@@ -1,4 +1,5 @@
-﻿using Guna.UI2.WinForms;
+﻿using Attendance.Domain.Contracts.Services;
+using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,13 @@ namespace Attendance.Presentation
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        private readonly IAuthService _authService;
+        public LoginForm(IAuthService authService)
         {
             InitializeComponent();
+            _authService = authService;
+
+            // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
             tbUserName.Focus();
@@ -75,5 +80,12 @@ namespace Attendance.Presentation
             ShowPlaceholder();
         }
 
+        private async void Login(object sender, EventArgs e)
+        {
+            if (await _authService.LoginAsync(tbUserName.Text, tbPassword.Text))
+                MessageBox.Show("Login successful!");
+            else
+                MessageBox.Show("Invalid username or password.");
+        }
     }
 }

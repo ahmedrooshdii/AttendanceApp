@@ -67,6 +67,7 @@
             btnLogin.Size = new Size(313, 51);
             btnLogin.TabIndex = 0;
             btnLogin.Text = "Sign in";
+            btnLogin.Click += Login;
             // 
             // RoundedForm
             // 
