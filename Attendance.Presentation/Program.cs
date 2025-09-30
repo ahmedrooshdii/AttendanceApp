@@ -39,7 +39,7 @@ namespace Attendance.Presentation
                 try
                 {
                     var db = scope.ServiceProvider.GetRequiredService<AttendanceDbContext>();
-                    db.Database.Migrate(); // Apply migrations automatically
+                 //   db.Database.Migrate(); // Apply migrations automatically
                     //AttendanceAppSeed.Seed(db);
                 }
                 catch (Exception ex)
@@ -50,11 +50,11 @@ namespace Attendance.Presentation
                 }
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+           Application.EnableVisualStyles();
+           Application.SetCompatibleTextRenderingDefault(false);
 
             var loginForm = serviceProvider.GetRequiredService<LoginForm>();
-            ApplicationConfiguration.Initialize();
+          //  ApplicationConfiguration.Initialize();
             Application.Run(loginForm);
         }
     }
