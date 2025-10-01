@@ -1,4 +1,6 @@
-﻿namespace Attendance.Presentation
+﻿using Attendance.Presentation.Forms;
+
+namespace Attendance.Presentation
 {
     internal static class Program
     {
@@ -30,6 +32,10 @@
 
             // Register Forms
             services.AddScoped<LoginForm>();
+            services.AddScoped<AdminDashboard>();
+            services.AddScoped<TeacherDashboard>();
+            services.AddScoped<StudentDashboard>();
+
 
             var serviceProvider = services.BuildServiceProvider();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attendance.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Attendance.Domain.Contracts.Services
 {
     public interface IAuthService
     {
-        Task<bool> LoginAsync(string username, string password);
+        Task<User> LoginAsync(string username, string password);
     }
 }

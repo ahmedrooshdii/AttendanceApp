@@ -1,4 +1,5 @@
 ﻿using Attendance.Domain.Contracts.Services;
+using Attendance.Presentation.Forms;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,20 @@ namespace Attendance.Presentation
     public partial class LoginForm : Form
     {
         private readonly IAuthService _authService;
-        public LoginForm(IAuthService authService)
+        private readonly AdminDashboard _adminDashboard;
+        private readonly TeacherDashboard _teacherDashboard;
+        private readonly StudentDashboard _studentDashboard;
+
+        public LoginForm(IAuthService authService, AdminDashboard adminDashboard , TeacherDashboard teacherDashboard, StudentDashboard studentDashboard)
         {
             InitializeComponent();
             _authService = authService;
+            _adminDashboard = adminDashboard;
+            _teacherDashboard = teacherDashboard;
+            _studentDashboard = studentDashboard;
 
             // UI Enhancements
+            //tbPassword.UseSystemPasswordChar = true;
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
             tbUserName.Focus();
@@ -48,6 +57,9 @@ namespace Attendance.Presentation
                     txt.ForeColor = Color.Gray;
                     // disable password masking while placeholder is shown
                     txt.UseSystemPasswordChar = false;
+                    //tbUserName.PasswordChar = originalPasswordChar;
+                    tbPassword.PasswordChar = '●';
+
                 }
             }
 
@@ -60,7 +72,8 @@ namespace Attendance.Presentation
                     txt.ForeColor = originalColor;
                     // restore password masking
                     txt.UseSystemPasswordChar = originalUseSystemPasswordChar;
-                    txt.PasswordChar = originalPasswordChar;
+                    tbPassword.PasswordChar = originalPasswordChar; // Use a bullet character for masking
+                    //txt.PasswordChar = originalPasswordChar;
                 }
             }
 
@@ -82,10 +95,37 @@ namespace Attendance.Presentation
 
         private async void Login(object sender, EventArgs e)
         {
-            if (await _authService.LoginAsync(tbUserName.Text, tbPassword.Text))
-                MessageBox.Show("Login successful!");
+            var user = await _authService.LoginAsync(tbUserName.Text, tbPassword.Text);
+            if (user != null && user.UserId > 0)
+            {
+                MessageBox.Show("Login successful!", "login", MessageBoxButtons.OK);
+                if (user.RoleId == 1)
+                {
+                    // Admin
+                    this.Hide();
+                    _adminDashboard.Owner = (LoginForm)this;
+                    _adminDashboard.Show();
+                }
+                else if (user.RoleId == 2)
+                {
+                    // Teacher
+                    this.Hide();
+                    _teacherDashboard.Owner = (LoginForm)this;
+                    _teacherDashboard.Show();
+
+                }
+                else if (user.RoleId == 3)
+                {
+                    // Student
+                    this.Hide();
+                    _studentDashboard.Owner = (LoginForm)this;
+                    _studentDashboard.Show();
+                }
+            }
             else
+            {
                 MessageBox.Show("Invalid username or password.");
+            }
         }
     }
 }
