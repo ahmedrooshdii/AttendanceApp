@@ -22,7 +22,7 @@ namespace Attendance.Service
             var user = await _repo.GetByUsernameAsync(username);
             if (user == null) return false;
 
-            return VerifyPassword(password, user.PasswordHash);
+            return VerifyPassword(password, user.Password);
         }
 
         private string HashPassword(string password)

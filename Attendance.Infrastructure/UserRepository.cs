@@ -17,7 +17,7 @@ namespace Attendance.Infrastructure
 
         public async Task<User?> GetByUsernameAsync(string username)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
     }
 }

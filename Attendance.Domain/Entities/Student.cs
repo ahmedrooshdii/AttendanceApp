@@ -8,19 +8,20 @@ using System.Threading.Tasks;
 
 namespace Attendance.Domain.Entities
 {
+    [Table("Student")]
     public class Student
     {
         [Key]
-        public int St_id { get; set; }   
-        public string St_Name { get; set; }
+        public int StudentId { get; set; }   
+        public string StudentName { get; set; }
 
         [ForeignKey("User")]
-        public int? User_id { get; set; }
+        public int? UserId { get; set; }
         public User? User { get; set; }
         [ForeignKey("Class")]
-        public int? Class_Id { get; set; }
+        public int? ClassId { get; set; }
         public Class? Class { get; set; }  
-        public ICollection<Atendance>? Atendances { get; set; } = new HashSet<Atendance>();
+        public ICollection<Attendence>? Atendances { get; set; } = new HashSet<Attendence>();
 
     }
 }

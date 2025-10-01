@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Attendance.Domain.Entities
 {
+    [Table("Users")]
     public class User
     {
         [Key]
-        public int User_id { get; set; }
-        public string User_Name { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
         public string Password { get; set; }
         [ForeignKey("Role")]
-        public int? Role_Id { get; set; }
+        public int? RoleId { get; set; }
         public Role? Role { get; set; }
 
     }

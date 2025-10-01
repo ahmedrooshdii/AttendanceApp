@@ -11,7 +11,7 @@ namespace Attendance.Infrastructure.Config
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<TeacherClass> builder)
         {
-            builder.HasKey(tc => new { tc.Tch_id, tc.Class_Id });
+            builder.HasKey(tc => new { tc.TeacherId, tc.ClassId });
            
 
         }

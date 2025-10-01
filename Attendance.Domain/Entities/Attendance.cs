@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Attendance.Domain.Entities
 {
-    public class Atendance
+    [Table("Attendance")]
+    public class Attendence
     {
         [Key]
-        public int Attend_Id { get; set; }
+        public int AttendanceId { get; set; }
         [ForeignKey("Student")]
-        public int? St_id { get; set; }
+        public int? StudentId { get; set; }
      
         public Student? Student { get; set; }
 
