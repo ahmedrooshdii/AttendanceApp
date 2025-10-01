@@ -1,7 +1,4 @@
-﻿
-using Microsoft.Extensions.Logging;
-
-namespace Attendance.Presentation
+﻿namespace Attendance.Presentation
 {
     internal static class Program
     {
@@ -25,9 +22,11 @@ namespace Attendance.Presentation
 
             // Register Repositories
             //services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             // Register Services
             //services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             // Register Forms
             services.AddScoped<LoginForm>();
@@ -39,7 +38,7 @@ namespace Attendance.Presentation
                 try
                 {
                     var db = scope.ServiceProvider.GetRequiredService<AttendanceDbContext>();
-                 //   db.Database.Migrate(); // Apply migrations automatically
+                    db.Database.Migrate(); // Apply migrations automatically
                     //AttendanceAppSeed.Seed(db);
                 }
                 catch (Exception ex)
