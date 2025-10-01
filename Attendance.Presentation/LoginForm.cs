@@ -17,20 +17,13 @@ namespace Attendance.Presentation
     public partial class LoginForm : Form
     {
         private readonly IAuthService _authService;
-        private readonly AdminDashboard _adminDashboard;
-        private readonly TeacherDashboard _teacherDashboard;
-        private readonly StudentDashboard _studentDashboard;
 
-        public LoginForm(IAuthService authService, AdminDashboard adminDashboard , TeacherDashboard teacherDashboard, StudentDashboard studentDashboard)
+        public LoginForm(IAuthService authService)
         {
             InitializeComponent();
             _authService = authService;
-            _adminDashboard = adminDashboard;
-            _teacherDashboard = teacherDashboard;
-            _studentDashboard = studentDashboard;
 
             // UI Enhancements
-            //tbPassword.UseSystemPasswordChar = true;
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
             tbUserName.Focus();
@@ -55,11 +48,8 @@ namespace Attendance.Presentation
                     isPlaceholderActive = true;
                     txt.Text = placeholder;
                     txt.ForeColor = Color.Gray;
-                    // disable password masking while placeholder is shown
                     txt.UseSystemPasswordChar = false;
-                    //tbUserName.PasswordChar = originalPasswordChar;
                     tbPassword.PasswordChar = '●';
-
                 }
             }
 
@@ -70,17 +60,14 @@ namespace Attendance.Presentation
                     isPlaceholderActive = false;
                     txt.Text = "";
                     txt.ForeColor = originalColor;
-                    // restore password masking
                     txt.UseSystemPasswordChar = originalUseSystemPasswordChar;
-                    tbPassword.PasswordChar = originalPasswordChar; // Use a bullet character for masking
-                    //txt.PasswordChar = originalPasswordChar;
+                    tbPassword.PasswordChar = originalPasswordChar;
                 }
             }
 
             txt.GotFocus += (s, e) => HidePlaceholder();
             txt.LostFocus += (s, e) => ShowPlaceholder();
 
-            // If user types programmatically, keep state consistent
             txt.TextChanged += (s, e) =>
             {
                 if (!txt.Focused && string.IsNullOrEmpty(txt.Text))
@@ -89,7 +76,6 @@ namespace Attendance.Presentation
                     HidePlaceholder();
             };
 
-            // initialize
             ShowPlaceholder();
         }
 
@@ -103,23 +89,25 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    _adminDashboard.Owner = (LoginForm)this;
-                    _adminDashboard.Show();
+                    var adminDashboard = new AdminDashboard(user);
+                    adminDashboard.Owner = this;
+                    adminDashboard.Show();
                 }
                 else if (user.RoleId == 2)
                 {
                     // Teacher
                     this.Hide();
-                    _teacherDashboard.Owner = (LoginForm)this;
-                    _teacherDashboard.Show();
-
+                    var teacherDashboard = new TeacherDashboard(user);
+                    teacherDashboard.Owner = this;
+                    teacherDashboard.Show();
                 }
                 else if (user.RoleId == 3)
                 {
                     // Student
                     this.Hide();
-                    _studentDashboard.Owner = (LoginForm)this;
-                    _studentDashboard.Show();
+                    var studentDashboard = new StudentDashboard(user);
+                    studentDashboard.Owner = this;
+                    studentDashboard.Show();
                 }
             }
             else
