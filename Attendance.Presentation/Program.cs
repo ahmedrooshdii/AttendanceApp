@@ -1,12 +1,14 @@
 ﻿using Attendance.Domain.Entities;
+using Attendance.Infrastructure.DataSeed;
 using Attendance.Presentation.Forms;
-
+using System.Diagnostics;
+using System.Threading.Tasks;
 namespace Attendance.Presentation
 {
     internal static class Program
     {
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
             var services = new ServiceCollection();
 
@@ -34,11 +36,11 @@ namespace Attendance.Presentation
                 {
                     var db = scope.ServiceProvider.GetRequiredService<AttendanceDbContext>();
                     db.Database.Migrate();
+                    await AttendanceDbContextSeed.SeedAsync(db);
                 }
                 catch (Exception ex)
                 {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<AttendanceDbContext>>();
-                    logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+                    Debug.WriteLine(ex.Message);
                 }
             }
 

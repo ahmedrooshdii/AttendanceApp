@@ -1,0 +1,27 @@
+[
+  {
+    "UserName": "admin",
+    "Password": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+    "RoleId": 1
+  },
+  {
+    "UserName": "teacher",
+    "Password": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+    "RoleId": 2
+  },
+  {
+    "UserName": "student1",
+    "Password": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+    "RoleId": 3
+  },
+  {
+    "UserName": "student2",
+    "Password": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+    "RoleId": 3
+  },
+  {
+    "UserName": "student3",
+    "Password": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+    "RoleId": 3
+  }
+]
