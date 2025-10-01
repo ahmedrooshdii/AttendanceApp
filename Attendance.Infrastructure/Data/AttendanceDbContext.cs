@@ -3,10 +3,14 @@
     public class AttendanceDbContext : DbContext
     {
 
-        #region DbSets
-        // Write your DbSets here
+     
+        public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
-        #endregion
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Atendance> Atendances { get; set; }
+        public DbSet<TeacherClass> TeacherClasses { get; set; }
 
         public AttendanceDbContext(DbContextOptions<AttendanceDbContext> options) :base(options){}
 
