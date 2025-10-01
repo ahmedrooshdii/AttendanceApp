@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Attendance.Domain.Contracts
+namespace Attendance.Domain.Contracts.Repositories
 {
     internal interface IGenericRepository
     {
