@@ -10,6 +10,9 @@
         private System.Windows.Forms.Label lblRoleName;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnUserManagement;
+        private System.Windows.Forms.Button btnClassManagement;
+        private System.Windows.Forms.Button btnReports;
+        private System.Windows.Forms.Button btnDatabaseLog;
 
         /// <summary>
         /// Required designer variable.
@@ -44,6 +47,9 @@
             btnLogout = new Button();
             sideNavPanel = new Panel();
             btnUserManagement = new Button();
+            btnClassManagement = new Button();
+            btnReports = new Button();
+            btnDatabaseLog = new Button();
             mainContentPanel = new Panel();
             headerPanel.SuspendLayout();
             sideNavPanel.SuspendLayout();
@@ -102,6 +108,9 @@
             // sideNavPanel
             // 
             sideNavPanel.BackColor = Color.LightGray;
+            sideNavPanel.Controls.Add(btnDatabaseLog);
+            sideNavPanel.Controls.Add(btnReports);
+            sideNavPanel.Controls.Add(btnClassManagement);
             sideNavPanel.Controls.Add(btnUserManagement);
             sideNavPanel.Dock = DockStyle.Left;
             sideNavPanel.Location = new Point(0, 50);
@@ -118,6 +127,36 @@
             btnUserManagement.TabIndex = 0;
             btnUserManagement.Text = "User Management";
             btnUserManagement.Click += BtnUserManagement_Click;
+            // 
+            // btnClassManagement
+            // 
+            btnClassManagement.Dock = DockStyle.Top;
+            btnClassManagement.Location = new Point(0, 23);
+            btnClassManagement.Name = "btnClassManagement";
+            btnClassManagement.Size = new Size(200, 23);
+            btnClassManagement.TabIndex = 1;
+            btnClassManagement.Text = "Class Management";
+            btnClassManagement.Click += BtnClassManagement_Click;
+            // 
+            // btnReports
+            // 
+            btnReports.Dock = DockStyle.Top;
+            btnReports.Location = new Point(0, 46);
+            btnReports.Name = "btnReports";
+            btnReports.Size = new Size(200, 23);
+            btnReports.TabIndex = 2;
+            btnReports.Text = "Reports";
+            btnReports.Click += BtnReports_Click;
+            // 
+            // btnDatabaseLog
+            // 
+            btnDatabaseLog.Dock = DockStyle.Top;
+            btnDatabaseLog.Location = new Point(0, 69);
+            btnDatabaseLog.Name = "btnDatabaseLog";
+            btnDatabaseLog.Size = new Size(200, 23);
+            btnDatabaseLog.TabIndex = 3;
+            btnDatabaseLog.Text = "Database Log";
+            btnDatabaseLog.Click += BtnDatabaseLog_Click;
             // 
             // mainContentPanel
             // 
