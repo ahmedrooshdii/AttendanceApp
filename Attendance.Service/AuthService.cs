@@ -1,6 +1,6 @@
 ﻿using Attendance.Domain.Contracts.Repositories;
 using Attendance.Domain.Contracts.Services;
-using Azure.Messaging;
+using Attendance.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +18,20 @@ namespace Attendance.Service
             _repo = repo;
         }
 
-        public async Task<bool> LoginAsync(string username, string password)
+        public async Task<User> LoginAsync(string username, string password)
         {
-            var user = await _repo.GetByUsernameAsync(username);
-            if (user == null) return false;
 
-            return VerifyPassword(password, user.PasswordHash);
+           // var c = HashPassword(password);
+
+            var user = await _repo.GetByUsernameAsync(username);
+            if (user == null) return new User();
+
+            var checkuser= VerifyPassword(password, user.Password);
+            if(checkuser)
+            {
+                return user;
+            }
+            return new User();
         }
 
         private string HashPassword(string password)

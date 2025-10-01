@@ -1,5 +1,5 @@
-﻿
-using Microsoft.Extensions.Logging;
+﻿using Attendance.Domain.Entities;
+using Attendance.Presentation.Forms;
 
 namespace Attendance.Presentation
 {
@@ -10,26 +10,20 @@ namespace Attendance.Presentation
         {
             var services = new ServiceCollection();
 
-            // Load configuration from appsettings.json
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            // Register IConfiguration itself
             services.AddSingleton<IConfiguration>(configuration);
 
-            // Configure EF Core
             services.AddDbContext<AttendanceDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            // Register Repositories
-            //services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthService, AuthService>();
 
-            // Register Services
-            //services.AddScoped<IAttendanceService, AttendanceService>();
-
-            // Register Forms
+            // Register only LoginForm, dashboards are created with user object
             services.AddScoped<LoginForm>();
 
             var serviceProvider = services.BuildServiceProvider();
@@ -39,22 +33,19 @@ namespace Attendance.Presentation
                 try
                 {
                     var db = scope.ServiceProvider.GetRequiredService<AttendanceDbContext>();
-                 //   db.Database.Migrate(); // Apply migrations automatically
-                    //AttendanceAppSeed.Seed(db);
+                    db.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
-                    // Handle exceptions that occur during migration
                     var logger = scope.ServiceProvider.GetRequiredService<ILogger<AttendanceDbContext>>();
                     logger.LogError(ex, "An error occurred while migrating or seeding the database.");
                 }
             }
 
-           Application.EnableVisualStyles();
-           Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             var loginForm = serviceProvider.GetRequiredService<LoginForm>();
-          //  ApplicationConfiguration.Initialize();
             Application.Run(loginForm);
         }
     }
