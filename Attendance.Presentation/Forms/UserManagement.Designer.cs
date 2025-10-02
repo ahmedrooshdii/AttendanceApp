@@ -48,27 +48,27 @@
             // 
             dgvUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsers.Location = new Point(20, 96);
-            dgvUsers.Margin = new Padding(5, 6, 5, 6);
+            dgvUsers.Location = new Point(16, 77);
+            dgvUsers.Margin = new Padding(4, 5, 4, 5);
             dgvUsers.Name = "dgvUsers";
             dgvUsers.RowHeadersWidth = 62;
-            dgvUsers.Size = new Size(1019, 387);
+            dgvUsers.Size = new Size(852, 310);
             dgvUsers.TabIndex = 0;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(20, 23);
-            txtSearch.Margin = new Padding(5, 6, 5, 6);
+            txtSearch.Location = new Point(16, 18);
+            txtSearch.Margin = new Padding(4, 5, 4, 5);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(331, 31);
+            txtSearch.Size = new Size(266, 27);
             txtSearch.TabIndex = 1;
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(367, 19);
-            btnSearch.Margin = new Padding(5, 6, 5, 6);
+            btnSearch.Location = new Point(294, 15);
+            btnSearch.Margin = new Padding(4, 5, 4, 5);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(125, 44);
+            btnSearch.Size = new Size(100, 35);
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
@@ -77,10 +77,10 @@
             // btnAdd
             // 
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAdd.Location = new Point(20, 502);
-            btnAdd.Margin = new Padding(5, 6, 5, 6);
+            btnAdd.Location = new Point(16, 402);
+            btnAdd.Margin = new Padding(4, 5, 4, 5);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(125, 44);
+            btnAdd.Size = new Size(100, 35);
             btnAdd.TabIndex = 3;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
@@ -89,10 +89,10 @@
             // btnEdit
             // 
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnEdit.Location = new Point(167, 502);
-            btnEdit.Margin = new Padding(5, 6, 5, 6);
+            btnEdit.Location = new Point(134, 402);
+            btnEdit.Margin = new Padding(4, 5, 4, 5);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(125, 44);
+            btnEdit.Size = new Size(100, 35);
             btnEdit.TabIndex = 4;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = true;
@@ -101,10 +101,10 @@
             // btnDelete
             // 
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDelete.Location = new Point(313, 502);
-            btnDelete.Margin = new Padding(5, 6, 5, 6);
+            btnDelete.Location = new Point(250, 402);
+            btnDelete.Margin = new Padding(4, 5, 4, 5);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(125, 44);
+            btnDelete.Size = new Size(100, 35);
             btnDelete.TabIndex = 5;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -112,16 +112,16 @@
             // 
             // UserManagement
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1059, 600);
+            ClientSize = new Size(884, 480);
             Controls.Add(btnDelete);
             Controls.Add(btnEdit);
             Controls.Add(btnAdd);
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvUsers);
-            Margin = new Padding(5, 6, 5, 6);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "UserManagement";
             Text = "User Management";
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
