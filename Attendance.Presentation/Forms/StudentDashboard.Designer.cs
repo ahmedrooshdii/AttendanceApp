@@ -31,13 +31,12 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentDashboard));
             panel2 = new Panel();
-            button2 = new Button();
-            pictureBox4 = new PictureBox();
             button1 = new Button();
             pictureBox3 = new PictureBox();
             btnLogout = new Button();
             pictureBox2 = new PictureBox();
             panel3 = new Panel();
+            button2 = new Button();
             lblRoleName = new Label();
             lblUserName = new Label();
             lblDate = new Label();
@@ -53,7 +52,6 @@
             pictureBox1 = new PictureBox();
             timerDateAndTime = new System.Windows.Forms.Timer(components);
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel3.SuspendLayout();
@@ -66,50 +64,17 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(pictureBox4);
             panel2.Controls.Add(button1);
             panel2.Controls.Add(pictureBox3);
             panel2.Controls.Add(btnLogout);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(panel3);
-            panel2.Controls.Add(lblDate);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(332, 0);
+            panel2.Location = new Point(274, 0);
             panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(852, 209);
+            panel2.Size = new Size(910, 72);
             panel2.TabIndex = 8;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.BackColor = Color.Red;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(740, 15);
-            button2.Margin = new Padding(4);
-            button2.Name = "button2";
-            button2.Size = new Size(96, 43);
-            button2.TabIndex = 7;
-            button2.Text = "Logout";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox4.Cursor = Cursors.Hand;
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(616, -3);
-            pictureBox4.Margin = new Padding(4);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(77, 73);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 6;
-            pictureBox4.TabStop = false;
             // 
             // button1
             // 
@@ -119,7 +84,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(1665, 18);
+            button1.Location = new Point(1723, 18);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(96, 43);
@@ -132,7 +97,7 @@
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.Cursor = Cursors.Hand;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(1542, 0);
+            pictureBox3.Location = new Point(1600, 0);
             pictureBox3.Margin = new Padding(4);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(77, 73);
@@ -148,7 +113,7 @@
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(2590, 18);
+            btnLogout.Location = new Point(2648, 18);
             btnLogout.Margin = new Padding(4);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(96, 43);
@@ -161,7 +126,7 @@
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.Cursor = Cursors.Hand;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(2466, 0);
+            pictureBox2.Location = new Point(2524, 0);
             pictureBox2.Margin = new Padding(4);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(77, 73);
@@ -172,19 +137,38 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(67, 3, 125);
+            panel3.Controls.Add(button2);
             panel3.Controls.Add(lblRoleName);
             panel3.Controls.Add(lblUserName);
-            panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(0, 82);
+            panel3.Controls.Add(lblDate);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 0);
             panel3.Margin = new Padding(4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(852, 127);
+            panel3.Size = new Size(910, 72);
             panel3.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button2.BackColor = Color.Red;
+            button2.Cursor = Cursors.Hand;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(801, 16);
+            button2.Margin = new Padding(4);
+            button2.Name = "button2";
+            button2.Size = new Size(96, 43);
+            button2.TabIndex = 7;
+            button2.Text = "Logout";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // lblRoleName
             // 
             lblRoleName.ForeColor = Color.White;
-            lblRoleName.Location = new Point(64, 71);
+            lblRoleName.Location = new Point(221, 28);
             lblRoleName.Margin = new Padding(4, 0, 4, 0);
             lblRoleName.Name = "lblRoleName";
             lblRoleName.Size = new Size(170, 29);
@@ -203,13 +187,13 @@
             // 
             // lblDate
             // 
-            lblDate.BackColor = Color.White;
+            lblDate.BackColor = Color.Transparent;
             lblDate.Font = new Font("Arial", 12F, FontStyle.Bold);
-            lblDate.ForeColor = Color.FromArgb(67, 3, 125);
-            lblDate.Location = new Point(31, 29);
+            lblDate.ForeColor = Color.White;
+            lblDate.Location = new Point(390, 28);
             lblDate.Margin = new Padding(4, 0, 4, 0);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(369, 24);
+            lblDate.Size = new Size(288, 24);
             lblDate.TabIndex = 0;
             lblDate.Text = "Date : ";
             // 
@@ -217,10 +201,10 @@
             // 
             mainContentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             mainContentPanel.Controls.Add(headerPanel);
-            mainContentPanel.Location = new Point(332, 217);
+            mainContentPanel.Location = new Point(316, 105);
             mainContentPanel.Margin = new Padding(4);
             mainContentPanel.Name = "mainContentPanel";
-            mainContentPanel.Size = new Size(853, 460);
+            mainContentPanel.Size = new Size(834, 546);
             mainContentPanel.TabIndex = 6;
             // 
             // headerPanel
@@ -229,7 +213,7 @@
             headerPanel.Location = new Point(104, 158);
             headerPanel.Margin = new Padding(4);
             headerPanel.Name = "headerPanel";
-            headerPanel.Size = new Size(686, 228);
+            headerPanel.Size = new Size(599, 228);
             headerPanel.TabIndex = 2;
             // 
             // sideNavPanel
@@ -243,7 +227,7 @@
             sideNavPanel.Location = new Point(0, 0);
             sideNavPanel.Margin = new Padding(4);
             sideNavPanel.Name = "sideNavPanel";
-            sideNavPanel.Size = new Size(332, 681);
+            sideNavPanel.Size = new Size(274, 681);
             sideNavPanel.TabIndex = 7;
             // 
             // btnTakeAttendance
@@ -254,10 +238,10 @@
             btnTakeAttendance.ForeColor = Color.White;
             btnTakeAttendance.Image = (Image)resources.GetObject("btnTakeAttendance.Image");
             btnTakeAttendance.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTakeAttendance.Location = new Point(10, 228);
+            btnTakeAttendance.Location = new Point(7, 202);
             btnTakeAttendance.Margin = new Padding(4);
             btnTakeAttendance.Name = "btnTakeAttendance";
-            btnTakeAttendance.Size = new Size(321, 94);
+            btnTakeAttendance.Size = new Size(267, 94);
             btnTakeAttendance.TabIndex = 1;
             btnTakeAttendance.Text = "View Attendance";
             btnTakeAttendance.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -268,10 +252,10 @@
             // 
             panel4.Controls.Add(panelSlide);
             panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(0, 228);
+            panel4.Location = new Point(0, 202);
             panel4.Margin = new Padding(4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(10, 453);
+            panel4.Size = new Size(10, 479);
             panel4.TabIndex = 0;
             // 
             // panelSlide
@@ -292,14 +276,14 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(332, 228);
+            panel1.Size = new Size(274, 202);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.Font = new Font("Arial", 12F, FontStyle.Bold);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(125, 158);
+            label1.Location = new Point(92, 158);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(86, 24);
@@ -310,7 +294,7 @@
             // 
             lblAppName.Font = new Font("Arial", 12F, FontStyle.Bold);
             lblAppName.ForeColor = Color.White;
-            lblAppName.Location = new Point(69, 134);
+            lblAppName.Location = new Point(37, 134);
             lblAppName.Margin = new Padding(4, 0, 4, 0);
             lblAppName.Name = "lblAppName";
             lblAppName.Size = new Size(216, 24);
@@ -321,7 +305,7 @@
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.ImageLocation = "";
-            pictureBox1.Location = new Point(104, 5);
+            pictureBox1.Location = new Point(69, 4);
             pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(120, 110);
@@ -347,10 +331,8 @@
             Name = "StudentDashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StudentDashboard";
-            WindowState = FormWindowState.Maximized;
             FormClosed += StudentDashboard_FormClosed_1;
             panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel3.ResumeLayout(false);
@@ -384,7 +366,6 @@
         private Label lblAppName;
         private PictureBox pictureBox1;
         private Button button2;
-        private PictureBox pictureBox4;
         private System.Windows.Forms.Timer timerDateAndTime;
     }
 }

@@ -30,9 +30,12 @@
         {
             tabControl1 = new TabControl();
             tabPageMarkAttendance = new TabPage();
-            comboBox1 = new ComboBox();
+            dataGridViewMarkAttendance = new DataGridView();
+            comboBoxClass = new ComboBox();
+            panel6 = new Panel();
             panel4 = new Panel();
             panel3 = new Panel();
+            panel5 = new Panel();
             panel2 = new Panel();
             panel1 = new Panel();
             comboBox2 = new ComboBox();
@@ -40,8 +43,13 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            ID = new DataGridViewTextBoxColumn();
+            StudentName = new DataGridViewTextBoxColumn();
+            status = new DataGridViewCheckBoxColumn();
+            Status2 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPageMarkAttendance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMarkAttendance).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,9 +66,12 @@
             // 
             // tabPageMarkAttendance
             // 
-            tabPageMarkAttendance.Controls.Add(comboBox1);
+            tabPageMarkAttendance.Controls.Add(dataGridViewMarkAttendance);
+            tabPageMarkAttendance.Controls.Add(comboBoxClass);
+            tabPageMarkAttendance.Controls.Add(panel6);
             tabPageMarkAttendance.Controls.Add(panel4);
             tabPageMarkAttendance.Controls.Add(panel3);
+            tabPageMarkAttendance.Controls.Add(panel5);
             tabPageMarkAttendance.Controls.Add(panel2);
             tabPageMarkAttendance.Controls.Add(panel1);
             tabPageMarkAttendance.Controls.Add(dateTimePicker1);
@@ -75,13 +86,37 @@
             tabPageMarkAttendance.Text = "Mark Attendance";
             tabPageMarkAttendance.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // dataGridViewMarkAttendance
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(535, 93);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(229, 24);
-            comboBox1.TabIndex = 5;
+            dataGridViewMarkAttendance.AllowUserToAddRows = false;
+            dataGridViewMarkAttendance.AllowUserToDeleteRows = false;
+            dataGridViewMarkAttendance.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewMarkAttendance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewMarkAttendance.BackgroundColor = Color.White;
+            dataGridViewMarkAttendance.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewMarkAttendance.Columns.AddRange(new DataGridViewColumn[] { ID, StudentName, status, Status2 });
+            dataGridViewMarkAttendance.Location = new Point(39, 131);
+            dataGridViewMarkAttendance.Name = "dataGridViewMarkAttendance";
+            dataGridViewMarkAttendance.ScrollBars = ScrollBars.Vertical;
+            dataGridViewMarkAttendance.Size = new Size(830, 280);
+            dataGridViewMarkAttendance.TabIndex = 6;
+            // 
+            // comboBoxClass
+            // 
+            comboBoxClass.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxClass.FlatStyle = FlatStyle.Flat;
+            comboBoxClass.FormattingEnabled = true;
+            comboBoxClass.Location = new Point(535, 88);
+            comboBoxClass.Name = "comboBoxClass";
+            comboBoxClass.Size = new Size(270, 24);
+            comboBoxClass.TabIndex = 5;
+            // 
+            // panel6
+            // 
+            panel6.Location = new Point(322, 57);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(39, 54);
+            panel6.TabIndex = 4;
             // 
             // panel4
             // 
@@ -96,6 +131,14 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(19, 26);
             panel3.TabIndex = 4;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.Gray;
+            panel5.Location = new Point(535, 116);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(270, 1);
+            panel5.TabIndex = 4;
             // 
             // panel2
             // 
@@ -163,6 +206,28 @@
             label1.TabIndex = 0;
             label1.Text = "Mark Attendance";
             // 
+            // ID
+            // 
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.ReadOnly = true;
+            // 
+            // StudentName
+            // 
+            StudentName.HeaderText = "Student Name";
+            StudentName.Name = "StudentName";
+            StudentName.ReadOnly = true;
+            // 
+            // status
+            // 
+            status.HeaderText = "Status";
+            status.Name = "status";
+            // 
+            // Status2
+            // 
+            Status2.HeaderText = "Status";
+            Status2.Name = "Status2";
+            // 
             // TakeAttendance
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
@@ -176,6 +241,7 @@
             tabControl1.ResumeLayout(false);
             tabPageMarkAttendance.ResumeLayout(false);
             tabPageMarkAttendance.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMarkAttendance).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -191,9 +257,15 @@
         private Label label2;
         private Panel panel3;
         private Panel panel2;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxClass;
         private Panel panel4;
         private Panel panel5;
         private ComboBox comboBox2;
+        private Panel panel6;
+        private DataGridView dataGridViewMarkAttendance;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn StudentName;
+        private DataGridViewCheckBoxColumn status;
+        private DataGridViewTextBoxColumn Status2;
     }
 }

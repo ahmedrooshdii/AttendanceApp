@@ -15,6 +15,8 @@ namespace Attendance.Presentation.Forms
         public TakeAttendance()
         {
             InitializeComponent();
+            dataGridViewMarkAttendance.Columns["ID"].Visible = false;
+            dataGridViewMarkAttendance.Columns["Status2"].Visible = false;
         }
     }
 }

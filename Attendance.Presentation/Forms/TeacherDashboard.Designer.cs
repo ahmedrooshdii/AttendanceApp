@@ -31,9 +31,6 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeacherDashboard));
             panel2 = new Panel();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
             btnLogout = new Button();
             pictureBox2 = new PictureBox();
             panel3 = new Panel();
@@ -65,59 +62,14 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(label2);
             panel2.Controls.Add(btnLogout);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(258, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(926, 165);
+            panel2.Size = new Size(926, 73);
             panel2.TabIndex = 5;
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.BorderStyle = BorderStyle.FixedSingle;
-            label4.Cursor = Cursors.Hand;
-            label4.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(794, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(27, 34);
-            label4.TabIndex = 4;
-            label4.Text = "-";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Cursor = Cursors.Hand;
-            label3.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(827, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(32, 34);
-            label3.TabIndex = 4;
-            label3.Text = "+";
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.BorderStyle = BorderStyle.FixedSingle;
-            label2.Cursor = Cursors.Hand;
-            label2.Font = new Font("Century Gothic", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Red;
-            label2.Location = new Point(867, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(34, 34);
-            label2.TabIndex = 4;
-            label2.Text = "X";
             // 
             // btnLogout
             // 
@@ -153,10 +105,10 @@
             panel3.Controls.Add(lblRoleName);
             panel3.Controls.Add(lblUserName);
             panel3.Controls.Add(lblDate);
-            panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(0, 65);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(926, 100);
+            panel3.Size = new Size(926, 72);
             panel3.TabIndex = 0;
             // 
             // button1
@@ -167,7 +119,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(826, 32);
+            button1.Location = new Point(826, 19);
             button1.Name = "button1";
             button1.Size = new Size(75, 34);
             button1.TabIndex = 5;
@@ -178,7 +130,7 @@
             // lblRoleName
             // 
             lblRoleName.ForeColor = Color.White;
-            lblRoleName.Location = new Point(310, 22);
+            lblRoleName.Location = new Point(261, 26);
             lblRoleName.Name = "lblRoleName";
             lblRoleName.Size = new Size(132, 23);
             lblRoleName.TabIndex = 2;
@@ -187,7 +139,7 @@
             // lblUserName
             // 
             lblUserName.ForeColor = Color.White;
-            lblUserName.Location = new Point(50, 22);
+            lblUserName.Location = new Point(48, 26);
             lblUserName.Name = "lblUserName";
             lblUserName.Size = new Size(116, 23);
             lblUserName.TabIndex = 1;
@@ -198,7 +150,7 @@
             lblDate.BackColor = Color.Transparent;
             lblDate.Font = new Font("Arial", 12F, FontStyle.Bold);
             lblDate.ForeColor = Color.White;
-            lblDate.Location = new Point(50, 60);
+            lblDate.Location = new Point(480, 27);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(287, 19);
             lblDate.TabIndex = 0;
@@ -208,9 +160,9 @@
             // 
             mainContentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             mainContentPanel.Controls.Add(headerPanel);
-            mainContentPanel.Location = new Point(278, 180);
+            mainContentPanel.Location = new Point(286, 98);
             mainContentPanel.Name = "mainContentPanel";
-            mainContentPanel.Size = new Size(881, 475);
+            mainContentPanel.Size = new Size(873, 557);
             mainContentPanel.TabIndex = 3;
             // 
             // headerPanel
@@ -298,7 +250,7 @@
             // 
             label1.Font = new Font("Arial", 12F, FontStyle.Bold);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(97, 125);
+            label1.Location = new Point(97, 144);
             label1.Name = "label1";
             label1.Size = new Size(67, 19);
             label1.TabIndex = 0;
@@ -308,7 +260,7 @@
             // 
             lblAppName.Font = new Font("Arial", 12F, FontStyle.Bold);
             lblAppName.ForeColor = Color.White;
-            lblAppName.Location = new Point(23, 106);
+            lblAppName.Location = new Point(23, 125);
             lblAppName.Name = "lblAppName";
             lblAppName.Size = new Size(212, 19);
             lblAppName.TabIndex = 0;
@@ -318,9 +270,9 @@
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.ImageLocation = "";
-            pictureBox1.Location = new Point(81, 4);
+            pictureBox1.Location = new Point(58, 11);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(93, 87);
+            pictureBox1.Size = new Size(130, 99);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -335,7 +287,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1184, 681);
-            ControlBox = false;
             Controls.Add(panel2);
             Controls.Add(mainContentPanel);
             Controls.Add(sideNavPanel);
@@ -348,7 +299,6 @@
             Text = "TeacherDashboard";
             FormClosed += TeacherDashboard_FormClosed_1;
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel3.ResumeLayout(false);
             mainContentPanel.ResumeLayout(false);
@@ -381,8 +331,5 @@
         private PictureBox pictureBox1;
         private System.Windows.Forms.Timer timerDateAndTime;
         private Button button1;
-        private Label label2;
-        private Label label4;
-        private Label label3;
     }
 }
