@@ -11,6 +11,7 @@ namespace Attendance.Presentation.Forms
         private readonly ClassManagement _classManagementForm;
         private readonly Reports _reportsForm;
         private readonly DatabaseLog _databaseLogForm;
+
         private bool _isLoggingOut = false;
         public AdminDashboard(User user)
         {

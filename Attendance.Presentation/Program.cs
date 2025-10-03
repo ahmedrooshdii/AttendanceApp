@@ -1,5 +1,6 @@
 ﻿using Attendance.Domain.Entities;
 using Attendance.Infrastructure.DataSeed;
+using Attendance.Infrastructure.Repositories;
 using Attendance.Infrastructure.RepositoryImplementation;
 using Attendance.Presentation.Forms;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +43,11 @@ namespace Attendance.Presentation
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IAttendanceService, AttendanceService>();
 
+            services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+            services.AddScoped<IUserManagementService, UserManagementService>();
+
+
+            // Register only LoginForm, dashboards are created with user object
             services.AddScoped<LoginForm>();
 
             var serviceProvider = services.BuildServiceProvider();

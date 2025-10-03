@@ -41,6 +41,8 @@
             btnAdd = new Button();
             btnEdit = new Button();
             btnDelete = new Button();
+            button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUsers).BeginInit();
             SuspendLayout();
             // 
@@ -82,9 +84,9 @@
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(88, 26);
             btnAdd.TabIndex = 3;
-            btnAdd.Text = "Add";
+            btnAdd.Text = "Add Student";
             btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += BtnAdd_Click;
+            btnAdd.Click += BtnAddStudent_Click;
             // 
             // btnEdit
             // 
@@ -110,6 +112,30 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += BtnDelete_Click;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button1.Location = new Point(206, 298);
+            button1.Margin = new Padding(4);
+            button1.Name = "button1";
+            button1.Size = new Size(88, 26);
+            button1.TabIndex = 6;
+            button1.Text = "Add Teacher";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += BtnAddTeacher_Click;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button2.Location = new Point(14, 298);
+            button2.Margin = new Padding(4);
+            button2.Name = "button2";
+            button2.Size = new Size(88, 26);
+            button2.TabIndex = 7;
+            button2.Text = "Add Admin";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += BtnAddAdmin_Click;
+            // 
             // UserManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -124,6 +150,7 @@
             Controls.Add(dgvUsers);
             Margin = new Padding(4, 4, 4, 4);
             Name = "UserManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "User Management";
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();
             ResumeLayout(false);
@@ -132,5 +159,8 @@
         }
 
         #endregion
+
+        private Button button1;
+        private Button button2;
     }
 }
