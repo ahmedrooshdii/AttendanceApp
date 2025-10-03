@@ -15,11 +15,34 @@ namespace Attendance.Presentation.Forms
     public partial class StudentDashboard : Form
     {
         private readonly User _user;
+        private readonly ViewAttendance _viewAttendanceForm;
+        private readonly Reports _reportsForm;
+        private readonly DatabaseLog _databaseLogForm;
+        private bool _isLoggingOut = false;
 
         public StudentDashboard(User user)
         {
             InitializeComponent();
+            timerDateAndTime.Start();
+            lblAppName.AutoSize = true;
             _user = user;
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Teacher";
+
+            // Pre-load forms
+            _viewAttendanceForm = new ViewAttendance
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+
+            // Add forms to main content panel
+            mainContentPanel.Controls.Add(_viewAttendanceForm);
+
+            // Set User Management as the default active tab
+            _viewAttendanceForm.BringToFront();
+            _viewAttendanceForm.Show();
             this.FormClosed += StudentDashboard_FormClosed;
         }
 
@@ -28,6 +51,40 @@ namespace Attendance.Presentation.Forms
             if (this.Owner != null)
             {
                 this.Owner.Show();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _isLoggingOut = true;
+            timerDateAndTime.Stop();
+            this.Owner.Show();
+            this.Close();
+        }
+        private void timerDateAndTime_Tick(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            lblDate.Text = "Date: " + now.ToString("MMMM dd, yyyy");
+        }
+
+        private void StudentDashboard_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            if (!_isLoggingOut)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnTakeAttendance_Click(object sender, EventArgs e)
+        {
+            try
+            {   
+                _viewAttendanceForm.BringToFront();
+                _viewAttendanceForm.Show();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

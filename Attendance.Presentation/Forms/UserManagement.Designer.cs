@@ -51,7 +51,7 @@
             dgvUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvUsers.Location = new Point(14, 58);
-            dgvUsers.Margin = new Padding(4);
+            dgvUsers.Margin = new Padding(4, 4, 4, 4);
             dgvUsers.Name = "dgvUsers";
             dgvUsers.RowHeadersWidth = 62;
             dgvUsers.Size = new Size(713, 232);
@@ -60,7 +60,7 @@
             // txtSearch
             // 
             txtSearch.Location = new Point(14, 14);
-            txtSearch.Margin = new Padding(4);
+            txtSearch.Margin = new Padding(4, 4, 4, 4);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(233, 23);
             txtSearch.TabIndex = 1;
@@ -68,7 +68,7 @@
             // btnSearch
             // 
             btnSearch.Location = new Point(257, 11);
-            btnSearch.Margin = new Padding(4);
+            btnSearch.Margin = new Padding(4, 4, 4, 4);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(88, 26);
             btnSearch.TabIndex = 2;
@@ -79,8 +79,8 @@
             // btnAdd
             // 
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAdd.Location = new Point(110, 298);
-            btnAdd.Margin = new Padding(4);
+            btnAdd.Location = new Point(14, 301);
+            btnAdd.Margin = new Padding(4, 4, 4, 4);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(88, 26);
             btnAdd.TabIndex = 3;
@@ -91,8 +91,8 @@
             // btnEdit
             // 
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnEdit.Location = new Point(302, 298);
-            btnEdit.Margin = new Padding(4);
+            btnEdit.Location = new Point(117, 301);
+            btnEdit.Margin = new Padding(4, 4, 4, 4);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(88, 26);
             btnEdit.TabIndex = 4;
@@ -103,8 +103,8 @@
             // btnDelete
             // 
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDelete.Location = new Point(398, 298);
-            btnDelete.Margin = new Padding(4);
+            btnDelete.Location = new Point(219, 301);
+            btnDelete.Margin = new Padding(4, 4, 4, 4);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(88, 26);
             btnDelete.TabIndex = 5;
@@ -140,16 +140,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(741, 360);
-            Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(btnDelete);
             Controls.Add(btnEdit);
             Controls.Add(btnAdd);
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvUsers);
-            Margin = new Padding(4);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "UserManagement";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "User Management";
