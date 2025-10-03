@@ -16,14 +16,13 @@ namespace Attendance.Presentation.Forms
     {
         private readonly User _user;
         private readonly TakeAttendance _takeAttendanceForm;
-        private readonly ViewClassAttendance _classManagementForm;
-        private readonly Reports _reportsForm;
-        private readonly DatabaseLog _databaseLogForm;
+        private readonly ViewAttendance _classManagementForm;
         private bool _isLoggingOut = false;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
-        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
+        private readonly IUserService _userService;
+        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService)
         {
             InitializeComponent();
             timerDateAndTime.Start();
@@ -34,6 +33,7 @@ namespace Attendance.Presentation.Forms
             _teacherService = teacherService;
             _classService = classService;
             _attendanceService = attendanceService;
+            _userService = userService;
             // Pre-load forms
             _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
             {
@@ -41,7 +41,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ViewClassAttendance
+            _classManagementForm = new ViewAttendance(_user.UserId, _classService, _userService, _teacherService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
@@ -110,6 +110,7 @@ namespace Attendance.Presentation.Forms
         {
             try
             {
+                _takeAttendanceForm.Hide();
                 MoveSidePanel(btnClassManagement);
                 _classManagementForm.BringToFront();
                 _classManagementForm.Show();

@@ -34,6 +34,7 @@ namespace Attendance.Presentation
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserServices>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IClassRepository, ClassRepository>();
             services.AddScoped<IClassServices, ClassServices>();

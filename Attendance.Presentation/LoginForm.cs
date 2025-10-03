@@ -20,14 +20,16 @@ namespace Attendance.Presentation
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
+        private readonly IUserService userServices;
 
-        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
+        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userServices)
         {
             InitializeComponent();
             _authService = authService;
             _teacherService = teacherService;
             _classService = classService;
             _attendanceService = attendanceService;
+            this.userServices = userServices;
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
@@ -102,7 +104,7 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService);
+                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
@@ -110,7 +112,7 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
-                    var studentDashboard = new StudentDashboard(user);
+                    var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService);
                     studentDashboard.Owner = this;
                     studentDashboard.Show();
                 }
