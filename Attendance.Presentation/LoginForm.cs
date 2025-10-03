@@ -17,11 +17,15 @@ namespace Attendance.Presentation
     public partial class LoginForm : Form
     {
         private readonly IAuthService _authService;
+        private readonly ITeacherService _teacherService;
+        private readonly IClassServices _classService;
 
-        public LoginForm(IAuthService authService)
+        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService)
         {
             InitializeComponent();
             _authService = authService;
+            _teacherService = teacherService;
+            _classService = classService;
 
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
@@ -97,7 +101,7 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = new TeacherDashboard(user);
+                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
