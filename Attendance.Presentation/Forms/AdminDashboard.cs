@@ -11,11 +11,12 @@ namespace Attendance.Presentation.Forms
         private readonly ClassManagement _classManagementForm;
         private readonly Reports _reportsForm;
         private readonly DatabaseLog _databaseLogForm;
-
+        private bool _isLoggingOut = false;
         public AdminDashboard(User user)
         {
             InitializeComponent();
-           
+            timerDataAndTime.Start();
+            lblAppName.AutoSize = true;
             _user = user;
             lblUserName.Text = $"User: {_user.UserName}";
             lblRoleName.Text = $"Role: Admin";
@@ -69,6 +70,8 @@ namespace Attendance.Presentation.Forms
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
+            _isLoggingOut = true;
+            timerDataAndTime.Stop();
             this.Owner.Show();
             this.Close();
         }
@@ -77,6 +80,7 @@ namespace Attendance.Presentation.Forms
         {
             try
             {
+                MoveSidePanel(btnUserManagement);
                 // Bring the pre-loaded UserManagement form to the front
                 _userManagementForm.BringToFront();
                 _userManagementForm.Show();
@@ -91,6 +95,7 @@ namespace Attendance.Presentation.Forms
         {
             try
             {
+                MoveSidePanel(btnClassManagement);
                 // Bring the pre-loaded UserManagement form to the front
                 _classManagementForm.BringToFront();
                 _classManagementForm.Show();
@@ -105,6 +110,7 @@ namespace Attendance.Presentation.Forms
         {
             try
             {
+                MoveSidePanel(btnReports);
                 // Bring the pre-loaded UserManagement form to the front
                 _reportsForm.BringToFront();
                 _reportsForm.Show();
@@ -119,6 +125,7 @@ namespace Attendance.Presentation.Forms
         {
             try
             {
+                MoveSidePanel(btnDatabaseLog);
                 // Bring the pre-loaded UserManagement form to the front
                 _databaseLogForm.BringToFront();
                 _databaseLogForm.Show();
@@ -127,6 +134,29 @@ namespace Attendance.Presentation.Forms
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void timerDataAndTime_Tick(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            lblDate.Text = now.ToString("MMMM dd, yyyy");
+        }
+        private void MoveSidePanel(Control btn)
+        {
+            panelSlide.Location = new Point(btn.Location.X - btn.Location.X, btn.Location.Y - 180);
+        }
+
+        private void AdminDashboard_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            if (!_isLoggingOut)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

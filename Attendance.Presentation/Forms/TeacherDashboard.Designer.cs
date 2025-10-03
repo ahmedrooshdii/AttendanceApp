@@ -28,12 +28,308 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "TeacherDashboard";
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeacherDashboard));
+            panel2 = new Panel();
+            btnLogout = new Button();
+            pictureBox2 = new PictureBox();
+            panel3 = new Panel();
+            button1 = new Button();
+            lblRoleName = new Label();
+            lblUserName = new Label();
+            lblDate = new Label();
+            mainContentPanel = new Panel();
+            headerPanel = new Panel();
+            sideNavPanel = new Panel();
+            btnClassManagement = new Button();
+            btnTakeAttendance = new Button();
+            panel4 = new Panel();
+            panelSlide = new Panel();
+            panel1 = new Panel();
+            label1 = new Label();
+            lblAppName = new Label();
+            pictureBox1 = new PictureBox();
+            timerDateAndTime = new System.Windows.Forms.Timer(components);
+            panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel3.SuspendLayout();
+            mainContentPanel.SuspendLayout();
+            sideNavPanel.SuspendLayout();
+            panel4.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(btnLogout);
+            panel2.Controls.Add(pictureBox2);
+            panel2.Controls.Add(panel3);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(258, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(926, 73);
+            panel2.TabIndex = 5;
+            // 
+            // btnLogout
+            // 
+            btnLogout.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLogout.BackColor = Color.Red;
+            btnLogout.Cursor = Cursors.Hand;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(1552, 14);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(75, 34);
+            btnLogout.TabIndex = 3;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox2.Cursor = Cursors.Hand;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(1456, 0);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(60, 58);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(67, 3, 125);
+            panel3.Controls.Add(button1);
+            panel3.Controls.Add(lblRoleName);
+            panel3.Controls.Add(lblUserName);
+            panel3.Controls.Add(lblDate);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(926, 72);
+            panel3.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.BackColor = Color.Red;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(826, 19);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 34);
+            button1.TabIndex = 5;
+            button1.Text = "Logout";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += BtnLogout_Click;
+            // 
+            // lblRoleName
+            // 
+            lblRoleName.ForeColor = Color.White;
+            lblRoleName.Location = new Point(261, 26);
+            lblRoleName.Name = "lblRoleName";
+            lblRoleName.Size = new Size(132, 23);
+            lblRoleName.TabIndex = 2;
+            lblRoleName.Text = "Role: Admin";
+            // 
+            // lblUserName
+            // 
+            lblUserName.ForeColor = Color.White;
+            lblUserName.Location = new Point(48, 26);
+            lblUserName.Name = "lblUserName";
+            lblUserName.Size = new Size(116, 23);
+            lblUserName.TabIndex = 1;
+            lblUserName.Text = "User: Admin";
+            // 
+            // lblDate
+            // 
+            lblDate.BackColor = Color.Transparent;
+            lblDate.Font = new Font("Arial", 12F, FontStyle.Bold);
+            lblDate.ForeColor = Color.White;
+            lblDate.Location = new Point(480, 27);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(287, 19);
+            lblDate.TabIndex = 0;
+            lblDate.Text = "Date : ";
+            // 
+            // mainContentPanel
+            // 
+            mainContentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            mainContentPanel.Controls.Add(headerPanel);
+            mainContentPanel.Location = new Point(286, 98);
+            mainContentPanel.Name = "mainContentPanel";
+            mainContentPanel.Size = new Size(873, 557);
+            mainContentPanel.TabIndex = 3;
+            // 
+            // headerPanel
+            // 
+            headerPanel.BackColor = Color.LightGray;
+            headerPanel.Location = new Point(81, 125);
+            headerPanel.Name = "headerPanel";
+            headerPanel.Size = new Size(774, 180);
+            headerPanel.TabIndex = 2;
+            // 
+            // sideNavPanel
+            // 
+            sideNavPanel.BackColor = Color.FromArgb(67, 3, 125);
+            sideNavPanel.Controls.Add(btnClassManagement);
+            sideNavPanel.Controls.Add(btnTakeAttendance);
+            sideNavPanel.Controls.Add(panel4);
+            sideNavPanel.Controls.Add(panel1);
+            sideNavPanel.Dock = DockStyle.Left;
+            sideNavPanel.ForeColor = Color.White;
+            sideNavPanel.Location = new Point(0, 0);
+            sideNavPanel.Name = "sideNavPanel";
+            sideNavPanel.Size = new Size(258, 681);
+            sideNavPanel.TabIndex = 4;
+            // 
+            // btnClassManagement
+            // 
+            btnClassManagement.FlatAppearance.BorderSize = 0;
+            btnClassManagement.FlatStyle = FlatStyle.Flat;
+            btnClassManagement.ForeColor = Color.White;
+            btnClassManagement.Image = (Image)resources.GetObject("btnClassManagement.Image");
+            btnClassManagement.Location = new Point(8, 260);
+            btnClassManagement.Name = "btnClassManagement";
+            btnClassManagement.Size = new Size(250, 74);
+            btnClassManagement.TabIndex = 1;
+            btnClassManagement.Text = "View Class Attendance";
+            btnClassManagement.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnClassManagement.Click += btnClassManagement_Click;
+            // 
+            // btnTakeAttendance
+            // 
+            btnTakeAttendance.BackColor = Color.FromArgb(67, 3, 125);
+            btnTakeAttendance.FlatAppearance.BorderSize = 0;
+            btnTakeAttendance.FlatStyle = FlatStyle.Flat;
+            btnTakeAttendance.ForeColor = Color.White;
+            btnTakeAttendance.Image = (Image)resources.GetObject("btnTakeAttendance.Image");
+            btnTakeAttendance.ImageAlign = ContentAlignment.MiddleLeft;
+            btnTakeAttendance.Location = new Point(8, 180);
+            btnTakeAttendance.Name = "btnTakeAttendance";
+            btnTakeAttendance.Size = new Size(250, 74);
+            btnTakeAttendance.TabIndex = 1;
+            btnTakeAttendance.Text = "Take Attendance";
+            btnTakeAttendance.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnTakeAttendance.UseVisualStyleBackColor = false;
+            btnTakeAttendance.Click += btnTakeAttendance_Click;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(panelSlide);
+            panel4.Dock = DockStyle.Left;
+            panel4.Location = new Point(0, 180);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(8, 501);
+            panel4.TabIndex = 0;
+            // 
+            // panelSlide
+            // 
+            panelSlide.BackColor = Color.White;
+            panelSlide.Location = new Point(0, 0);
+            panelSlide.Name = "panelSlide";
+            panelSlide.Size = new Size(8, 74);
+            panelSlide.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblAppName);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(258, 180);
+            panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Arial", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(97, 144);
+            label1.Name = "label1";
+            label1.Size = new Size(67, 19);
+            label1.TabIndex = 0;
+            label1.Text = "System";
+            // 
+            // lblAppName
+            // 
+            lblAppName.Font = new Font("Arial", 12F, FontStyle.Bold);
+            lblAppName.ForeColor = Color.White;
+            lblAppName.Location = new Point(23, 125);
+            lblAppName.Name = "lblAppName";
+            lblAppName.Size = new Size(212, 19);
+            lblAppName.TabIndex = 0;
+            lblAppName.Text = "Attendance Management";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.ImageLocation = "";
+            pictureBox1.Location = new Point(58, 11);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(130, 99);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // timerDateAndTime
+            // 
+            timerDateAndTime.Tick += timerDateAndTime_Tick;
+            // 
+            // TeacherDashboard
+            // 
+            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(1184, 681);
+            Controls.Add(panel2);
+            Controls.Add(mainContentPanel);
+            Controls.Add(sideNavPanel);
+            Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4);
+            Name = "TeacherDashboard";
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "TeacherDashboard";
+            FormClosed += TeacherDashboard_FormClosed_1;
+            panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel3.ResumeLayout(false);
+            mainContentPanel.ResumeLayout(false);
+            sideNavPanel.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panel2;
+        private Button btnLogout;
+        private PictureBox pictureBox2;
+        private Panel panel3;
+        private Label lblRoleName;
+        private Label lblUserName;
+        private Label lblDate;
+        private Panel mainContentPanel;
+        private Panel headerPanel;
+        private Panel sideNavPanel;
+        private Button btnClassManagement;
+        private Button btnTakeAttendance;
+        private Panel panel4;
+        private Panel panelSlide;
+        private Panel panel1;
+        private Label label1;
+        private Label lblAppName;
+        private PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timerDateAndTime;
+        private Button button1;
     }
 }
