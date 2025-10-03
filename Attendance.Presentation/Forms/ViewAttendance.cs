@@ -73,7 +73,19 @@ namespace Attendance.Presentation.Forms
         {
             if (cmbClass.SelectedValue == null) return;
 
-            int classId = (int)((cmbClass.SelectedValue as Class)?.ClassId);
+            int classId;
+            if (cmbClass.SelectedValue is int id)
+            {
+                classId = id;
+            }
+            else if (cmbClass.SelectedValue is Class cls)
+            {
+                classId = cls.ClassId;
+            }
+            else
+            {
+                return; // Unexpected type, do nothing
+            }
             LoadStudentAutoComplete(classId);
         }
         private async void LoadStudentAutoComplete(int classId)

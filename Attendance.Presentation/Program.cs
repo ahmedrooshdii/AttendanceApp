@@ -30,7 +30,7 @@ namespace Attendance.Presentation
 
             services.AddSingleton<IConfiguration>(configuration);
 
-            services.AddDbContext<AttendanceDbContext>(options =>
+            services.AddDbContextFactory<AttendanceDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUserRepository, UserRepository>();
