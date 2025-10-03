@@ -30,12 +30,13 @@
         {
             tabControl1 = new TabControl();
             tabPageMarkAttendance = new TabPage();
+            button1 = new Button();
             panel5 = new Panel();
             dataGridViewMarkAttendance = new DataGridView();
             ID = new DataGridViewTextBoxColumn();
             StudentName = new DataGridViewTextBoxColumn();
-            status = new DataGridViewCheckBoxColumn();
-            Status2 = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewComboBoxColumn();
+            Note = new DataGridViewTextBoxColumn();
             comboBoxClass = new ComboBox();
             panel6 = new Panel();
             panel4 = new Panel();
@@ -66,6 +67,7 @@
             // 
             // tabPageMarkAttendance
             // 
+            tabPageMarkAttendance.Controls.Add(button1);
             tabPageMarkAttendance.Controls.Add(panel5);
             tabPageMarkAttendance.Controls.Add(dataGridViewMarkAttendance);
             tabPageMarkAttendance.Controls.Add(comboBoxClass);
@@ -86,6 +88,22 @@
             tabPageMarkAttendance.Text = "Mark Attendance";
             tabPageMarkAttendance.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.BackColor = Color.Green;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(772, 371);
+            button1.Name = "button1";
+            button1.Size = new Size(98, 44);
+            button1.TabIndex = 7;
+            button1.Text = "Submit";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // panel5
             // 
             panel5.BackColor = Color.Gray;
@@ -102,11 +120,11 @@
             dataGridViewMarkAttendance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewMarkAttendance.BackgroundColor = Color.White;
             dataGridViewMarkAttendance.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewMarkAttendance.Columns.AddRange(new DataGridViewColumn[] { ID, StudentName, status, Status2 });
+            dataGridViewMarkAttendance.Columns.AddRange(new DataGridViewColumn[] { ID, StudentName, Status, Note });
             dataGridViewMarkAttendance.Location = new Point(39, 131);
             dataGridViewMarkAttendance.Name = "dataGridViewMarkAttendance";
             dataGridViewMarkAttendance.ScrollBars = ScrollBars.Vertical;
-            dataGridViewMarkAttendance.Size = new Size(830, 280);
+            dataGridViewMarkAttendance.Size = new Size(831, 234);
             dataGridViewMarkAttendance.TabIndex = 6;
             // 
             // ID
@@ -121,15 +139,16 @@
             StudentName.Name = "StudentName";
             StudentName.ReadOnly = true;
             // 
-            // status
+            // Status
             // 
-            status.HeaderText = "Status";
-            status.Name = "status";
+            Status.HeaderText = "Status";
+            Status.Items.AddRange(new object[] { "--Select--", "Present", "Absent", "Late" });
+            Status.Name = "Status";
             // 
-            // Status2
+            // Note
             // 
-            Status2.HeaderText = "Status";
-            Status2.Name = "Status2";
+            Note.HeaderText = "Note";
+            Note.Name = "Note";
             // 
             // comboBoxClass
             // 
@@ -192,6 +211,7 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(270, 22);
             dateTimePicker1.TabIndex = 1;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // label3
             // 
@@ -265,9 +285,10 @@
         private ComboBox comboBox2;
         private Panel panel6;
         private DataGridView dataGridViewMarkAttendance;
+        private Button button1;
         private DataGridViewTextBoxColumn ID;
         private DataGridViewTextBoxColumn StudentName;
-        private DataGridViewCheckBoxColumn status;
-        private DataGridViewTextBoxColumn Status2;
+        private DataGridViewComboBoxColumn Status;
+        private DataGridViewTextBoxColumn Note;
     }
 }

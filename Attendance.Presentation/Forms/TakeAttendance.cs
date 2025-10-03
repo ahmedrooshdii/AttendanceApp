@@ -1,4 +1,6 @@
 ﻿using Attendance.Domain.Entities;
+using Attendance.Infrastructure.RepositoryImplementation;
+using Guna.UI2.WinForms.Suite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +18,16 @@ namespace Attendance.Presentation.Forms
         private int _userId;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
+        private readonly IAttendanceService _attendanceService;
 
-        public TakeAttendance(int userId, ITeacherService teacherService, IClassServices classService)
+        public TakeAttendance(int userId, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
         {
             InitializeComponent();
             dataGridViewMarkAttendance.Columns["ID"].Visible = false;
-            dataGridViewMarkAttendance.Columns["Status2"].Visible = false;
             _userId = userId;
             _teacherService = teacherService;
-            _classService = classService; 
+            _classService = classService;
+            _attendanceService = attendanceService;
         }
 
         private async void TakeAttendance_Load(object sender, EventArgs e)
@@ -51,23 +54,86 @@ namespace Attendance.Presentation.Forms
 
         private async void comboBoxClass_SelectedIndexChanged(object sender, EventArgs e)
         {
+            await LoadStudentsForAttendance();
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBoxClass.SelectedValue is not int selectedClassId || selectedClassId <= 0)
+            {
+                MessageBox.Show("Please select a class before submitting.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedDate = dateTimePicker1.Value.Date;
+            var attendanceList = new List<Attendence>();
+
+            foreach (DataGridViewRow row in dataGridViewMarkAttendance.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                int studentId = Convert.ToInt32(row.Cells["ID"].Value);
+                string studentName = row.Cells["StudentName"].Value?.ToString() ?? "";
+                string status = row.Cells["Status"].Value?.ToString();
+                string note = row.Cells["Note"].Value?.ToString() ?? "";
+
+                // Force teacher to select a status
+                if (string.IsNullOrEmpty(status) || status == "--Select--")
+                {
+                    MessageBox.Show($"Please select a status for student: {studentName}",
+                        "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                attendanceList.Add(new Attendence
+                {
+                    StudentId = studentId,
+                    Date = selectedDate,
+                    Status = status,
+                    Notes = note
+                });
+            }
+
+            // Save to DB via service
+            try
+            {
+                await _attendanceService.SaveAttendanceAsync(selectedClassId, attendanceList);
+
+                MessageBox.Show("Attendance saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            await LoadStudentsForAttendance();
+        }
+        private async Task LoadStudentsForAttendance()
+        {
             if (comboBoxClass.SelectedValue is int selectedClassId && selectedClassId > 0)
             {
+                var selectedDate = dateTimePicker1.Value.Date;
+
                 var students = await _classService.GetStudentsByClassIdAsync(selectedClassId);
 
                 if (students != null && students.Any())
                 {
-                    // Clear old rows
                     dataGridViewMarkAttendance.Rows.Clear();
 
-                    // Add each student to the grid
                     foreach (var student in students)
                     {
+                        // check if attendance already exists for this date
+                        var todayAttendance = student.Atendances?
+                            .FirstOrDefault(a => a.Date.Date == selectedDate);
+
                         dataGridViewMarkAttendance.Rows.Add(
                             student.StudentId,
                             student.StudentName,
-                            false,
-                            "Absent" // default attendance status
+                            todayAttendance?.Status ?? "--Select--",
+                            todayAttendance?.Notes ?? string.Empty
                         );
                     }
                 }
@@ -78,7 +144,6 @@ namespace Attendance.Presentation.Forms
             }
             else
             {
-                // Clear the grid if no valid class is selected
                 dataGridViewMarkAttendance.Rows.Clear();
             }
         }

@@ -31,6 +31,7 @@ namespace Attendance.Infrastructure.RepositoryImplementation
         public async Task<List<Student>> GetStudentsByClassIdAsync(int classId)
         {
             return await _context.Students
+                .Include(s=>s.Atendances)
                 .Where(s => s.ClassId == classId)
                 .ToListAsync();
         }

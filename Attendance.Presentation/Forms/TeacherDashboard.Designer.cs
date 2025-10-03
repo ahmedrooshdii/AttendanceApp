@@ -294,7 +294,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             Name = "TeacherDashboard";
-            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TeacherDashboard";
             FormClosed += TeacherDashboard_FormClosed_1;

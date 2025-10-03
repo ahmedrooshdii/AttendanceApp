@@ -22,8 +22,8 @@ namespace Attendance.Presentation.Forms
         private bool _isLoggingOut = false;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
-
-        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService)
+        private readonly IAttendanceService _attendanceService;
+        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
         {
             InitializeComponent();
             timerDateAndTime.Start();
@@ -33,8 +33,9 @@ namespace Attendance.Presentation.Forms
             lblRoleName.Text = $"Role: Teacher";
             _teacherService = teacherService;
             _classService = classService;
+            _attendanceService = attendanceService;
             // Pre-load forms
-            _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService)
+            _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
