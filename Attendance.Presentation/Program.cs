@@ -1,8 +1,16 @@
 ﻿using Attendance.Domain.Entities;
 using Attendance.Infrastructure.DataSeed;
+using Attendance.Infrastructure.RepositoryImplementation;
 using Attendance.Presentation.Forms;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
 namespace Attendance.Presentation
 {
     internal static class Program
@@ -10,6 +18,9 @@ namespace Attendance.Presentation
         [STAThread]
         static async Task Main()
         {
+            await Task.Yield(); // ensure async path
+
+            // Configure DI in background
             var services = new ServiceCollection();
 
             var configuration = new ConfigurationBuilder()
@@ -24,8 +35,13 @@ namespace Attendance.Presentation
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IClassRepository, ClassRepository>();
+            services.AddScoped<IClassServices, ClassServices>();
+            services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IAttendanceService, AttendanceService>();
 
-            // Register only LoginForm, dashboards are created with user object
             services.AddScoped<LoginForm>();
 
             var serviceProvider = services.BuildServiceProvider();
@@ -44,11 +60,19 @@ namespace Attendance.Presentation
                 }
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            // Run WinForms on STA thread
+            var thread = new Thread(() =>
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            var loginForm = serviceProvider.GetRequiredService<LoginForm>();
-            Application.Run(loginForm);
+                var loginForm = serviceProvider.GetRequiredService<LoginForm>();
+                Application.Run(loginForm);
+            });
+
+            thread.SetApartmentState(ApartmentState.STA); // required for DataGridView ComboBox etc.
+            thread.Start();
+            thread.Join();
         }
     }
 }
