@@ -13,20 +13,23 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Attendance.Presentation
-{
+{  
+        
     public partial class LoginForm : Form
     {
+        private readonly AttendanceDbContext db;
         private readonly IAuthService _authService;
 
-        public LoginForm(IAuthService authService)
+        public LoginForm(IAuthService authService, AttendanceDbContext _db)
         {
             InitializeComponent();
             _authService = authService;
-
+            db = _db;   
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
             tbUserName.Focus();
+           // this.db = db;
         }
 
         private void Exit(object sender, EventArgs e)
@@ -89,7 +92,7 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user);
+                    var adminDashboard = new AdminDashboard(user,db);
                     adminDashboard.Owner = this;
                     adminDashboard.Show();
                 }

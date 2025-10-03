@@ -11,23 +11,25 @@ namespace Attendance.Presentation.Forms
         private readonly ClassManagement _classManagementForm;
         private readonly Reports _reportsForm;
         private readonly DatabaseLog _databaseLogForm;
-
-        public AdminDashboard(User user)
+        private readonly  AttendanceDbContext db;
+        public AdminDashboard(User user,AttendanceDbContext _db)
         {
             InitializeComponent();
-           
+            db = _db;
+
             _user = user;
             lblUserName.Text = $"User: {_user.UserName}";
             lblRoleName.Text = $"Role: Admin";
 
             // Pre-load forms
+
             _userManagementForm = new UserManagement
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ClassManagement
+            _classManagementForm = new ClassManagement(db)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,

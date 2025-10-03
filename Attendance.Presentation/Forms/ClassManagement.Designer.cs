@@ -141,6 +141,7 @@ namespace Attendance.Presentation.Forms
             Margin = new Padding(2);
             Name = "ClassManagement";
             Text = "Class Management";
+            Load += ClassManagement_Load;
             ((System.ComponentModel.ISupportInitialize)DisplayClasss).EndInit();
             ResumeLayout(false);
             PerformLayout();

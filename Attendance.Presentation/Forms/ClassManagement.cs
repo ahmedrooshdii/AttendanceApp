@@ -6,11 +6,17 @@ namespace Attendance.Presentation.Forms
 {
     public partial class ClassManagement : Form
     {
+
         AttendanceDbContext db;
-        public ClassManagement()
+        public ClassManagement(AttendanceDbContext _db)
         {
             InitializeComponent();
+            db = _db;
+
+
         }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -19,7 +25,7 @@ namespace Attendance.Presentation.Forms
 
         private void DisplayClasss_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var Classs = db.Classes.ToList();
+            var Classs = db.Classes.Select(e => new { Id = e.ClassId, Class_Name = e.ClassName }).ToList();
 
             DisplayClasss.DataSource = Classs;
 
@@ -50,6 +56,14 @@ namespace Attendance.Presentation.Forms
         private void Search_btn_Click(object sender, EventArgs e)
         {
             MessageBox.Show("is not implemented yet");
+        }
+
+        private void ClassManagement_Load(object sender, EventArgs e)
+        {
+            var Classs = db.Classes.Select(e => new { Id = e.ClassId, Class_Name = e.ClassName }).ToList();
+            DisplayClasss.DataSource = Classs;
+                
+
         }
     }
 }
