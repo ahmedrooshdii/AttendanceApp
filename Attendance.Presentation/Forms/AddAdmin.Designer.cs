@@ -149,6 +149,7 @@
             MaximumSize = new Size(551, 377);
             MinimumSize = new Size(551, 377);
             Name = "AddAdmin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AddAdmin";
             ResumeLayout(false);
             PerformLayout();

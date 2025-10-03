@@ -1,5 +1,6 @@
 ﻿using Attendance.Domain.Entities;
 using Attendance.Infrastructure.DataSeed;
+using Attendance.Infrastructure.Repositories;
 using Attendance.Presentation.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ namespace Attendance.Presentation
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+            services.AddScoped<IUserManagementService, UserManagementService>();
+
 
             // Register only LoginForm, dashboards are created with user object
             services.AddScoped<LoginForm>();

@@ -1,69 +1,73 @@
-﻿using Attendance.Infrastructure.Data;
-using Attendance.Domain.Entities;
+﻿using Attendance.Domain.Contracts.Services;
+using Attendance.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Attendance.Presentation.Forms
 {
     public partial class UserManagement : Form
     {
+        private readonly IUserManagementService _service;
         private readonly AttendanceDbContext _db;
+
+        public UserManagement(IUserManagementService service, AttendanceDbContext db)
+        {
+            InitializeComponent();
+            _service = service;
+            _db = db;
+            this.Load += FormUsers_Load;
+        }
 
         public UserManagement()
         {
-
             InitializeComponent();
+
             var options = new DbContextOptionsBuilder<AttendanceDbContext>()
-        .UseSqlServer("Data Source=.;Initial Catalog=AttendanceDB;Integrated Security=True;TrustServerCertificate=True;")
-        .Options;
+                .UseSqlServer("Data Source=.;Initial Catalog=AttendanceDB;Integrated Security=True;TrustServerCertificate=True;")
+                .Options;
 
             _db = new AttendanceDbContext(options);
+
+            var repo = new Attendance.Infrastructure.Repositories.UserManagementRepository(_db);
+            _service = new Attendance.Service.UserManagementService(repo);
 
             this.Load += FormUsers_Load;
         }
 
-        private void FormUsers_Load(object sender, EventArgs e)
+        private async void FormUsers_Load(object sender, EventArgs e)
         {
-            LoadUsers();
+            await LoadUsersAsync();
         }
 
-        private void LoadUsers()
+        private async Task LoadUsersAsync()
         {
-            var users = _db.Users
-                .Include(u => u.Role)
-                .Select(u => new
-                {
-                    u.UserId,
-                    u.UserName,
-                    Role = u.Role != null ? u.Role.RoleName : ""
-                })
-                .ToList();
-
-            dgvUsers.DataSource = users;
+            try
+            {
+                var users = await _service.GetAllUsersAsync();
+                dgvUsers.DataSource = users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading users: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
+        private async void BtnSearch_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.Trim();
-
-            var users = _db.Users
-                .Include(u => u.Role)
-                .Where(u =>
-                    EF.Functions.Like(u.UserId.ToString(), $"%{searchText}%") ||
-                    EF.Functions.Like(u.UserName, $"%{searchText}%") ||
-                    (u.Role != null && EF.Functions.Like(u.Role.RoleName, $"%{searchText}%"))
-                )
-                .Select(u => new
-                {
-                    u.UserId,
-                    u.UserName,
-                    Role = u.Role != null ? u.Role.RoleName : ""
-                })
-                .ToList();
-
-            dgvUsers.DataSource = users;
+            try
+            {
+                string searchText = txtSearch.Text.Trim();
+                var users = await _service.SearchUsersAsync(searchText);
+                dgvUsers.DataSource = users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnAddAdmin_Click(object sender, EventArgs e)
@@ -72,7 +76,7 @@ namespace Attendance.Presentation.Forms
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    LoadUsers();
+                    _ = LoadUsersAsync();
                 }
             }
         }
@@ -83,7 +87,7 @@ namespace Attendance.Presentation.Forms
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    LoadUsers();
+                    _ = LoadUsersAsync();
                 }
             }
         }
@@ -94,12 +98,12 @@ namespace Attendance.Presentation.Forms
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    LoadUsers();
+                    _ = LoadUsersAsync();
                 }
             }
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e)
+        private async void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgvUsers.SelectedRows.Count > 0)
             {
@@ -110,104 +114,100 @@ namespace Attendance.Presentation.Forms
                                               MessageBoxIcon.Warning);
                 if (confirm == DialogResult.Yes)
                 {
-                    using var transaction = _db.Database.BeginTransaction();
                     try
                     {
-                        var teacher = _db.Teachers.FirstOrDefault(t => t.UserId == userId);
-                        if (teacher != null)
+                        bool success = await _service.DeleteUserAsync(userId);
+                        if (success)
                         {
-                            var teacherClasses = _db.TeacherClasses.Where(tc => tc.TeacherId == teacher.TeacherId);
-                            _db.TeacherClasses.RemoveRange(teacherClasses);
-                            _db.Teachers.Remove(teacher);
+                            MessageBox.Show("User deleted successfully!", "Success",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            await LoadUsersAsync();
                         }
-
-                        var student = _db.Students.FirstOrDefault(s => s.UserId == userId);
-                        if (student != null)
+                        else
                         {
-                            _db.Students.Remove(student);
+                            MessageBox.Show("Error deleting user", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
-                        var user = _db.Users.FirstOrDefault(u => u.UserId == userId);
-                        if (user != null)
-                        {
-                            _db.Users.Remove(user);
-                        }
-
-                        _db.SaveChanges();
-                        transaction.Commit();
-
-                        MessageBox.Show("User deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadUsers();
                     }
                     catch (Exception ex)
                     {
-                        transaction.Rollback();
-                        MessageBox.Show($"Error deleting user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Error: {ex.Message}", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Please select a user to delete", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please select a user to delete", "Alert",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
+        private async void BtnEdit_Click(object sender, EventArgs e)
         {
             if (dgvUsers.CurrentRow != null)
             {
-                int userId = Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserId"].Value);
-                var user = _db.Users
-                              .Include(u => u.Role)
-                              .FirstOrDefault(u => u.UserId == userId);
+                try
+                {
+                    int userId = Convert.ToInt32(dgvUsers.CurrentRow.Cells["UserId"].Value);
+                    var user = await _service.GetUserByIdAsync(userId);
 
-                if (user == null)
-                {
-                    MessageBox.Show("User not found.");
-                    return;
-                }
-                if (user.RoleId == 1) 
-                {
-                    using (AddAdmin frm = new AddAdmin(_db, user)) 
+                    if (user == null)
                     {
-                        if (frm.ShowDialog() == DialogResult.OK)
+                        MessageBox.Show("User not found.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (user.RoleId == 1) 
+                    {
+                        using (AddAdmin frm = new AddAdmin(_db, user))
                         {
-                            LoadUsers();
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                await LoadUsersAsync();
+                            }
                         }
                     }
-                }
-                else if (user.RoleId == 2) 
-                {
-                    using (AddTeacher frm = new AddTeacher(_db, user))
+                    else if (user.RoleId == 2) 
                     {
-                        if (frm.ShowDialog() == DialogResult.OK)
+                        using (AddTeacher frm = new AddTeacher(_db, user))
                         {
-                            LoadUsers();
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                await LoadUsersAsync();
+                            }
                         }
                     }
-                }
-                else if (user.RoleId == 3) 
-                {
-                    using (AddStudent frm = new AddStudent(_db, user))
+                    else if (user.RoleId == 3) 
                     {
-                        if (frm.ShowDialog() == DialogResult.OK)
+                        using (AddStudent frm = new AddStudent(_db, user))
                         {
-                            LoadUsers();
+                            if (frm.ShowDialog() == DialogResult.OK)
+                            {
+                                await LoadUsersAsync();
+                            }
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("Unknown role, cannot edit this user.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Unknown role, cannot edit this user.");
+                    MessageBox.Show($"Error: {ex.Message}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Please select user to edit ");
+                MessageBox.Show("Please select a user to edit", "Alert",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-
-
+       
     }
 }
