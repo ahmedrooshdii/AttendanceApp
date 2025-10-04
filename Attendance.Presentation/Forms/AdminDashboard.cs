@@ -46,7 +46,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ClassManagement(db)
+            _classManagementForm = new ClassManagement()
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,

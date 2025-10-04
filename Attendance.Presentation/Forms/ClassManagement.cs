@@ -11,15 +11,25 @@ namespace Attendance.Presentation.Forms
  
 
         private readonly AttendanceDbContext db;
-    
+
+     
+
+        public ClassManagement()
+        {
+            InitializeComponent();
+            var options = new DbContextOptionsBuilder<AttendanceDbContext>()
+               .UseSqlServer("Data Source=.;Initial Catalog=AttendanceDB;Integrated Security=True;TrustServerCertificate=True;")
+               .Options;
+
+            db = new AttendanceDbContext(options);
+            LoadClasses();
+        }
         public ClassManagement(AttendanceDbContext _db)
         {
             InitializeComponent();
             db = _db;
             LoadClasses();
         }
-      
-
 
         private void ClassManagement_Load(object sender, EventArgs e)
         {
