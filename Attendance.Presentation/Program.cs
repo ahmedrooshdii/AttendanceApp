@@ -1,5 +1,6 @@
 ﻿using Attendance.Domain.Entities;
 using Attendance.Infrastructure.DataSeed;
+using Attendance.Infrastructure.Repositories;
 using Attendance.Infrastructure.RepositoryImplementation;
 using Attendance.Presentation.Forms;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ namespace Attendance.Presentation
             // Configure DI in background
             var services = new ServiceCollection();
 
+            // Configuration from appsettings.json
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -31,7 +33,16 @@ namespace Attendance.Presentation
             services.AddSingleton<IConfiguration>(configuration);
 
             services.AddDbContextFactory<AttendanceDbContext>(options =>
+            // DbContext
+            services.AddDbContext<AttendanceDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            // Logging
+            services.AddLogging(builder => builder.AddConsole());
+
+            // Backup DI
+            services.AddScoped<IBackupRepository, BackupRepository>();
+            services.AddScoped<IBackupService, BackupService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserServices>();
@@ -46,6 +57,21 @@ namespace Attendance.Presentation
             services.AddScoped<IStudentrepository, StudentRepository>();
 
 
+            services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+            services.AddScoped<IUserManagementService, UserManagementService>();
+
+            // Forms
+            services.AddTransient<LoginForm>();
+            services.AddTransient<AdminDashboard>();
+            services.AddTransient<TeacherDashboard>();
+            services.AddTransient<StudentDashboard>();
+            services.AddTransient<Reports>();
+            services.AddTransient<DatabaseLog>();
+            services.AddTransient<UserManagement>();
+            services.AddTransient<ClassManagement>();
+
+
+            // Register only LoginForm, dashboards are created with user object
             services.AddScoped<LoginForm>();
 
             var serviceProvider = services.BuildServiceProvider();
