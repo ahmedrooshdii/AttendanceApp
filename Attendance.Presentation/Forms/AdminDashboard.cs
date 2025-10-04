@@ -1,52 +1,38 @@
 ﻿using Attendance.Domain.Entities;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Attendance.Presentation.Forms
 {
-    public partial class AdminDashboard : Form
+    public partial class AdminDashboard : BaseDashboardForm
     {
-        private readonly User _user;
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserManagement _userManagementForm;
         private readonly ClassManagement _classManagementForm;
         private readonly Reports _reportsForm;
         private readonly DatabaseLog _databaseLogForm;
 
         private bool _isLoggingOut = false;
-        public AdminDashboard(User user)
+
+        public AdminDashboard(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             timerDataAndTime.Start();
             lblAppName.AutoSize = true;
-            _user = user;
-            lblUserName.Text = $"User: {_user.UserName}";
-            lblRoleName.Text = $"Role: Admin";
+
+            // resolve forms from DI
+            _userManagementForm = _serviceProvider.GetRequiredService<UserManagement>();
+            _classManagementForm = _serviceProvider.GetRequiredService<ClassManagement>();
+            _reportsForm = _serviceProvider.GetRequiredService<Reports>();
+            _databaseLogForm = _serviceProvider.GetRequiredService<DatabaseLog>();
 
             // Pre-load forms
-            _userManagementForm = new UserManagement
-            {
-                TopLevel = false,
-                FormBorderStyle = FormBorderStyle.None,
-                Dock = DockStyle.Fill
-            };
-            _classManagementForm = new ClassManagement
-            {
-                TopLevel = false,
-                FormBorderStyle = FormBorderStyle.None,
-                Dock = DockStyle.Fill
-            };
-            _reportsForm = new Reports
-            {
-                TopLevel = false,
-                FormBorderStyle = FormBorderStyle.None,
-                Dock = DockStyle.Fill
-            };
-            _databaseLogForm = new DatabaseLog
-            {
-                TopLevel = false,
-                FormBorderStyle = FormBorderStyle.None,
-                Dock = DockStyle.Fill
-            };
+            PrepareForm(_userManagementForm);
+            PrepareForm(_classManagementForm);
+            PrepareForm(_reportsForm);
+            PrepareForm(_databaseLogForm);
 
             // Add forms to main content panel
             mainContentPanel.Controls.Add(_userManagementForm);
@@ -59,6 +45,13 @@ namespace Attendance.Presentation.Forms
             _userManagementForm.Show();
 
             this.FormClosed += AdminDashboard_FormClosed;
+        }
+
+        private void PrepareForm(Form form)
+        {
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
         }
 
         private void AdminDashboard_FormClosed(object sender, FormClosedEventArgs e)
@@ -155,9 +148,11 @@ namespace Attendance.Presentation.Forms
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        protected internal override void OnUserInitialized(User user)
         {
-
+            lblUserName.Text = $"User: {CurrentUser.UserName}";
+            lblRoleName.Text = $"Role: Admin";
         }
+
     }
 }
