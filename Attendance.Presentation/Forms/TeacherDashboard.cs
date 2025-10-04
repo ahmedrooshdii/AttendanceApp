@@ -12,14 +12,49 @@ using Attendance.Domain.Entities;
 
 namespace Attendance.Presentation.Forms
 {
-    public partial class TeacherDashboard : Form
+    public partial class TeacherDashboard : BaseDashboardForm
     {
         private readonly User _user;
-
-        public TeacherDashboard(User user)
+        private readonly TakeAttendance _takeAttendanceForm;
+        private readonly ViewAttendance _classManagementForm;
+        private bool _isLoggingOut = false;
+        private readonly ITeacherService _teacherService;
+        private readonly IClassServices _classService;
+        private readonly IAttendanceService _attendanceService;
+        private readonly IUserService _userService;
+        private readonly IStudentService _studentService;
+        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService, IStudentService studentService)
         {
             InitializeComponent();
+            timerDateAndTime.Start();
+            lblAppName.AutoSize = true;
             _user = user;
+            _teacherService = teacherService;
+            _classService = classService;
+            _attendanceService = attendanceService;
+            _userService = userService;
+            _studentService = studentService;
+            // Pre-load forms
+            _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+            _classManagementForm = new ViewAttendance(_user.UserId, _classService, _userService, _teacherService, _studentService, _attendanceService)
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+            // Add forms to main content panel
+            mainContentPanel.Controls.Add(_takeAttendanceForm);
+            mainContentPanel.Controls.Add(_classManagementForm);
+
+            // Set User Management as the default active tab
+            _takeAttendanceForm.BringToFront();
+            _takeAttendanceForm.Show();
+
             this.FormClosed += TeacherDashboard_FormClosed;
         }
 
@@ -29,6 +64,67 @@ namespace Attendance.Presentation.Forms
             {
                 this.Owner.Show();
             }
+        }
+
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            _isLoggingOut = true;
+            timerDateAndTime.Stop();
+            this.Owner.Show();
+            this.Close();
+        }
+        private void timerDateAndTime_Tick(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            lblDate.Text = "Date: " + now.ToString("MMMM dd, yyyy");
+        }
+        private void MoveSidePanel(Control btn)
+        {
+            panelSlide.Location = new Point(btn.Location.X - btn.Location.X, btn.Location.Y - 180);
+        }
+
+        private void TeacherDashboard_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            if (!_isLoggingOut)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnTakeAttendance_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MoveSidePanel(btnTakeAttendance);
+                _takeAttendanceForm.BringToFront();
+                _takeAttendanceForm.Show();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnClassManagement_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MoveSidePanel(btnClassManagement);
+                _classManagementForm.BringToFront();
+                _classManagementForm.Show();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        protected internal override void OnUserInitialized(User user)
+        {
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Admin";
         }
     }
 }

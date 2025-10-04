@@ -10,5 +10,6 @@ namespace Attendance.Domain.Contracts.Repositories
     public interface IUserRepository
     {
         Task<User?> GetByUsernameAsync(string username);
+        Task<User?> GetByIdAsync(int userId);
     }
 }
