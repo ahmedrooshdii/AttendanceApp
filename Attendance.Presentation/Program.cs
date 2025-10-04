@@ -42,6 +42,9 @@ namespace Attendance.Presentation
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentrepository, StudentRepository>();
+
 
             services.AddScoped<LoginForm>();
 

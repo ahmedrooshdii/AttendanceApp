@@ -14,18 +14,22 @@ namespace Attendance.Presentation.Forms
 {
     public partial class ViewAttendance : Form
     {
+        private User user;
+        private readonly int userId;
         private readonly IUserService userServices;
         private readonly IClassServices classServices;
         private readonly ITeacherService teacherService;
-        private readonly int userId;
-
-        public ViewAttendance(int _userId, IClassServices _classServices, IUserService _userServices, ITeacherService _teacherService)
+        private readonly IStudentService studentService;
+        private readonly IAttendanceService attendanceService;
+        public ViewAttendance(int _userId, IClassServices _classServices, IUserService _userServices, ITeacherService _teacherService, IStudentService _studentService, IAttendanceService _attendanceService)
         {
             InitializeComponent();
             classServices = _classServices;
             userId = _userId;
             userServices = _userServices;
             teacherService = _teacherService;
+            studentService = _studentService;
+            attendanceService = _attendanceService;
         }
 
         private async void ViewAttendance_Load(object sender, EventArgs e)
@@ -38,7 +42,7 @@ namespace Attendance.Presentation.Forms
                 this.Close();
                 return;
             }
-            var user = await userServices.GetByIdAsync(userId);
+            user = await userServices.GetByIdAsync(userId);
             if (user?.Role?.RoleName == "Admin")
             {
                 //load all classes
@@ -86,6 +90,7 @@ namespace Attendance.Presentation.Forms
             {
                 return; // Unexpected type, do nothing
             }
+            txtStudent.Text = "";
             LoadStudentAutoComplete(classId);
         }
         private async void LoadStudentAutoComplete(int classId)
@@ -96,6 +101,45 @@ namespace Attendance.Presentation.Forms
                 AutoCompleteStringCollection autoCompleteData = new AutoCompleteStringCollection();
                 autoCompleteData.AddRange(students.Select(s => s.StudentName).ToArray());
                 txtStudent.AutoCompleteCustomSource = autoCompleteData;
+            }
+        }
+
+        private async void btnGenerate_Click(object sender, EventArgs e)
+        {
+            Student student; 
+            if(user?.Role?.RoleName == "Admin" || user?.Role?.RoleName == "Teacher")
+            {
+                // if class is selected and student is selected then fetch there attendance from db
+                var students = await studentService.GetStudentByNameAsync(txtStudent.Text);
+                if(students.Count == 0 || students.Count > 1)
+                {
+                    MessageBox.Show("please choose the student Name from the list suggested", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                student = students[0];
+            } else
+            {
+                student = await studentService.GetStudentByUserIdAsync(userId);
+                if (student == null)
+                {
+                    MessageBox.Show("Invalid user ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            var attendance = attendanceService.GetStudentAttendancesByDateRangeAsync(student.StudentId, dtFrom.Value.Date, dtTo.Value.Date);
+            if(attendance.Result.Count() == 0)
+            {
+                MessageBox.Show("no Result choose another date range.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            dgvReport.Rows.Clear();
+            foreach (var attend in attendance.Result)
+            {
+                dgvReport.Rows.Add(
+                    attend.Date.ToString("dddd/dd/MMM/yyyy"),
+                    attend.Status,
+                    attend?.Notes ?? ""
+                    );
             }
         }
     }

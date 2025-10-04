@@ -22,7 +22,8 @@ namespace Attendance.Presentation.Forms
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
         private readonly IUserService _userService;
-        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService)
+        private readonly IStudentService _studentService;
+        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService, IStudentService studentService)
         {
             InitializeComponent();
             timerDateAndTime.Start();
@@ -34,6 +35,7 @@ namespace Attendance.Presentation.Forms
             _classService = classService;
             _attendanceService = attendanceService;
             _userService = userService;
+            _studentService = studentService;
             // Pre-load forms
             _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
             {
@@ -41,7 +43,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ViewAttendance(_user.UserId, _classService, _userService, _teacherService)
+            _classManagementForm = new ViewAttendance(_user.UserId, _classService, _userService, _teacherService, _studentService, _attendanceService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
@@ -110,7 +112,6 @@ namespace Attendance.Presentation.Forms
         {
             try
             {
-                _takeAttendanceForm.Hide();
                 MoveSidePanel(btnClassManagement);
                 _classManagementForm.BringToFront();
                 _classManagementForm.Show();

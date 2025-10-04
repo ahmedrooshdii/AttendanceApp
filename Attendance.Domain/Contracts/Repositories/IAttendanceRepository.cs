@@ -13,5 +13,6 @@ namespace Attendance.Domain.Contracts.Repositories
         Task AddAttendanceAsync(Attendence attendance);
         Task UpdateAttendanceAsync(Attendence attendance);
         Task SaveChangesAsync();
+        Task<List<Attendence>> GetByDateRangeAsync(int studentId, DateTime from, DateTime to);
     }
 }

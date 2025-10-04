@@ -38,5 +38,9 @@ namespace Attendance.Infrastructure.RepositoryImplementation
         {
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<List<Attendence>> GetByDateRangeAsync(int studentId, DateTime from, DateTime to)
+        {
+            return _dbContext.Attendances.Where(a=>a.StudentId == studentId && a.Date >= from && a.Date <= to).ToList();
+        }
     }
 }

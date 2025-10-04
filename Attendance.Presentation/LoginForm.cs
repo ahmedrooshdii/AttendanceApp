@@ -1,5 +1,6 @@
 ﻿using Attendance.Domain.Contracts.Services;
 using Attendance.Presentation.Forms;
+using Attendance.Service;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,9 @@ namespace Attendance.Presentation
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
         private readonly IUserService userServices;
+        private readonly IStudentService _studentService;
 
-        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userServices)
+        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userServices, IStudentService studentService)
         {
             InitializeComponent();
             _authService = authService;
@@ -30,6 +32,7 @@ namespace Attendance.Presentation
             _classService = classService;
             _attendanceService = attendanceService;
             this.userServices = userServices;
+            _studentService = studentService;
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
@@ -96,7 +99,7 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user);
+                    var adminDashboard = new AdminDashboard(user, _classService, _teacherService, _studentService, _attendanceService, userServices);
                     adminDashboard.Owner = this;
                     adminDashboard.Show();
                 }
@@ -104,7 +107,7 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices);
+                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices, _studentService);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
@@ -112,7 +115,7 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
-                    var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService);
+                    var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService, _studentService, _attendanceService);
                     studentDashboard.Owner = this;
                     studentDashboard.Show();
                 }
