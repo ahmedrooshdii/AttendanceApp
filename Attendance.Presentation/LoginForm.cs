@@ -7,12 +7,20 @@ namespace Attendance.Presentation
     {
         private readonly IAuthService _authService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly ITeacherService _teacherService;
+        private readonly IClassServices _classService;
+        private readonly IAttendanceService _attendanceService;
 
-        public LoginForm(IAuthService authService, IServiceProvider serviceProvider)
+        public LoginForm(IAuthService authService, IServiceProvider serviceProvider,
+            ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService
+            )
         {
             InitializeComponent();
             _authService = authService;
             _serviceProvider = serviceProvider;
+            _teacherService = teacherService;
+            _classService = classService;
+            _attendanceService = attendanceService;
 
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
@@ -90,8 +98,9 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
-                    teacherDashboard.InitializeUser(user);
+                    //  var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
+                    // teacherDashboard.InitializeUser(user);
+                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
@@ -99,7 +108,8 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
-                    var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
+                    //var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
+                    var studentDashboard = new StudentDashboard(user);
                     studentDashboard.InitializeUser(user);
                     studentDashboard.Owner = this;
                     studentDashboard.Show();
@@ -109,7 +119,7 @@ namespace Attendance.Presentation
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Invalid username or passwordz.");
             }
         }
     }
