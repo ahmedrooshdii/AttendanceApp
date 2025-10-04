@@ -1,3 +1,6 @@
+﻿using Attendance.Domain.Contracts.Services;
+using Attendance.Presentation.Forms;
+using Attendance.Service;
 ﻿using Attendance.Presentation.Forms;
 using Guna.UI2.WinForms;
 
@@ -10,7 +13,10 @@ namespace Attendance.Presentation
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
+        private readonly IUserService userServices;
+        private readonly IStudentService _studentService;
 
+        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userServices, IStudentService studentService)
         public LoginForm(IAuthService authService, IServiceProvider serviceProvider,
             ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService
             )
@@ -21,6 +27,8 @@ namespace Attendance.Presentation
             _teacherService = teacherService;
             _classService = classService;
             _attendanceService = attendanceService;
+            this.userServices = userServices;
+            _studentService = studentService;
 
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
@@ -89,6 +97,7 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
+                    var adminDashboard = new AdminDashboard(user, _classService, _teacherService, _studentService, _attendanceService, userServices);
                     var adminDashboard = _serviceProvider.GetRequiredService<AdminDashboard>();
                     adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;
@@ -98,6 +107,7 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
+                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices, _studentService);
                     //  var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
                     // teacherDashboard.InitializeUser(user);
                     var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService);
@@ -108,6 +118,7 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
+                    var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService, _studentService, _attendanceService);
                     //var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
                     var studentDashboard = new StudentDashboard(user);
                     studentDashboard.InitializeUser(user);

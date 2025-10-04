@@ -49,5 +49,9 @@ namespace Attendance.Service
 
             await _attendanceRepository.SaveChangesAsync();
         }
+        public async Task<List<Attendence>> GetStudentAttendancesByDateRangeAsync(int userId,DateTime from, DateTime to)
+        {
+            return await _attendanceRepository.GetByDateRangeAsync(userId, from, to);
+        }
     }
 }

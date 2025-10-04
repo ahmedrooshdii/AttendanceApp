@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Attendance.Domain.Contracts.Repositories
 {
-    public interface IUserRepository
+    public interface IStudentrepository
     {
-        Task<User?> GetByUsernameAsync(string username);
-        Task<User?> GetByIdAsync(int userId);
+        Task<Student?> GetStudentByUserIdAsync(int userid);
+        Task<List<Student>> GetStudentByNameAsync(string studentName);
     }
 }

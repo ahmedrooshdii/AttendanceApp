@@ -32,6 +32,7 @@ namespace Attendance.Presentation
 
             services.AddSingleton<IConfiguration>(configuration);
 
+            services.AddDbContextFactory<AttendanceDbContext>(options =>
             // DbContext
             services.AddDbContext<AttendanceDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
@@ -44,6 +45,7 @@ namespace Attendance.Presentation
             services.AddScoped<IBackupService, BackupService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserServices>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IClassRepository, ClassRepository>();
             services.AddScoped<IClassServices, ClassServices>();
@@ -51,6 +53,9 @@ namespace Attendance.Presentation
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentrepository, StudentRepository>();
+
 
             services.AddScoped<IUserManagementRepository, UserManagementRepository>();
             services.AddScoped<IUserManagementService, UserManagementService>();

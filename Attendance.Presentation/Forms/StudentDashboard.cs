@@ -20,16 +20,29 @@ namespace Attendance.Presentation.Forms
         private readonly DatabaseLog _databaseLogForm;
         private bool _isLoggingOut = false;
 
-        public StudentDashboard(User user)
+        private readonly IClassServices classServices;
+        private readonly IUserService userServices;
+        private readonly ITeacherService teacherService;
+        private readonly IStudentService studentService;
+        private readonly IAttendanceService attendanceService;
+
+        public StudentDashboard(User user, IClassServices _classServices, IUserService _userServices, ITeacherService _teacherService, IStudentService _studentService, IAttendanceService _attendanceService)
         {
             InitializeComponent();
             timerDateAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Teacher";
+            classServices = _classServices;
+            userServices = _userServices;
+            teacherService = _teacherService;
+            studentService = _studentService;
+            attendanceService = _attendanceService;
 
 
             // Pre-load forms
-            _viewAttendanceForm = new ViewAttendance
+            _viewAttendanceForm = new ViewAttendance(user.UserId, classServices, userServices, teacherService, studentService, attendanceService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,

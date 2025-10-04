@@ -10,8 +10,15 @@ namespace Attendance.Presentation.Forms
         private readonly IServiceProvider _serviceProvider;
         private readonly UserManagement _userManagementForm;
         private readonly ClassManagement _classManagementForm;
-        private readonly Reports _reportsForm;
+        private readonly ViewAttendance _viewattendanceForm;
         private readonly DatabaseLog _databaseLogForm;
+        private readonly IClassServices _classServices;
+        private readonly IUserService _userService;
+        private readonly ITeacherService _teacherService;
+        private readonly IStudentService _studentService;
+        private readonly IAttendanceService _attendanceService;
+        private bool _isLoggingOut = false;
+        public AdminDashboard(User user, IClassServices classServices,ITeacherService teacherService ,IStudentService studentService, IAttendanceService attendanceService, IUserService userService)
 
         private bool _isLoggingOut = false;
 
@@ -21,6 +28,39 @@ namespace Attendance.Presentation.Forms
             _serviceProvider = serviceProvider;
             timerDataAndTime.Start();
             lblAppName.AutoSize = true;
+            _user = user;
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Admin";
+            _classServices = classServices;
+            _teacherService = teacherService;
+            _studentService = studentService;
+            _attendanceService = attendanceService;
+            _userService = userService;
+            // Pre-load forms
+            _userManagementForm = new UserManagement
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+            _classManagementForm = new ClassManagement
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+            _viewattendanceForm = new ViewAttendance(_user.UserId, _classServices, _userService,_teacherService, _studentService, _attendanceService)
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+            _databaseLogForm = new DatabaseLog
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
 
             // resolve forms from DI
             _userManagementForm = _serviceProvider.GetRequiredService<UserManagement>();
@@ -37,7 +77,7 @@ namespace Attendance.Presentation.Forms
             // Add forms to main content panel
             mainContentPanel.Controls.Add(_userManagementForm);
             mainContentPanel.Controls.Add(_classManagementForm);
-            mainContentPanel.Controls.Add(_reportsForm);
+            mainContentPanel.Controls.Add(_viewattendanceForm);
             mainContentPanel.Controls.Add(_databaseLogForm);
 
             // Set User Management as the default active tab
@@ -106,8 +146,8 @@ namespace Attendance.Presentation.Forms
             {
                 MoveSidePanel(btnReports);
                 // Bring the pre-loaded UserManagement form to the front
-                _reportsForm.BringToFront();
-                _reportsForm.Show();
+                _viewattendanceForm.BringToFront();
+                _viewattendanceForm.Show();
             }
             catch (Exception ex)
             {
