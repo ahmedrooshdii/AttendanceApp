@@ -17,15 +17,16 @@ namespace Attendance.Presentation.Forms
         private readonly ITeacherService _teacherService;
         private readonly IStudentService _studentService;
         private readonly IAttendanceService _attendanceService;
-        private bool _isLoggingOut = false;
-        public AdminDashboard(User user, IClassServices classServices,ITeacherService teacherService ,IStudentService studentService, IAttendanceService attendanceService, IUserService userService)
+        private readonly IBackupService _backupService;
+        private readonly User _user;
 
         private bool _isLoggingOut = false;
+        public AdminDashboard(User user, IClassServices classServices,
+            ITeacherService teacherService ,IStudentService studentService, IAttendanceService attendanceService, 
+            IUserService userService , IBackupService  backupService)
 
-        public AdminDashboard(IServiceProvider serviceProvider)
-        {
+        { 
             InitializeComponent();
-            _serviceProvider = serviceProvider;
             timerDataAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
@@ -36,6 +37,7 @@ namespace Attendance.Presentation.Forms
             _studentService = studentService;
             _attendanceService = attendanceService;
             _userService = userService;
+            _backupService = backupService;
             // Pre-load forms
             _userManagementForm = new UserManagement
             {
@@ -55,7 +57,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _databaseLogForm = new DatabaseLog
+            _databaseLogForm = new DatabaseLog(_backupService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
@@ -63,16 +65,16 @@ namespace Attendance.Presentation.Forms
             };
 
             // resolve forms from DI
-            _userManagementForm = _serviceProvider.GetRequiredService<UserManagement>();
-            _classManagementForm = _serviceProvider.GetRequiredService<ClassManagement>();
-            _reportsForm = _serviceProvider.GetRequiredService<Reports>();
-            _databaseLogForm = _serviceProvider.GetRequiredService<DatabaseLog>();
+            //_userManagementForm = _serviceProvider.GetRequiredService<UserManagement>();
+            //_classManagementForm = _serviceProvider.GetRequiredService<ClassManagement>();
+            //_reportsForm = _serviceProvider.GetRequiredService<Reports>();
+            //_databaseLogForm = _serviceProvider.GetRequiredService<DatabaseLog>();
 
             // Pre-load forms
-            PrepareForm(_userManagementForm);
-            PrepareForm(_classManagementForm);
-            PrepareForm(_reportsForm);
-            PrepareForm(_databaseLogForm);
+            //PrepareForm(_userManagementForm);
+            //PrepareForm(_classManagementForm);
+            //PrepareForm(_reportsForm);
+            //PrepareForm(_databaseLogForm);
 
             // Add forms to main content panel
             mainContentPanel.Controls.Add(_userManagementForm);

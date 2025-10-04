@@ -1,7 +1,6 @@
 ﻿using Attendance.Domain.Contracts.Services;
 using Attendance.Presentation.Forms;
 using Attendance.Service;
-﻿using Attendance.Presentation.Forms;
 using Guna.UI2.WinForms;
 
 namespace Attendance.Presentation
@@ -9,26 +8,27 @@ namespace Attendance.Presentation
     public partial class LoginForm : Form
     {
         private readonly IAuthService _authService;
-        private readonly IServiceProvider _serviceProvider;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
         private readonly IUserService userServices;
         private readonly IStudentService _studentService;
+        private readonly IBackupService _backupService;
 
-        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userServices, IStudentService studentService)
-        public LoginForm(IAuthService authService, IServiceProvider serviceProvider,
-            ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService
-            )
+
+        public LoginForm(IAuthService authService,
+            ITeacherService teacherService, IClassServices classService,
+            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService , IBackupService backupService)
+      
         {
             InitializeComponent();
             _authService = authService;
-            _serviceProvider = serviceProvider;
             _teacherService = teacherService;
             _classService = classService;
             _attendanceService = attendanceService;
             this.userServices = userServices;
             _studentService = studentService;
+            _backupService = backupService;
 
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
@@ -97,8 +97,9 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user, _classService, _teacherService, _studentService, _attendanceService, userServices);
-                    var adminDashboard = _serviceProvider.GetRequiredService<AdminDashboard>();
+                    var adminDashboard = new AdminDashboard(user, _classService, _teacherService, _studentService, _attendanceService, userServices ,
+                         _backupService
+                        );
                     adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;
                     adminDashboard.Show();
@@ -110,7 +111,6 @@ namespace Attendance.Presentation
                     var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices, _studentService);
                     //  var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
                     // teacherDashboard.InitializeUser(user);
-                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
@@ -120,7 +120,6 @@ namespace Attendance.Presentation
                     this.Hide();
                     var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService, _studentService, _attendanceService);
                     //var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
-                    var studentDashboard = new StudentDashboard(user);
                     studentDashboard.InitializeUser(user);
                     studentDashboard.Owner = this;
                     studentDashboard.Show();

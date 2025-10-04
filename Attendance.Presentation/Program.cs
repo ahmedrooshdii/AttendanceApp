@@ -33,8 +33,7 @@ namespace Attendance.Presentation
             services.AddSingleton<IConfiguration>(configuration);
 
             services.AddDbContextFactory<AttendanceDbContext>(options =>
-            // DbContext
-            services.AddDbContext<AttendanceDbContext>(options =>
+           
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             // Logging
