@@ -131,9 +131,9 @@
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(96, 53);
             label1.Name = "label1";
-            label1.Size = new Size(128, 25);
+            label1.Size = new Size(109, 25);
             label1.TabIndex = 20;
-            label1.Text = "Admin Name";
+            label1.Text = "User Name";
             // 
             // AddAdmin
             // 

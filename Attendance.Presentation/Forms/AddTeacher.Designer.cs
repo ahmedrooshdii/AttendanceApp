@@ -36,6 +36,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             UserPassTxt = new Guna.UI2.WinForms.Guna2TextBox();
             userNameTxt = new Guna.UI2.WinForms.Guna2TextBox();
             CancelBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -44,6 +46,8 @@
             label2 = new Label();
             label1 = new Label();
             ClassComb = new CheckedListBox();
+            fullNameTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            label4 = new Label();
             SuspendLayout();
             // 
             // UserPassTxt
@@ -57,7 +61,7 @@
             UserPassTxt.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             UserPassTxt.Font = new Font("Segoe UI", 9F);
             UserPassTxt.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            UserPassTxt.Location = new Point(252, 118);
+            UserPassTxt.Location = new Point(252, 150);
             UserPassTxt.Name = "UserPassTxt";
             UserPassTxt.PlaceholderText = "";
             UserPassTxt.SelectedText = "";
@@ -77,7 +81,7 @@
             userNameTxt.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             userNameTxt.Font = new Font("Segoe UI", 9F);
             userNameTxt.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            userNameTxt.Location = new Point(252, 53);
+            userNameTxt.Location = new Point(252, 85);
             userNameTxt.Name = "userNameTxt";
             userNameTxt.PlaceholderText = "";
             userNameTxt.SelectedText = "";
@@ -94,7 +98,7 @@
             CancelBtn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             CancelBtn.Font = new Font("Segoe UI", 9F);
             CancelBtn.ForeColor = Color.White;
-            CancelBtn.Location = new Point(311, 249);
+            CancelBtn.Location = new Point(311, 281);
             CancelBtn.Name = "CancelBtn";
             CancelBtn.ShadowDecoration.CustomizableEdges = customizableEdges6;
             CancelBtn.Size = new Size(98, 37);
@@ -110,7 +114,7 @@
             AddBtn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             AddBtn.Font = new Font("Segoe UI", 9F);
             AddBtn.ForeColor = Color.White;
-            AddBtn.Location = new Point(172, 249);
+            AddBtn.Location = new Point(172, 281);
             AddBtn.Name = "AddBtn";
             AddBtn.ShadowDecoration.CustomizableEdges = customizableEdges8;
             AddBtn.Size = new Size(98, 37);
@@ -121,7 +125,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label3.Location = new Point(110, 183);
+            label3.Location = new Point(110, 215);
             label3.Name = "label3";
             label3.Size = new Size(73, 25);
             label3.TabIndex = 14;
@@ -131,7 +135,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label2.Location = new Point(110, 118);
+            label2.Location = new Point(110, 150);
             label2.Name = "label2";
             label2.Size = new Size(97, 25);
             label2.TabIndex = 13;
@@ -141,25 +145,56 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(110, 53);
+            label1.Location = new Point(110, 85);
             label1.Name = "label1";
-            label1.Size = new Size(136, 25);
+            label1.Size = new Size(109, 25);
             label1.TabIndex = 12;
-            label1.Text = "Teacher Name";
+            label1.Text = "User Name";
             // 
             // ClassComb
             // 
             ClassComb.FormattingEnabled = true;
-            ClassComb.Location = new Point(252, 183);
+            ClassComb.Location = new Point(252, 215);
             ClassComb.Name = "ClassComb";
             ClassComb.Size = new Size(200, 40);
             ClassComb.TabIndex = 19;
+            // 
+            // fullNameTxt
+            // 
+            fullNameTxt.CustomizableEdges = customizableEdges9;
+            fullNameTxt.DefaultText = "";
+            fullNameTxt.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            fullNameTxt.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            fullNameTxt.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            fullNameTxt.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            fullNameTxt.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            fullNameTxt.Font = new Font("Segoe UI", 9F);
+            fullNameTxt.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            fullNameTxt.Location = new Point(252, 30);
+            fullNameTxt.Name = "fullNameTxt";
+            fullNameTxt.PlaceholderText = "";
+            fullNameTxt.SelectedText = "";
+            fullNameTxt.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            fullNameTxt.Size = new Size(200, 36);
+            fullNameTxt.TabIndex = 21;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(110, 30);
+            label4.Name = "label4";
+            label4.Size = new Size(101, 25);
+            label4.TabIndex = 20;
+            label4.Text = "Full Name";
             // 
             // AddTeacher
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(535, 338);
+            Controls.Add(fullNameTxt);
+            Controls.Add(label4);
             Controls.Add(ClassComb);
             Controls.Add(UserPassTxt);
             Controls.Add(userNameTxt);
@@ -187,5 +222,7 @@
         private Label label2;
         private Label label1;
         private CheckedListBox ClassComb;
+        private Guna.UI2.WinForms.Guna2TextBox fullNameTxt;
+        private Label label4;
     }
 }

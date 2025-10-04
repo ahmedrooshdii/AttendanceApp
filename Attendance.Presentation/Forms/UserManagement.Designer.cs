@@ -52,27 +52,27 @@
             // 
             dgvUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsers.Location = new Point(20, 97);
-            dgvUsers.Margin = new Padding(6, 7, 6, 7);
+            dgvUsers.Location = new Point(14, 58);
+            dgvUsers.Margin = new Padding(4, 4, 4, 4);
             dgvUsers.Name = "dgvUsers";
             dgvUsers.RowHeadersWidth = 62;
-            dgvUsers.Size = new Size(1175, 387);
+            dgvUsers.Size = new Size(822, 232);
             dgvUsers.TabIndex = 0;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(20, 23);
-            txtSearch.Margin = new Padding(6, 7, 6, 7);
+            txtSearch.Location = new Point(14, 14);
+            txtSearch.Margin = new Padding(4, 4, 4, 4);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(331, 31);
+            txtSearch.Size = new Size(233, 23);
             txtSearch.TabIndex = 1;
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(367, 18);
-            btnSearch.Margin = new Padding(6, 7, 6, 7);
+            btnSearch.Location = new Point(257, 11);
+            btnSearch.Margin = new Padding(4, 4, 4, 4);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(126, 43);
+            btnSearch.Size = new Size(88, 26);
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
@@ -81,10 +81,10 @@
             // btnAdd
             // 
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAdd.Location = new Point(710, 502);
-            btnAdd.Margin = new Padding(6, 7, 6, 7);
+            btnAdd.Location = new Point(457, 298);
+            btnAdd.Margin = new Padding(4, 4, 4, 4);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(211, 43);
+            btnAdd.Size = new Size(148, 26);
             btnAdd.TabIndex = 3;
             btnAdd.Text = "Add Student";
             btnAdd.UseVisualStyleBackColor = true;
@@ -93,10 +93,10 @@
             // btnEdit
             // 
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnEdit.Location = new Point(167, 502);
-            btnEdit.Margin = new Padding(6, 7, 6, 7);
+            btnEdit.Location = new Point(83, 298);
+            btnEdit.Margin = new Padding(4, 4, 4, 4);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(126, 43);
+            btnEdit.Size = new Size(88, 26);
             btnEdit.TabIndex = 4;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = true;
@@ -105,10 +105,10 @@
             // btnDelete
             // 
             btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDelete.Location = new Point(313, 502);
-            btnDelete.Margin = new Padding(6, 7, 6, 7);
+            btnDelete.Location = new Point(183, 298);
+            btnDelete.Margin = new Padding(4, 4, 4, 4);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(126, 43);
+            btnDelete.Size = new Size(88, 26);
             btnDelete.TabIndex = 5;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -141,10 +141,10 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button3.Location = new Point(933, 498);
-            button3.Margin = new Padding(6, 7, 6, 7);
+            button3.Location = new Point(617, 296);
+            button3.Margin = new Padding(4, 4, 4, 4);
             button3.Name = "button3";
-            button3.Size = new Size(233, 43);
+            button3.Size = new Size(163, 26);
             button3.TabIndex = 6;
             button3.Text = "Add Admin";
             button3.UseVisualStyleBackColor = true;
@@ -153,10 +153,10 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button4.Location = new Point(466, 502);
-            button4.Margin = new Padding(6, 7, 6, 7);
+            button4.Location = new Point(283, 298);
+            button4.Margin = new Padding(4, 4, 4, 4);
             button4.Name = "button4";
-            button4.Size = new Size(232, 43);
+            button4.Size = new Size(162, 26);
             button4.TabIndex = 7;
             button4.Text = "Add Teacher";
             button4.UseVisualStyleBackColor = true;
@@ -164,10 +164,10 @@
             // 
             // UserManagement
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1215, 600);
+            ClientSize = new Size(850, 360);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(btnDelete);
@@ -176,7 +176,7 @@
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(dgvUsers);
-            Margin = new Padding(6, 7, 6, 7);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "UserManagement";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "User Management";
