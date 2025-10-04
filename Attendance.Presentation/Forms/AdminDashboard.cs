@@ -11,8 +11,8 @@ namespace Attendance.Presentation.Forms
         private readonly ClassManagement _classManagementForm;
         private readonly Reports _reportsForm;
         private readonly DatabaseLog _databaseLogForm;
-        private readonly  AttendanceDbContext db;
-        public AdminDashboard(User user,AttendanceDbContext _db)
+        private readonly AttendanceDbContext db;
+        public AdminDashboard(User user, AttendanceDbContext _db)
         {
             InitializeComponent();
             db = _db;
@@ -129,6 +129,11 @@ namespace Attendance.Presentation.Forms
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AdminDashboard_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

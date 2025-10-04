@@ -46,10 +46,10 @@
             lblRoleName = new Label();
             btnLogout = new Button();
             sideNavPanel = new Panel();
-            btnUserManagement = new Button();
-            btnClassManagement = new Button();
-            btnReports = new Button();
             btnDatabaseLog = new Button();
+            btnReports = new Button();
+            btnClassManagement = new Button();
+            btnUserManagement = new Button();
             mainContentPanel = new Panel();
             headerPanel.SuspendLayout();
             sideNavPanel.SuspendLayout();
@@ -118,25 +118,15 @@
             sideNavPanel.Size = new Size(200, 400);
             sideNavPanel.TabIndex = 1;
             // 
-            // btnUserManagement
+            // btnDatabaseLog
             // 
-            btnUserManagement.Dock = DockStyle.Top;
-            btnUserManagement.Location = new Point(0, 0);
-            btnUserManagement.Name = "btnUserManagement";
-            btnUserManagement.Size = new Size(200, 23);
-            btnUserManagement.TabIndex = 0;
-            btnUserManagement.Text = "User Management";
-            btnUserManagement.Click += BtnUserManagement_Click;
-            // 
-            // btnClassManagement
-            // 
-            btnClassManagement.Dock = DockStyle.Top;
-            btnClassManagement.Location = new Point(0, 23);
-            btnClassManagement.Name = "btnClassManagement";
-            btnClassManagement.Size = new Size(200, 23);
-            btnClassManagement.TabIndex = 1;
-            btnClassManagement.Text = "Class Management";
-            btnClassManagement.Click += BtnClassManagement_Click;
+            btnDatabaseLog.Dock = DockStyle.Top;
+            btnDatabaseLog.Location = new Point(0, 69);
+            btnDatabaseLog.Name = "btnDatabaseLog";
+            btnDatabaseLog.Size = new Size(200, 23);
+            btnDatabaseLog.TabIndex = 3;
+            btnDatabaseLog.Text = "Database Log";
+            btnDatabaseLog.Click += BtnDatabaseLog_Click;
             // 
             // btnReports
             // 
@@ -148,15 +138,25 @@
             btnReports.Text = "Reports";
             btnReports.Click += BtnReports_Click;
             // 
-            // btnDatabaseLog
+            // btnClassManagement
             // 
-            btnDatabaseLog.Dock = DockStyle.Top;
-            btnDatabaseLog.Location = new Point(0, 69);
-            btnDatabaseLog.Name = "btnDatabaseLog";
-            btnDatabaseLog.Size = new Size(200, 23);
-            btnDatabaseLog.TabIndex = 3;
-            btnDatabaseLog.Text = "Database Log";
-            btnDatabaseLog.Click += BtnDatabaseLog_Click;
+            btnClassManagement.Dock = DockStyle.Top;
+            btnClassManagement.Location = new Point(0, 23);
+            btnClassManagement.Name = "btnClassManagement";
+            btnClassManagement.Size = new Size(200, 23);
+            btnClassManagement.TabIndex = 1;
+            btnClassManagement.Text = "Class Management";
+            btnClassManagement.Click += BtnClassManagement_Click;
+            // 
+            // btnUserManagement
+            // 
+            btnUserManagement.Dock = DockStyle.Top;
+            btnUserManagement.Location = new Point(0, 0);
+            btnUserManagement.Name = "btnUserManagement";
+            btnUserManagement.Size = new Size(200, 23);
+            btnUserManagement.TabIndex = 0;
+            btnUserManagement.Text = "User Management";
+            btnUserManagement.Click += BtnUserManagement_Click;
             // 
             // mainContentPanel
             // 
@@ -174,6 +174,7 @@
             Controls.Add(headerPanel);
             Name = "AdminDashboard";
             Text = "Admin Dashboard";
+            Load += AdminDashboard_Load;
             headerPanel.ResumeLayout(false);
             sideNavPanel.ResumeLayout(false);
             ResumeLayout(false);

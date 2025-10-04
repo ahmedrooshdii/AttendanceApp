@@ -51,7 +51,7 @@ namespace Attendance.Presentation.Forms
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             DisplayClasss.DefaultCellStyle = dataGridViewCellStyle3;
             DisplayClasss.GridColor = Color.FromArgb(231, 229, 255);
-            DisplayClasss.Location = new Point(6, 72);
+            DisplayClasss.Location = new Point(6, 69);
             DisplayClasss.Name = "DisplayClasss";
             DisplayClasss.RowHeadersVisible = false;
             DisplayClasss.RowHeadersWidth = 51;
