@@ -12,8 +12,8 @@ namespace Attendance.Presentation.Forms
     public partial class AddStudent : Form
     {
         private readonly AttendanceDbContext _db;
-        private readonly User _user;          
-        private readonly bool _isEdit;       
+        private readonly User _user;
+        private readonly bool _isEdit;
 
         public AddStudent(AttendanceDbContext db)
         {
@@ -48,7 +48,7 @@ namespace Attendance.Presentation.Forms
 
                 ClassComb.DataSource = classes;
                 ClassComb.DisplayMember = "ClassName";
-                ClassComb.ValueMember = "ClassId"; 
+                ClassComb.ValueMember = "ClassId";
             }
             catch (Exception ex)
             {
@@ -64,10 +64,11 @@ namespace Attendance.Presentation.Forms
                 var student = _db.Students.FirstOrDefault(s => s.UserId == _user.UserId);
                 if (student != null)
                 {
+                    fullNameTxt.Text = student.StudentName;
                     ClassComb.SelectedValue = student.ClassId;
                 }
 
-                AddBtn.Text = "Update"; 
+                AddBtn.Text = "Update";
             }
         }
 
@@ -102,6 +103,7 @@ namespace Attendance.Presentation.Forms
                     var student = _db.Students.FirstOrDefault(s => s.UserId == _user.UserId);
                     if (student != null)
                         student.ClassId = classId;
+                        student.StudentName = fullNameTxt.Text.Trim();
 
                     _db.Users.Update(_user);
                     _db.SaveChanges();
@@ -130,7 +132,7 @@ namespace Attendance.Presentation.Forms
 
                     var student = new Student
                     {
-                        StudentName = userName,
+                        StudentName = fullNameTxt.Text.Trim(),
                         UserId = user.UserId,
                         ClassId = classId
                     };
@@ -162,5 +164,7 @@ namespace Attendance.Presentation.Forms
             var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(bytes);
         }
+
+
     }
 }

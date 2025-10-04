@@ -38,6 +38,7 @@ namespace Attendance.Presentation.Forms
 
         private async void FormUsers_Load(object sender, EventArgs e)
         {
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             await LoadUsersAsync();
         }
 

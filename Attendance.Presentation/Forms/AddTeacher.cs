@@ -73,6 +73,7 @@ namespace Attendance.Presentation.Forms
 
                 if (teacher != null)
                 {
+                    fullNameTxt.Text = teacher.TeacherName;
                     var teacherClassIds = teacher.TeacherClasses
                                                 .Select(tc => tc.ClassId)
                                                 .ToHashSet();
@@ -145,7 +146,7 @@ namespace Attendance.Presentation.Forms
 
                     if (teacher != null)
                     {
-                        teacher.TeacherName = userName;
+                        teacher.TeacherName = fullNameTxt.Text.Trim();
 
                         _db.TeacherClasses.RemoveRange(teacher.TeacherClasses);
                         _db.SaveChanges();
@@ -181,7 +182,7 @@ namespace Attendance.Presentation.Forms
 
                     var teacher = new Teacher
                     {
-                        TeacherName = userName,
+                        TeacherName = fullNameTxt.Text.Trim(),
                         UserId = user.UserId
                     };
                     _db.Teachers.Add(teacher);
