@@ -64,7 +64,7 @@
             txtSearch.Location = new Point(20, 23);
             txtSearch.Margin = new Padding(6, 7, 6, 7);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(331, 31);
+            txtSearch.Size = new Size(266, 27);
             txtSearch.TabIndex = 1;
             // 
             // btnSearch
@@ -164,7 +164,7 @@
             // 
             // UserManagement
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1215, 600);

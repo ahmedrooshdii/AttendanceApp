@@ -4,9 +4,11 @@ using Attendance.Service;
 using Guna.UI2.WinForms;
 
 namespace Attendance.Presentation
-{
+{  
+        
     public partial class LoginForm : Form
     {
+        private readonly AttendanceDbContext db;
         private readonly IAuthService _authService;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;

@@ -39,13 +39,14 @@ namespace Attendance.Presentation.Forms
             _userService = userService;
             _backupService = backupService;
             // Pre-load forms
+
             _userManagementForm = new UserManagement
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ClassManagement
+            _classManagementForm = new ClassManagement(db)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,

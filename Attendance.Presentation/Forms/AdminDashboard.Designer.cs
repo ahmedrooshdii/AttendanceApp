@@ -154,7 +154,7 @@
             btnReports.Text = "Reports        ";
             btnReports.Click += BtnReports_Click;
             // 
-            // btnDatabaseLog
+            // btnClassManagement
             // 
             btnDatabaseLog.Dock = DockStyle.Top;
             btnDatabaseLog.FlatAppearance.BorderSize = 0;
