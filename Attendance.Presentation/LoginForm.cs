@@ -1,37 +1,42 @@
 ﻿using Attendance.Domain.Contracts.Services;
 using Attendance.Presentation.Forms;
+using Attendance.Service;
 using Guna.UI2.WinForms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Attendance.Presentation
-{
+{  
+        
     public partial class LoginForm : Form
     {
+        private readonly AttendanceDbContext db;
         private readonly IAuthService _authService;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
+        private readonly IUserService userServices;
+        private readonly IStudentService _studentService;
+        private readonly IBackupService _backupService;
 
-        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
+
+        public LoginForm(IAuthService authService,
+            ITeacherService teacherService, IClassServices classService,
+            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService , IBackupService backupService)
+      
         {
             InitializeComponent();
             _authService = authService;
             _teacherService = teacherService;
             _classService = classService;
             _attendanceService = attendanceService;
+            this.userServices = userServices;
+            _studentService = studentService;
+            _backupService = backupService;
+
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
             tbUserName.Focus();
+            this.AcceptButton = btnLogin;
         }
 
         private void Exit(object sender, EventArgs e)
@@ -94,7 +99,10 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user);
+                    var adminDashboard = new AdminDashboard(user, _classService, _teacherService, _studentService, _attendanceService, userServices ,
+                         _backupService
+                        );
+                    adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;
                     adminDashboard.Show();
                 }
@@ -102,7 +110,9 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService);
+                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices, _studentService);
+                    //  var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
+                    // teacherDashboard.InitializeUser(user);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
@@ -110,14 +120,18 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
-                    var studentDashboard = new StudentDashboard(user);
+                    var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService, _studentService, _attendanceService);
+                    //var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
+                    studentDashboard.InitializeUser(user);
                     studentDashboard.Owner = this;
                     studentDashboard.Show();
                 }
+                tbPassword.Text = string.Empty;
+                tbUserName.Text = string.Empty;
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Invalid username or passwordz.");
             }
         }
     }

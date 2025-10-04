@@ -12,28 +12,28 @@ using Attendance.Domain.Entities;
 
 namespace Attendance.Presentation.Forms
 {
-    public partial class TeacherDashboard : Form
+    public partial class TeacherDashboard : BaseDashboardForm
     {
         private readonly User _user;
         private readonly TakeAttendance _takeAttendanceForm;
-        private readonly ViewClassAttendance _classManagementForm;
-        private readonly Reports _reportsForm;
-        private readonly DatabaseLog _databaseLogForm;
+        private readonly ViewAttendance _classManagementForm;
         private bool _isLoggingOut = false;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
-        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
+        private readonly IUserService _userService;
+        private readonly IStudentService _studentService;
+        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService, IStudentService studentService)
         {
             InitializeComponent();
             timerDateAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
-            lblUserName.Text = $"User: {_user.UserName}";
-            lblRoleName.Text = $"Role: Teacher";
             _teacherService = teacherService;
             _classService = classService;
             _attendanceService = attendanceService;
+            _userService = userService;
+            _studentService = studentService;
             // Pre-load forms
             _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
             {
@@ -41,7 +41,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ViewClassAttendance
+            _classManagementForm = new ViewAttendance(_user.UserId, _classService, _userService, _teacherService, _studentService, _attendanceService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
@@ -119,6 +119,12 @@ namespace Attendance.Presentation.Forms
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        protected internal override void OnUserInitialized(User user)
+        {
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Admin";
         }
     }
 }

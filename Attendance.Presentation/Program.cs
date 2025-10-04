@@ -24,6 +24,7 @@ namespace Attendance.Presentation
             // Configure DI in background
             var services = new ServiceCollection();
 
+            // Configuration from appsettings.json
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -31,10 +32,19 @@ namespace Attendance.Presentation
 
             services.AddSingleton<IConfiguration>(configuration);
 
-            services.AddDbContext<AttendanceDbContext>(options =>
+            services.AddDbContextFactory<AttendanceDbContext>(options =>
+           
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+            // Logging
+            services.AddLogging(builder => builder.AddConsole());
+
+            // Backup DI
+            services.AddScoped<IBackupRepository, BackupRepository>();
+            services.AddScoped<IBackupService, BackupService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserServices>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IClassRepository, ClassRepository>();
             services.AddScoped<IClassServices, ClassServices>();
@@ -42,9 +52,22 @@ namespace Attendance.Presentation
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentrepository, StudentRepository>();
+
 
             services.AddScoped<IUserManagementRepository, UserManagementRepository>();
             services.AddScoped<IUserManagementService, UserManagementService>();
+
+            // Forms
+            services.AddTransient<LoginForm>();
+            services.AddTransient<AdminDashboard>();
+            services.AddTransient<TeacherDashboard>();
+            services.AddTransient<StudentDashboard>();
+            services.AddTransient<Reports>();
+            services.AddTransient<DatabaseLog>();
+            services.AddTransient<UserManagement>();
+            services.AddTransient<ClassManagement>();
 
 
             // Register only LoginForm, dashboards are created with user object

@@ -19,5 +19,6 @@ namespace Attendance.Infrastructure
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
+        public async Task<User?> GetByIdAsync(int userId) => await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.UserId == userId);
     }
 }

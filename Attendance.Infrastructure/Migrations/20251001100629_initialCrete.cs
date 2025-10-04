@@ -31,7 +31,7 @@ namespace Attendance.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
-                constraints: table =>
+         constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.RoleId);
                 });

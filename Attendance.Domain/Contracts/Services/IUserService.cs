@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Attendance.Domain.Contracts.Repositories
+namespace Attendance.Domain.Contracts.Services
 {
-    public interface IUserRepository
+    public interface IUserService
     {
-        Task<User?> GetByUsernameAsync(string username);
         Task<User?> GetByIdAsync(int userId);
     }
 }
