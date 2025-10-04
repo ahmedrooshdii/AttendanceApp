@@ -1,37 +1,24 @@
-﻿using Attendance.Domain.Contracts.Services;
-using Attendance.Presentation.Forms;
+﻿using Attendance.Presentation.Forms;
 using Guna.UI2.WinForms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Attendance.Presentation
 {
     public partial class LoginForm : Form
     {
         private readonly IAuthService _authService;
-        private readonly ITeacherService _teacherService;
-        private readonly IClassServices _classService;
-        private readonly IAttendanceService _attendanceService;
+        private readonly IServiceProvider _serviceProvider;
 
-        public LoginForm(IAuthService authService, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
+        public LoginForm(IAuthService authService, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             _authService = authService;
-            _teacherService = teacherService;
-            _classService = classService;
-            _attendanceService = attendanceService;
+            _serviceProvider = serviceProvider;
+
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
             SetPlaceholder(tbPassword, "Password");
             tbUserName.Focus();
+            this.AcceptButton = btnLogin;
         }
 
         private void Exit(object sender, EventArgs e)
@@ -94,7 +81,8 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user);
+                    var adminDashboard = _serviceProvider.GetRequiredService<AdminDashboard>();
+                    adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;
                     adminDashboard.Show();
                 }
@@ -102,7 +90,8 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService);
+                    var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
+                    teacherDashboard.InitializeUser(user);
                     teacherDashboard.Owner = this;
                     teacherDashboard.Show();
                 }
@@ -110,10 +99,13 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
-                    var studentDashboard = new StudentDashboard(user);
+                    var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
+                    studentDashboard.InitializeUser(user);
                     studentDashboard.Owner = this;
                     studentDashboard.Show();
                 }
+                tbPassword.Text = string.Empty;
+                tbUserName.Text = string.Empty;
             }
             else
             {

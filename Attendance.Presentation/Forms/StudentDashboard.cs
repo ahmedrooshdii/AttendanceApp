@@ -12,7 +12,7 @@ using Attendance.Domain.Entities;
 
 namespace Attendance.Presentation.Forms
 {
-    public partial class StudentDashboard : Form
+    public partial class StudentDashboard : BaseDashboardForm
     {
         private readonly User _user;
         private readonly ViewAttendance _viewAttendanceForm;
@@ -26,8 +26,7 @@ namespace Attendance.Presentation.Forms
             timerDateAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
-            lblUserName.Text = $"User: {_user.UserName}";
-            lblRoleName.Text = $"Role: Teacher";
+
 
             // Pre-load forms
             _viewAttendanceForm = new ViewAttendance
@@ -86,6 +85,12 @@ namespace Attendance.Presentation.Forms
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        protected internal override void OnUserInitialized(User user)
+        {
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Admin";
         }
     }
 }
