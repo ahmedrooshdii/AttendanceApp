@@ -58,6 +58,8 @@ namespace Attendance.Presentation
 
             services.AddScoped<IUserManagementRepository, UserManagementRepository>();
             services.AddScoped<IUserManagementService, UserManagementService>();
+            services.AddScoped<IPreferenceRepository, PreferenceRepository>();
+            services.AddScoped<PreferenceService>();
 
             // Forms
             services.AddTransient<LoginForm>();

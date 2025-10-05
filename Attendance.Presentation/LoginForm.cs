@@ -16,14 +16,17 @@ namespace Attendance.Presentation
         private readonly IUserService userServices;
         private readonly IStudentService _studentService;
         private readonly IBackupService _backupService;
+        private readonly IServiceProvider _serviceProvider;
 
 
         public LoginForm(IAuthService authService,
             ITeacherService teacherService, IClassServices classService,
-            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService , IBackupService backupService)
+            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService ,
+            IBackupService backupService , IServiceProvider serviceProvider)
       
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             _authService = authService;
             _teacherService = teacherService;
             _classService = classService;
@@ -99,8 +102,9 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user, _classService, _teacherService, _studentService, _attendanceService, userServices ,
-                         _backupService
+                    var adminDashboard = new AdminDashboard(user, 
+                        _classService, _teacherService, _studentService, _attendanceService, userServices ,
+                         _backupService , _serviceProvider
                         );
                     adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;

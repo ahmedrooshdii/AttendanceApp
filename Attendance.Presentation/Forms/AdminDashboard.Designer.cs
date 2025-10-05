@@ -12,6 +12,9 @@
         private System.Windows.Forms.Button btnUserManagement;
         private System.Windows.Forms.Button btnClassManagement;
         private System.Windows.Forms.Button btnReports;
+        private System.Windows.Forms.Button btnPreference;
+
+
         private System.Windows.Forms.Button btnDatabaseLog;
 
         /// <summary>
@@ -48,6 +51,7 @@
             lblRoleName = new Label();
             btnLogout = new Button();
             sideNavPanel = new Panel();
+            btnPreference = new Button();
             btnReports = new Button();
             btnDatabaseLog = new Button();
             btnClassManagement = new Button();
@@ -126,6 +130,7 @@
             // sideNavPanel
             // 
             sideNavPanel.BackColor = Color.FromArgb(67, 3, 125);
+            sideNavPanel.Controls.Add(btnPreference);
             sideNavPanel.Controls.Add(btnReports);
             sideNavPanel.Controls.Add(btnDatabaseLog);
             sideNavPanel.Controls.Add(btnClassManagement);
@@ -139,6 +144,21 @@
             sideNavPanel.Size = new Size(258, 681);
             sideNavPanel.TabIndex = 1;
             // 
+            // btnPreference
+            // 
+            btnPreference.Dock = DockStyle.Top;
+            btnPreference.FlatAppearance.BorderSize = 0;
+            btnPreference.FlatStyle = FlatStyle.Flat;
+            btnPreference.ForeColor = Color.White;
+            btnPreference.Image = (Image)resources.GetObject("btnPreference.Image");
+            btnPreference.ImageAlign = ContentAlignment.MiddleLeft;
+            btnPreference.Location = new Point(8, 498);
+            btnPreference.Name = "btnPreference";
+            btnPreference.Size = new Size(250, 80);
+            btnPreference.TabIndex = 5;
+            btnPreference.Text = "Preference";
+            btnPreference.Click += BtnPreference_Click;
+            // 
             // btnReports
             // 
             btnReports.Dock = DockStyle.Top;
@@ -151,10 +171,10 @@
             btnReports.Name = "btnReports";
             btnReports.Size = new Size(250, 80);
             btnReports.TabIndex = 2;
-            btnReports.Text = "Reports        ";
+            btnReports.Text = "Reports";
             btnReports.Click += BtnReports_Click;
             // 
-            // btnClassManagement
+            // btnDatabaseLog
             // 
             btnDatabaseLog.Dock = DockStyle.Top;
             btnDatabaseLog.FlatAppearance.BorderSize = 0;
@@ -329,5 +349,6 @@
         private Panel panelSlide;
         private System.Windows.Forms.Timer timerDataAndTime;
         private PictureBox pictureBox1;
+        private Button button1;
     }
 }

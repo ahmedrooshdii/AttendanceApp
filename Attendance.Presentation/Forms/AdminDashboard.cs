@@ -12,6 +12,8 @@ namespace Attendance.Presentation.Forms
         private readonly ClassManagement _classManagementForm;
         private readonly ViewAttendance _viewattendanceForm;
         private readonly DatabaseLog _databaseLogForm;
+        private readonly Preference _preferenceForm;
+
         private readonly IClassServices _classServices;
         private readonly IUserService _userService;
         private readonly ITeacherService _teacherService;
@@ -22,11 +24,12 @@ namespace Attendance.Presentation.Forms
 
         private bool _isLoggingOut = false;
         public AdminDashboard(User user, IClassServices classServices,
-            ITeacherService teacherService ,IStudentService studentService, IAttendanceService attendanceService, 
-            IUserService userService , IBackupService  backupService)
+            ITeacherService teacherService, IStudentService studentService, IAttendanceService attendanceService,
+            IUserService userService, IBackupService backupService , IServiceProvider serviceProvider)
 
-        { 
+        {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             timerDataAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
@@ -52,7 +55,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _viewattendanceForm = new ViewAttendance(_user.UserId, _classServices, _userService,_teacherService, _studentService, _attendanceService)
+            _viewattendanceForm = new ViewAttendance(_user.UserId, _classServices, _userService, _teacherService, _studentService, _attendanceService)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
@@ -64,7 +67,12 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-
+            _preferenceForm = new Preference(_serviceProvider)
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
             // resolve forms from DI
             //_userManagementForm = _serviceProvider.GetRequiredService<UserManagement>();
             //_classManagementForm = _serviceProvider.GetRequiredService<ClassManagement>();
@@ -82,6 +90,7 @@ namespace Attendance.Presentation.Forms
             mainContentPanel.Controls.Add(_classManagementForm);
             mainContentPanel.Controls.Add(_viewattendanceForm);
             mainContentPanel.Controls.Add(_databaseLogForm);
+            mainContentPanel.Controls.Add(_preferenceForm);
 
             // Set User Management as the default active tab
             _userManagementForm.BringToFront();
@@ -159,6 +168,19 @@ namespace Attendance.Presentation.Forms
             }
         }
 
+        private void BtnPreference_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MoveSidePanel(btnPreference);
+                _preferenceForm.BringToFront();
+                _preferenceForm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BtnDatabaseLog_Click(object sender, EventArgs e)
         {
             try
