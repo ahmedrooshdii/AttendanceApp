@@ -79,6 +79,17 @@ namespace Attendance.Infrastructure.DataSeed
                     await _dbContext.SaveChangesAsync();
                 }
             }
+            if (_dbContext.Preferences.Count() == 0)
+            {
+                //    var rolesData = File.ReadAllText("roles.json");
+                var preferences = JsonSerializer.Deserialize<List<Preference>>("[\r\n  {\r\n    \"Language\": \"English\",\r\n    \"DateFormat\": \"dd/MM/yyyy\",\r\n    \"Theme\": \"Light\"\r\n  }\r\n]");
+
+                if (preferences?.Count() > 0)
+                {
+                    await _dbContext.Set<Preference>().AddRangeAsync(preferences);
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
         }
     }
 }

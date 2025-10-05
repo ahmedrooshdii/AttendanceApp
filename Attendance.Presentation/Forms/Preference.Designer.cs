@@ -44,7 +44,7 @@
             cmbLanguage.Name = "cmbLanguage";
             cmbLanguage.Size = new Size(408, 33);
             cmbLanguage.TabIndex = 3;
-            cmbLanguage.SelectedIndexChanged += cmbLanguage_SelectedIndexChanged;
+          //  cmbLanguage.SelectedIndexChanged += cmbLanguage_SelectedIndexChanged;
             // 
             // lblDateFormat
             // 
@@ -53,7 +53,7 @@
             lblDateFormat.Size = new Size(104, 33);
             lblDateFormat.TabIndex = 0;
             lblDateFormat.Text = "Date Format :";
-            lblDateFormat.Click += lblDateFormat_Click;
+         //   lblDateFormat.Click += lblDateFormat_Click;
             // 
             // lblLanguage
             // 
@@ -83,7 +83,7 @@
             cmbTheme.Name = "cmbTheme";
             cmbTheme.Size = new Size(408, 33);
             cmbTheme.TabIndex = 6;
-            cmbTheme.SelectedIndexChanged += cmbTheme_SelectedIndexChanged;
+          //  cmbTheme.SelectedIndexChanged += cmbTheme_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -92,7 +92,7 @@
             label1.Size = new Size(104, 33);
             label1.TabIndex = 7;
             label1.Text = "Theme : ";
-            label1.Click += label1_Click;
+           // label1.Click += label1_Click;
             // 
             // Preference
             // 
@@ -113,5 +113,7 @@
         private Button save;
         private ComboBox cmbTheme;
         private Label label1;
+
+       
     }
 }

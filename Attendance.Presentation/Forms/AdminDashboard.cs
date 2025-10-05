@@ -25,10 +25,11 @@ namespace Attendance.Presentation.Forms
         private bool _isLoggingOut = false;
         public AdminDashboard(User user, IClassServices classServices,
             ITeacherService teacherService, IStudentService studentService, IAttendanceService attendanceService,
-            IUserService userService, IBackupService backupService)
+            IUserService userService, IBackupService backupService , IServiceProvider serviceProvider)
 
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             timerDataAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
@@ -66,7 +67,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _preferenceForm = new Preference()
+            _preferenceForm = new Preference(_serviceProvider)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
