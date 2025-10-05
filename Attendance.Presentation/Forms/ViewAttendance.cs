@@ -32,7 +32,7 @@ namespace Attendance.Presentation.Forms
             attendanceService = _attendanceService;
         }
 
-        private async void ViewAttendance_Load(object sender, EventArgs e)
+        public async void ViewAttendance_Load(object sender, EventArgs e)
         {
             List<Class> allClasses = null; // Initialize the variable
             //check if userId is valid
@@ -63,6 +63,7 @@ namespace Attendance.Presentation.Forms
                 label1.Visible = false;
                 label2.Visible = false;
                 txtStudent.Visible = false;
+                btnGenerate.PerformClick();
             }
             if (allClasses != null)
             {
@@ -75,6 +76,10 @@ namespace Attendance.Presentation.Forms
 
         private void cmbClass_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (user?.Role?.RoleName == "Student")
+            {
+                return; // do nothing if the user is not Admin or Teacher
+            }
             if (cmbClass.SelectedValue == null) return;
 
             int classId;
@@ -92,6 +97,7 @@ namespace Attendance.Presentation.Forms
             }
             txtStudent.Text = "";
             LoadStudentAutoComplete(classId);
+            PopulateTable(classId);
         }
         private async void LoadStudentAutoComplete(int classId)
         {
@@ -106,18 +112,18 @@ namespace Attendance.Presentation.Forms
 
         private async void btnGenerate_Click(object sender, EventArgs e)
         {
-            Student student; 
-            if(user?.Role?.RoleName == "Admin" || user?.Role?.RoleName == "Teacher")
+            Student student;
+            if (user?.Role?.RoleName == "Admin" || user?.Role?.RoleName == "Teacher")
             {
                 // if class is selected and student is selected then fetch there attendance from db
                 var students = await studentService.GetStudentByNameAsync(txtStudent.Text);
-                if(students.Count == 0 || students.Count > 1)
+                if (students == null || students.Count() == 0)
                 {
-                    MessageBox.Show("please choose the student Name from the list suggested", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 student = students[0];
-            } else
+            }
+            else
             {
                 student = await studentService.GetStudentByUserIdAsync(userId);
                 if (student == null)
@@ -127,7 +133,7 @@ namespace Attendance.Presentation.Forms
                 }
             }
             var attendance = attendanceService.GetStudentAttendancesByDateRangeAsync(student.StudentId, dtFrom.Value.Date, dtTo.Value.Date);
-            if(attendance.Result.Count() == 0)
+            if (attendance.Result.Count() == 0)
             {
                 MessageBox.Show("no Result choose another date range.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -137,10 +143,47 @@ namespace Attendance.Presentation.Forms
             {
                 dgvReport.Rows.Add(
                     attend.Date.ToString("dddd/dd/MMM/yyyy"),
+                    attend.Student?.StudentName,
                     attend.Status,
                     attend?.Notes ?? ""
                     );
             }
+        }
+        private async void PopulateTable(int classId)
+        {
+            var students = await classServices.GetStudentsByClassIdAsync(classId);
+            if (students != null)
+            {
+                dgvReport.Rows.Clear();
+                foreach (var student in students)
+                {
+                    var attendance = await attendanceService.GetStudentAttendancesByDateRangeAsync(student.StudentId, dtFrom.Value.Date, dtTo.Value.Date);
+                    foreach (var attend in attendance)
+                    {
+                        dgvReport.Rows.Add(
+                            attend.Date.ToString("dddd/dd/MMM/yyyy"),
+                            student.StudentName,
+                            attend.Status,
+                            attend?.Notes ?? ""
+                            );
+                    }
+                }
+            }
+        }
+
+        private void dtFrom_ValueChanged(object sender, EventArgs e)
+        {
+            this.btnGenerate.PerformClick();
+        }
+
+        private void dtTo_ValueChanged(object sender, EventArgs e)
+        {
+            this.btnGenerate.PerformClick();
+        }
+
+        private void txtStudent_TextChanged(object sender, EventArgs e)
+        {
+            this.btnGenerate.PerformClick();
         }
     }
 }

@@ -124,7 +124,7 @@ namespace Attendance.Presentation.Forms
         protected internal override void OnUserInitialized(User user)
         {
             lblUserName.Text = $"User: {_user.UserName}";
-            lblRoleName.Text = $"Role: Admin";
+            lblRoleName.Text = $"Role: Teacher";
         }
     }
 }

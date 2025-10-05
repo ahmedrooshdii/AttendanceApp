@@ -134,7 +134,7 @@
             lblRoleName.Name = "lblRoleName";
             lblRoleName.Size = new Size(132, 23);
             lblRoleName.TabIndex = 2;
-            lblRoleName.Text = "Role: Admin";
+            lblRoleName.Text = "Role: Teacher";
             // 
             // lblUserName
             // 

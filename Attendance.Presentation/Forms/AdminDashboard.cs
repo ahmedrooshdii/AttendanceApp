@@ -149,6 +149,7 @@ namespace Attendance.Presentation.Forms
             {
                 MoveSidePanel(btnReports);
                 // Bring the pre-loaded UserManagement form to the front
+                _viewattendanceForm.ViewAttendance_Load(sender, e); // Refresh data when opening
                 _viewattendanceForm.BringToFront();
                 _viewattendanceForm.Show();
             }

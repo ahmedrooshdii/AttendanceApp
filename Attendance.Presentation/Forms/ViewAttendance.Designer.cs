@@ -48,15 +48,16 @@
             label2 = new Label();
             label1 = new Label();
             dgvReport = new DataGridView();
+            Date = new DataGridViewTextBoxColumn();
+            StudentName = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewTextBoxColumn();
+            Notes = new DataGridViewTextBoxColumn();
             btnExport = new Button();
             btnGenerate = new Button();
             dtTo = new DateTimePicker();
             dtFrom = new DateTimePicker();
             txtStudent = new TextBox();
             cmbClass = new ComboBox();
-            Date = new DataGridViewTextBoxColumn();
-            Status = new DataGridViewTextBoxColumn();
-            Notes = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReport).BeginInit();
             SuspendLayout();
@@ -238,13 +239,37 @@
             dgvReport.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvReport.BackgroundColor = Color.White;
             dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReport.Columns.AddRange(new DataGridViewColumn[] { Date, Status, Notes });
+            dgvReport.Columns.AddRange(new DataGridViewColumn[] { Date, StudentName, Status, Notes });
             dgvReport.Location = new Point(47, 155);
             dgvReport.Margin = new Padding(4);
             dgvReport.Name = "dgvReport";
             dgvReport.ReadOnly = true;
             dgvReport.Size = new Size(811, 155);
             dgvReport.TabIndex = 16;
+            // 
+            // Date
+            // 
+            Date.HeaderText = "Date";
+            Date.Name = "Date";
+            Date.ReadOnly = true;
+            // 
+            // StudentName
+            // 
+            StudentName.HeaderText = "Student Name";
+            StudentName.Name = "StudentName";
+            StudentName.ReadOnly = true;
+            // 
+            // Status
+            // 
+            Status.HeaderText = "Status";
+            Status.Name = "Status";
+            Status.ReadOnly = true;
+            // 
+            // Notes
+            // 
+            Notes.HeaderText = "Notes";
+            Notes.Name = "Notes";
+            Notes.ReadOnly = true;
             // 
             // btnExport
             // 
@@ -253,7 +278,7 @@
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
             btnExport.ForeColor = Color.White;
-            btnExport.Location = new Point(159, 343);
+            btnExport.Location = new Point(47, 343);
             btnExport.Margin = new Padding(4);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(96, 39);
@@ -284,6 +309,7 @@
             dtTo.Name = "dtTo";
             dtTo.Size = new Size(280, 27);
             dtTo.TabIndex = 13;
+            dtTo.ValueChanged += dtTo_ValueChanged;
             // 
             // dtFrom
             // 
@@ -292,6 +318,7 @@
             dtFrom.Name = "dtFrom";
             dtFrom.Size = new Size(292, 27);
             dtFrom.TabIndex = 12;
+            dtFrom.ValueChanged += dtFrom_ValueChanged;
             // 
             // txtStudent
             // 
@@ -302,34 +329,18 @@
             txtStudent.Name = "txtStudent";
             txtStudent.Size = new Size(289, 27);
             txtStudent.TabIndex = 11;
+            txtStudent.TextChanged += txtStudent_TextChanged;
             // 
             // cmbClass
             // 
             cmbClass.FormattingEnabled = true;
+            cmbClass.Items.AddRange(new object[] { "--Select Class--" });
             cmbClass.Location = new Point(110, 37);
             cmbClass.Margin = new Padding(4);
             cmbClass.Name = "cmbClass";
             cmbClass.Size = new Size(292, 27);
             cmbClass.TabIndex = 10;
             cmbClass.SelectedIndexChanged += cmbClass_SelectedIndexChanged;
-            // 
-            // Date
-            // 
-            Date.HeaderText = "Date";
-            Date.Name = "Date";
-            Date.ReadOnly = true;
-            // 
-            // Status
-            // 
-            Status.HeaderText = "Status";
-            Status.Name = "Status";
-            Status.ReadOnly = true;
-            // 
-            // Notes
-            // 
-            Notes.HeaderText = "Notes";
-            Notes.Name = "Notes";
-            Notes.ReadOnly = true;
             // 
             // ViewAttendance
             // 
@@ -378,6 +389,7 @@
         private Panel panel14;
         private Panel panel15;
         private DataGridViewTextBoxColumn Date;
+        private DataGridViewTextBoxColumn StudentName;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn Notes;
     }

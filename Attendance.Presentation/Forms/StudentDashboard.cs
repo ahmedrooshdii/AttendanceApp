@@ -33,7 +33,7 @@ namespace Attendance.Presentation.Forms
             lblAppName.AutoSize = true;
             _user = user;
             lblUserName.Text = $"User: {_user.UserName}";
-            lblRoleName.Text = $"Role: Teacher";
+            lblRoleName.Text = $"Role: Student";
             classServices = _classServices;
             userServices = _userServices;
             teacherService = _teacherService;
@@ -103,7 +103,7 @@ namespace Attendance.Presentation.Forms
         protected internal override void OnUserInitialized(User user)
         {
             lblUserName.Text = $"User: {_user.UserName}";
-            lblRoleName.Text = $"Role: Admin";
+            lblRoleName.Text = $"Role: Student";
         }
     }
 }
