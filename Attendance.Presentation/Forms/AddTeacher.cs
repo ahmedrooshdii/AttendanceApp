@@ -12,8 +12,8 @@ namespace Attendance.Presentation.Forms
     public partial class AddTeacher : Form
     {
         private readonly AttendanceDbContext _db;
-        private readonly User _user;      
-        private readonly bool _isEdit;     
+        private readonly User _user;
+        private readonly bool _isEdit;
 
         public AddTeacher(AttendanceDbContext db)
         {
@@ -90,7 +90,7 @@ namespace Attendance.Presentation.Forms
                             }
                             else
                             {
-                                ClassComb.SetItemChecked(i, false); 
+                                ClassComb.SetItemChecked(i, false);
                             }
                         }
                     }
@@ -233,5 +233,7 @@ namespace Attendance.Presentation.Forms
             public string ClassName { get; set; }
             public override string ToString() => ClassName;
         }
+
+  
     }
 }

@@ -59,9 +59,11 @@
             UserPassTxt.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             UserPassTxt.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             UserPassTxt.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            UserPassTxt.Font = new Font("Segoe UI", 9F);
+            UserPassTxt.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            UserPassTxt.ForeColor = Color.Black;
             UserPassTxt.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            UserPassTxt.Location = new Point(252, 150);
+            UserPassTxt.Location = new Point(266, 148);
+            UserPassTxt.Margin = new Padding(4);
             UserPassTxt.Name = "UserPassTxt";
             UserPassTxt.PlaceholderText = "";
             UserPassTxt.SelectedText = "";
@@ -79,9 +81,11 @@
             userNameTxt.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             userNameTxt.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             userNameTxt.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            userNameTxt.Font = new Font("Segoe UI", 9F);
+            userNameTxt.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            userNameTxt.ForeColor = Color.Black;
             userNameTxt.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            userNameTxt.Location = new Point(252, 85);
+            userNameTxt.Location = new Point(266, 87);
+            userNameTxt.Margin = new Padding(4);
             userNameTxt.Name = "userNameTxt";
             userNameTxt.PlaceholderText = "";
             userNameTxt.SelectedText = "";
@@ -96,9 +100,11 @@
             CancelBtn.DisabledState.CustomBorderColor = Color.DarkGray;
             CancelBtn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             CancelBtn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            CancelBtn.Font = new Font("Segoe UI", 9F);
+            CancelBtn.FillColor = Color.Red;
+            CancelBtn.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             CancelBtn.ForeColor = Color.White;
-            CancelBtn.Location = new Point(311, 281);
+            CancelBtn.Location = new Point(294, 276);
+            CancelBtn.Margin = new Padding(4);
             CancelBtn.Name = "CancelBtn";
             CancelBtn.ShadowDecoration.CustomizableEdges = customizableEdges6;
             CancelBtn.Size = new Size(98, 37);
@@ -112,9 +118,11 @@
             AddBtn.DisabledState.CustomBorderColor = Color.DarkGray;
             AddBtn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             AddBtn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            AddBtn.Font = new Font("Segoe UI", 9F);
+            AddBtn.FillColor = Color.Green;
+            AddBtn.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             AddBtn.ForeColor = Color.White;
-            AddBtn.Location = new Point(172, 281);
+            AddBtn.Location = new Point(128, 276);
+            AddBtn.Margin = new Padding(4);
             AddBtn.Name = "AddBtn";
             AddBtn.ShadowDecoration.CustomizableEdges = customizableEdges8;
             AddBtn.Size = new Size(98, 37);
@@ -125,7 +133,8 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label3.Location = new Point(110, 215);
+            label3.Location = new Point(91, 219);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(73, 25);
             label3.TabIndex = 14;
@@ -135,7 +144,8 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label2.Location = new Point(110, 150);
+            label2.Location = new Point(91, 148);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(97, 25);
             label2.TabIndex = 13;
@@ -145,7 +155,8 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(110, 85);
+            label1.Location = new Point(91, 87);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(109, 25);
             label1.TabIndex = 12;
@@ -153,10 +164,12 @@
             // 
             // ClassComb
             // 
+            ClassComb.ForeColor = Color.Black;
             ClassComb.FormattingEnabled = true;
-            ClassComb.Location = new Point(252, 215);
+            ClassComb.Location = new Point(266, 209);
+            ClassComb.Margin = new Padding(4);
             ClassComb.Name = "ClassComb";
-            ClassComb.Size = new Size(200, 40);
+            ClassComb.Size = new Size(200, 48);
             ClassComb.TabIndex = 19;
             // 
             // fullNameTxt
@@ -168,9 +181,11 @@
             fullNameTxt.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             fullNameTxt.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             fullNameTxt.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            fullNameTxt.Font = new Font("Segoe UI", 9F);
+            fullNameTxt.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            fullNameTxt.ForeColor = Color.Black;
             fullNameTxt.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            fullNameTxt.Location = new Point(252, 30);
+            fullNameTxt.Location = new Point(266, 26);
+            fullNameTxt.Margin = new Padding(4);
             fullNameTxt.Name = "fullNameTxt";
             fullNameTxt.PlaceholderText = "";
             fullNameTxt.SelectedText = "";
@@ -182,7 +197,8 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(110, 30);
+            label4.Location = new Point(96, 26);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(101, 25);
             label4.TabIndex = 20;
@@ -190,9 +206,9 @@
             // 
             // AddTeacher
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(535, 338);
+            ClientSize = new Size(553, 346);
             Controls.Add(fullNameTxt);
             Controls.Add(label4);
             Controls.Add(ClassComb);
@@ -203,8 +219,10 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            MaximumSize = new Size(551, 377);
-            MinimumSize = new Size(551, 377);
+            Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Margin = new Padding(4);
+            MaximumSize = new Size(569, 385);
+            MinimumSize = new Size(569, 385);
             Name = "AddTeacher";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AddTeacher";
