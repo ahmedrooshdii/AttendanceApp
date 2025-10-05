@@ -72,6 +72,31 @@ namespace Attendance.Infrastructure.Migrations
                     b.ToTable("Class");
                 });
 
+            modelBuilder.Entity("Attendance.Domain.Entities.Preference", b =>
+                {
+                    b.Property<int>("PreferenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PreferenceId"));
+
+                    b.Property<string>("DateFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Theme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PreferenceId");
+
+                    b.ToTable("Preference");
+                });
+
             modelBuilder.Entity("Attendance.Domain.Entities.Role", b =>
                 {
                     b.Property<int>("RoleId")

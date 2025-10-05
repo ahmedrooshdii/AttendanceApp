@@ -11,6 +11,9 @@
         public DbSet<Class> Classes { get; set; }
         public DbSet<Attendence> Attendances { get; set; }
         public DbSet<TeacherClass> TeacherClasses { get; set; }
+        public DbSet<Preference> Preferences { get; set; }
+
+
 
         public AttendanceDbContext(DbContextOptions<AttendanceDbContext> options) :base(options){}
 

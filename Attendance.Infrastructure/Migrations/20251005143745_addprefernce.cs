@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Attendance.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCrete : Migration
+    public partial class addprefernce : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +25,21 @@ namespace Attendance.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Preference",
+                columns: table => new
+                {
+                    PreferenceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateFormat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Theme = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Preference", x => x.PreferenceId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
@@ -31,7 +47,7 @@ namespace Attendance.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
-         constraints: table =>
+                constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.RoleId);
                 });
@@ -107,11 +123,19 @@ namespace Attendance.Infrastructure.Migrations
                     AttendanceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentId = table.Column<int>(type: "int", nullable: true),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Attendance", x => x.AttendanceId);
+                    table.ForeignKey(
+                        name: "FK_Attendance_Class_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Class",
+                        principalColumn: "ClassId");
                     table.ForeignKey(
                         name: "FK_Attendance_Student_StudentId",
                         column: x => x.StudentId,
@@ -142,6 +166,11 @@ namespace Attendance.Infrastructure.Migrations
                         principalColumn: "TeacherId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attendance_ClassId",
+                table: "Attendance",
+                column: "ClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attendance_StudentId",
@@ -179,6 +208,9 @@ namespace Attendance.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Attendance");
+
+            migrationBuilder.DropTable(
+                name: "Preference");
 
             migrationBuilder.DropTable(
                 name: "TeacherClass");

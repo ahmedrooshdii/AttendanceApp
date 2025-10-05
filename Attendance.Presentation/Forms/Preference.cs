@@ -16,5 +16,25 @@ namespace Attendance.Presentation.Forms
         {
             InitializeComponent();
         }
+
+        private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDateFormat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTheme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
