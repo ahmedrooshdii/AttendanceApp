@@ -21,20 +21,20 @@ namespace Attendance.Presentation.Forms
             db = _db;
             clssicd = _clssicd;
         }
-
         private void UpdateClass_Load(object sender, EventArgs e)
         {
-          
+            var existingClass = db.Classes.FirstOrDefault(c => c.ClassId == clssicd);
+            if (existingClass != null)
+            {
+                textBox_updateClass.Text = existingClass.ClassName;
+            }
         }
-
-        private void UpdateBtn_Click(object sender, EventArgs e)
+      private void UpdateBtn_Click(object sender, EventArgs e)
         {
             var existingClass = db.Classes.FirstOrDefault(c => c.ClassId == clssicd);
-           
 
             if (existingClass != null)
             {
-              
                 existingClass.ClassName = textBox_updateClass.Text;
 
                 db.Classes.Update(existingClass);
@@ -42,6 +42,7 @@ namespace Attendance.Presentation.Forms
 
                 MessageBox.Show("Class updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else
             {
@@ -49,6 +50,6 @@ namespace Attendance.Presentation.Forms
                 this.Close();
             }
         }
-
     }
 }
+
