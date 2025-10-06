@@ -198,7 +198,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(442, 92);
             label4.Name = "label4";
-            label4.Size = new Size(42, 19);
+            label4.Size = new Size(65, 28);
             label4.TabIndex = 19;
             label4.Text = "To  : ";
             // 
@@ -207,7 +207,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(47, 92);
             label3.Name = "label3";
-            label3.Size = new Size(60, 19);
+            label3.Size = new Size(91, 28);
             label3.TabIndex = 20;
             label3.Text = "From : ";
             // 
@@ -217,7 +217,7 @@
             label2.Location = new Point(410, 40);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(74, 19);
+            label2.Size = new Size(111, 28);
             label2.TabIndex = 18;
             label2.Text = "Student :";
             // 
@@ -227,7 +227,7 @@
             label1.Location = new Point(47, 41);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(60, 19);
+            label1.Size = new Size(96, 28);
             label1.TabIndex = 17;
             label1.Text = "Class : ";
             // 
@@ -244,30 +244,35 @@
             dgvReport.Margin = new Padding(4);
             dgvReport.Name = "dgvReport";
             dgvReport.ReadOnly = true;
+            dgvReport.RowHeadersWidth = 62;
             dgvReport.Size = new Size(811, 155);
             dgvReport.TabIndex = 16;
             // 
             // Date
             // 
             Date.HeaderText = "Date";
+            Date.MinimumWidth = 8;
             Date.Name = "Date";
             Date.ReadOnly = true;
             // 
             // StudentName
             // 
             StudentName.HeaderText = "Student Name";
+            StudentName.MinimumWidth = 8;
             StudentName.Name = "StudentName";
             StudentName.ReadOnly = true;
             // 
             // Status
             // 
             Status.HeaderText = "Status";
+            Status.MinimumWidth = 8;
             Status.Name = "Status";
             Status.ReadOnly = true;
             // 
             // Notes
             // 
             Notes.HeaderText = "Notes";
+            Notes.MinimumWidth = 8;
             Notes.Name = "Notes";
             Notes.ReadOnly = true;
             // 
@@ -281,10 +286,11 @@
             btnExport.Location = new Point(47, 343);
             btnExport.Margin = new Padding(4);
             btnExport.Name = "btnExport";
-            btnExport.Size = new Size(96, 39);
+            btnExport.Size = new Size(327, 39);
             btnExport.TabIndex = 15;
-            btnExport.Text = "Export";
+            btnExport.Text = "Export To Excel";
             btnExport.UseVisualStyleBackColor = false;
+            btnExport.Click += btnExport_Click;
             // 
             // btnGenerate
             // 
@@ -307,7 +313,7 @@
             dtTo.Location = new Point(499, 89);
             dtTo.Margin = new Padding(4);
             dtTo.Name = "dtTo";
-            dtTo.Size = new Size(280, 27);
+            dtTo.Size = new Size(280, 37);
             dtTo.TabIndex = 13;
             dtTo.ValueChanged += dtTo_ValueChanged;
             // 
@@ -316,7 +322,7 @@
             dtFrom.Location = new Point(110, 89);
             dtFrom.Margin = new Padding(4);
             dtFrom.Name = "dtFrom";
-            dtFrom.Size = new Size(292, 27);
+            dtFrom.Size = new Size(292, 37);
             dtFrom.TabIndex = 12;
             dtFrom.ValueChanged += dtFrom_ValueChanged;
             // 
@@ -327,7 +333,7 @@
             txtStudent.Location = new Point(499, 36);
             txtStudent.Margin = new Padding(4);
             txtStudent.Name = "txtStudent";
-            txtStudent.Size = new Size(289, 27);
+            txtStudent.Size = new Size(289, 37);
             txtStudent.TabIndex = 11;
             txtStudent.TextChanged += txtStudent_TextChanged;
             // 
@@ -338,13 +344,13 @@
             cmbClass.Location = new Point(110, 37);
             cmbClass.Margin = new Padding(4);
             cmbClass.Name = "cmbClass";
-            cmbClass.Size = new Size(292, 27);
+            cmbClass.Size = new Size(292, 36);
             cmbClass.TabIndex = 10;
             cmbClass.SelectedIndexChanged += cmbClass_SelectedIndexChanged;
             // 
             // ViewAttendance
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(14F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(904, 421);

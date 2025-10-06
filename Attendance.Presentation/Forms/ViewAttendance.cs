@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using ClosedXML.Excel;
 
 namespace Attendance.Presentation.Forms
 {
@@ -184,6 +186,42 @@ namespace Attendance.Presentation.Forms
         private void txtStudent_TextChanged(object sender, EventArgs e)
         {
             this.btnGenerate.PerformClick();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (dgvReport.Rows.Count == 0)
+            {
+                MessageBox.Show("No records to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string fileName = "Attendance.xlsx";
+            if (cmbClass.SelectedItem is Class selectedClass && !string.IsNullOrWhiteSpace(selectedClass.ClassName))
+            {
+                fileName = $"{selectedClass.ClassName}.xlsx";
+            }
+            using (var sfd = new SaveFileDialog { Filter = "Excel Files|*.xlsx", FileName = fileName })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    var wb = new XLWorkbook();
+                    var ws = wb.Worksheets.Add("Attendance");
+                    // Add headers
+                    for (int i = 0; i < dgvReport.Columns.Count; i++)
+                        ws.Cell(1, i + 1).Value = dgvReport.Columns[i].HeaderText ?? string.Empty;
+                    // Add rows
+                    for (int i = 0; i < dgvReport.Rows.Count; i++)
+                        for (int j = 0; j < dgvReport.Columns.Count; j++)
+                            ws.Cell(i + 2, j + 1).Value = dgvReport.Rows[i].Cells[j].Value?.ToString() ?? string.Empty;
+                    wb.SaveAs(sfd.FileName);
+                    MessageBox.Show("Exported to Excel successfully.");
+                }
+            }
+        }
+
+        private void btnExport_Click_1(object sender, EventArgs e)
+        {
+            btnExport_Click(sender, e);
         }
     }
 }
