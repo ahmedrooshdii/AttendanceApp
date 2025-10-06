@@ -176,7 +176,6 @@
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
-            Load += Init;
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
             pnlPassword.ResumeLayout(false);

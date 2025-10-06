@@ -8,7 +8,6 @@ namespace Attendance.Presentation
 
     public partial class LoginForm : Form
     {
-        private readonly AttendanceDbContext db;
         private readonly IAuthService _authService;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
@@ -186,11 +185,6 @@ namespace Attendance.Presentation
             {
                 MessageBox.Show("Invalid username or passwordz.");
             }
-        }
-
-        private void Init(object sender, EventArgs e)
-        {
-            btnLogin.Click += Login;
         }
     }
 }

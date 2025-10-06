@@ -131,5 +131,10 @@ namespace Attendance.Presentation.Forms
             }
         }
         #endregion
+
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

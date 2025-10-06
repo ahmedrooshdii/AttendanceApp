@@ -1,6 +1,7 @@
 ﻿using Attendance.Domain.Contracts.Repositories;
 using Attendance.Domain.Contracts.Services;
 using Attendance.Domain.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,18 @@ namespace Attendance.Service
 {
     public class AuthService : IAuthService
     {
-        private IUserRepository _repo;
-        public AuthService(IUserRepository repo)
+        private readonly IServiceProvider _serviceProvider;
+
+        public AuthService(IServiceProvider serviceProvider)
         {
-            _repo = repo;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task<User> LoginAsync(string username, string password)
         {
-
-           // var c = HashPassword(password);
+            // var c = HashPassword(password);
+            using var scope = _serviceProvider.CreateScope();
+            var _repo = scope.ServiceProvider.GetRequiredService<IUserRepository>();
 
             var user = await _repo.GetByUsernameAsync(username);
             if (user == null) return new User();
