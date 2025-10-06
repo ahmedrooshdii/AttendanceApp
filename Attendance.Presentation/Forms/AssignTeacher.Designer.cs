@@ -53,6 +53,7 @@
             BtnCansel.TabIndex = 2;
             BtnCansel.Text = "Cancel";
             BtnCansel.UseVisualStyleBackColor = false;
+            BtnCansel.Click += BtnCansel_Click;
             // 
             // label1
             // 

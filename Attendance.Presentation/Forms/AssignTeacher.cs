@@ -22,12 +22,12 @@ namespace Attendance.Presentation.Forms
             db = context;
             this.clsassId = classId;
 
-            // علشان نربط الأحداث بالزرار
+
             this.Load += AssignTeacher_Load;
             btnSave.Click += BtnSave_Click;
             BtnCansel.Click += BtnCansel_Click;
 
-            // تفعيل الـ Scroll في البانيل
+
             Panal_ChkBox.AutoScroll = true;
         }
 
@@ -35,14 +35,26 @@ namespace Attendance.Presentation.Forms
         {
             var teachers = db.Teachers.ToList();
 
-            int y = 10; // المسافة الرأسية بين كل CheckBox
+           
+            var assignedTeachers = db.TeacherClasses
+                                     .Where(tc => tc.ClassId == clsassId)
+                                     .Select(tc => tc.TeacherId)
+                                     .ToList();
+
+            int y = 10; 
             foreach (var teacher in teachers)
             {
                 CheckBox chk = new CheckBox();
                 chk.Text = teacher.TeacherName;
-                chk.Tag = teacher.TeacherId; // نخزن الـ Id هنا
+                chk.Tag = teacher.TeacherId; 
                 chk.Location = new Point(10, y);
                 chk.AutoSize = true;
+
+             
+                if (assignedTeachers.Contains(teacher.TeacherId))
+                {
+                    chk.Checked = true;
+                }
 
                 Panal_ChkBox.Controls.Add(chk);
                 y += 30;
@@ -52,30 +64,45 @@ namespace Attendance.Presentation.Forms
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+            
+            var existingAssignments = db.TeacherClasses
+                                        .Where(tc => tc.ClassId == clsassId)
+                                        .ToList();
+
             foreach (CheckBox chk in Panal_ChkBox.Controls.OfType<CheckBox>())
             {
+                int teacherId = (int)chk.Tag;
+                var existing = existingAssignments.FirstOrDefault(tc => tc.TeacherId == teacherId);
+
                 if (chk.Checked)
                 {
-                    int teacherId = (int)chk.Tag;
-                    var teacherClass = new TeacherClass
+                    
+                    if (existing == null)
                     {
-                        ClassId = clsassId,
-                        TeacherId = teacherId
-                    };
-
-                    db.TeacherClasses.Add(teacherClass);
+                        db.TeacherClasses.Add(new TeacherClass
+                        {
+                            ClassId = clsassId,
+                            TeacherId = teacherId
+                        });
+                    }
+                }
+                else
+                {
+                    if (existing != null)
+                    {
+                        db.TeacherClasses.Remove(existing);
+                    }
                 }
             }
 
             db.SaveChanges();
-            MessageBox.Show("Teachers assigned successfully!");
+            MessageBox.Show("Teachers updated successfully!");
             this.Close();
         }
 
-
         private void BtnCansel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();    
         }
     }
 }

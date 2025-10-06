@@ -103,7 +103,7 @@ namespace Attendance.Presentation.Forms
 
                 if (classObj != null)
                 {
-                    // check if class has teachers
+              
                     bool hasTeachers = db.TeacherClasses.Any(t => t.ClassId == id);
 
                     if (hasTeachers)
@@ -115,7 +115,6 @@ namespace Attendance.Presentation.Forms
                         return;
                     }
 
-                    // check if class has students
                     bool hasStudents = db.Students.Any(s => s.ClassId == id);
 
                     if (hasStudents)
@@ -127,7 +126,7 @@ namespace Attendance.Presentation.Forms
                         return;
                     }
 
-                    // confirm delete
+               
                     var result = MessageBox.Show("Are you sure you want to delete this class?",
                                                  "Confirm Delete",
                                                  MessageBoxButtons.YesNo,
