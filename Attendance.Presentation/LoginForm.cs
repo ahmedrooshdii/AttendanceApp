@@ -4,11 +4,10 @@ using Attendance.Service;
 using Guna.UI2.WinForms;
 
 namespace Attendance.Presentation
-{  
-        
+{
+
     public partial class LoginForm : Form
     {
-        private readonly AttendanceDbContext db;
         private readonly IAuthService _authService;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
@@ -21,9 +20,9 @@ namespace Attendance.Presentation
 
         public LoginForm(IAuthService authService,
             ITeacherService teacherService, IClassServices classService,
-            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService ,
-            IBackupService backupService , IServiceProvider serviceProvider)
-      
+            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService,
+            IBackupService backupService, IServiceProvider serviceProvider)
+
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
@@ -37,7 +36,7 @@ namespace Attendance.Presentation
 
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
-            SetPlaceholder(tbPassword, "Password");
+            SetPlaceholder(tbPassword, "Password", true);
             tbUserName.Focus();
             this.AcceptButton = btnLogin;
         }
@@ -47,7 +46,52 @@ namespace Attendance.Presentation
             Application.Exit();
         }
 
-        private void SetPlaceholder(Guna2TextBox txt, string placeholder)
+        //private void SetPlaceholder(TextBox txt, string placeholder)
+        //{
+        //    Color originalColor = txt.ForeColor;
+        //    bool originalUseSystemPasswordChar = txt.UseSystemPasswordChar;
+        //    char originalPasswordChar = txt.PasswordChar;
+        //    bool isPlaceholderActive = false;
+
+        //    void ShowPlaceholder()
+        //    {
+        //        if (string.IsNullOrEmpty(txt.Text))
+        //        {
+        //            isPlaceholderActive = true;
+        //            txt.Text = placeholder;
+        //            txt.ForeColor = Color.Gray;
+        //            txt.UseSystemPasswordChar = false;
+        //            tbPassword.PasswordChar = '●';
+        //        }
+        //    }
+
+        //    void HidePlaceholder()
+        //    {
+        //        if (isPlaceholderActive)
+        //        {
+        //            isPlaceholderActive = false;
+        //            txt.Text = "";
+        //            txt.ForeColor = originalColor;
+        //            txt.UseSystemPasswordChar = originalUseSystemPasswordChar;
+        //            tbPassword.PasswordChar = originalPasswordChar;
+        //        }
+        //    }
+
+        //    txt.GotFocus += (s, e) => HidePlaceholder();
+        //    txt.LostFocus += (s, e) => ShowPlaceholder();
+
+        //    txt.TextChanged += (s, e) =>
+        //    {
+        //        if (!txt.Focused && string.IsNullOrEmpty(txt.Text))
+        //            ShowPlaceholder();
+        //        else if (!string.IsNullOrEmpty(txt.Text) && isPlaceholderActive && txt.Focused)
+        //            HidePlaceholder();
+        //    };
+
+        //    ShowPlaceholder();
+        //}
+
+        private void SetPlaceholder(TextBox txt, string placeholder, bool isPassword = false)
         {
             Color originalColor = txt.ForeColor;
             bool originalUseSystemPasswordChar = txt.UseSystemPasswordChar;
@@ -61,8 +105,7 @@ namespace Attendance.Presentation
                     isPlaceholderActive = true;
                     txt.Text = placeholder;
                     txt.ForeColor = Color.Gray;
-                    txt.UseSystemPasswordChar = false;
-                    tbPassword.PasswordChar = '●';
+                    txt.PasswordChar = originalPasswordChar;
                 }
             }
 
@@ -73,8 +116,15 @@ namespace Attendance.Presentation
                     isPlaceholderActive = false;
                     txt.Text = "";
                     txt.ForeColor = originalColor;
-                    txt.UseSystemPasswordChar = originalUseSystemPasswordChar;
-                    tbPassword.PasswordChar = originalPasswordChar;
+
+                    if (isPassword)
+                    {
+                        txt.PasswordChar = '●';
+                    }
+                    else
+                    {
+                        txt.PasswordChar = originalPasswordChar;
+                    }
                 }
             }
 
@@ -85,8 +135,6 @@ namespace Attendance.Presentation
             {
                 if (!txt.Focused && string.IsNullOrEmpty(txt.Text))
                     ShowPlaceholder();
-                else if (!string.IsNullOrEmpty(txt.Text) && isPlaceholderActive && txt.Focused)
-                    HidePlaceholder();
             };
 
             ShowPlaceholder();
@@ -102,9 +150,9 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user, 
-                        _classService, _teacherService, _studentService, _attendanceService, userServices ,
-                         _backupService , _serviceProvider
+                    var adminDashboard = new AdminDashboard(user,
+                        _classService, _teacherService, _studentService, _attendanceService, userServices,
+                         _backupService, _serviceProvider
                         );
                     adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;
