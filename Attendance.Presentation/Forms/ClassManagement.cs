@@ -8,11 +8,11 @@ namespace Attendance.Presentation.Forms
 {
     public partial class ClassManagement : Form
     {
- 
+
 
         private readonly AttendanceDbContext db;
 
-     
+
 
         public ClassManagement()
         {
@@ -44,24 +44,27 @@ namespace Attendance.Presentation.Forms
                 .ToList();
 
             DisplayClasss.DataSource = classes;
-                DisplayClasss.Columns["Id"].HeaderText = "Class ID";
 
-       
-                DisplayClasss.Columns["Class_Name"].HeaderText = "Class Name";
+            DisplayClasss.EnableHeadersVisualStyles = false;
+            DisplayClasss.ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Control;
+            DisplayClasss.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
 
+            DisplayClasss.Columns["Id"].HeaderText = "Class ID";
+            DisplayClasss.Columns["Class_Name"].HeaderText = "Class Name";
             DisplayClasss.ColumnHeadersHeight = 40;
         }
 
 
+
         private void Add_btn_Click(object sender, EventArgs e)
         {
-           Add ad = new Add(db);  
-           
-           // adminDashboard.Hide();  
-           // ad.Show();
+            Add ad = new Add(db);
+
+            // adminDashboard.Hide();  
+            // ad.Show();
             //adminDashboard.Show(.);  
 
-            
+
             using (Add frm = new Add(db))
             {
                 if (frm.ShowDialog() == DialogResult.OK)
@@ -73,42 +76,57 @@ namespace Attendance.Presentation.Forms
 
         }
 
-    
+
         private void Update_btn_Click(object sender, EventArgs e)
         {
             if (DisplayClasss.CurrentRow != null && DisplayClasss.CurrentRow.Cells["Id"].Value != null)
             {
-                UpdateClass up = new UpdateClass(db, Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value));
-                up.Show();
-                using (UpdateClass frm = new UpdateClass(db, Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value)))
+                int classId = Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value);
+
+                using (UpdateClass frm = new UpdateClass(db, classId))
                 {
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
                         LoadClasses();
                     }
                 }
-
             }
-
-
-
         }
 
 
         private void Delete_btn_Click(object sender, EventArgs e)
         {
-            //if (DisplayClasss.CurrentRow != null)
-            //{
             if (DisplayClasss.CurrentRow != null && DisplayClasss.CurrentRow.Cells["Id"].Value != null)
             {
-                //int id = (int)DisplayClasss.CurrentRow.Cells["Id"].Value;
                 int id = Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value);
-
-                var classObj = db.Classes.FirstOrDefault(e=>e.ClassId==id);
+                var classObj = db.Classes.FirstOrDefault(c => c.ClassId == id);
 
                 if (classObj != null)
                 {
-                   
+              
+                    bool hasTeachers = db.TeacherClasses.Any(t => t.ClassId == id);
+
+                    if (hasTeachers)
+                    {
+                        MessageBox.Show("This class is assigned to a teacher and cannot be deleted.",
+                                        "Delete Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    bool hasStudents = db.Students.Any(s => s.ClassId == id);
+
+                    if (hasStudents)
+                    {
+                        MessageBox.Show("This class has students assigned and cannot be deleted.",
+                                        "Delete Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                        return;
+                    }
+
+               
                     var result = MessageBox.Show("Are you sure you want to delete this class?",
                                                  "Confirm Delete",
                                                  MessageBoxButtons.YesNo,
@@ -125,7 +143,10 @@ namespace Attendance.Presentation.Forms
             }
             else
             {
-                MessageBox.Show("Please select a row before deleting.");
+                MessageBox.Show("Please select a row before deleting.",
+                                "Delete Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
         }
 
@@ -140,7 +161,7 @@ namespace Attendance.Presentation.Forms
                 return;
             }
 
-        
+
             var result = db.Classes
                            .Where(c => c.ClassName.Contains(keyword))
                            .Select(c => new { Id = c.ClassId, Class_Name = c.ClassName })
@@ -154,13 +175,30 @@ namespace Attendance.Presentation.Forms
             {
                 MessageBox.Show("No classes found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DisplayClasss.DataSource = null;
-                LoadClasses();  
+                LoadClasses();
             }
         }
 
         private void DisplayClasss_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+
         }
+
+        private void Assign_teacherBtn_Click(object sender, EventArgs e)
+        {
+            if (DisplayClasss.CurrentRow != null && DisplayClasss.CurrentRow.Cells["Id"].Value != null)
+            {
+                int classId = Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value);
+
+                AssignTeacher assignTeacher = new AssignTeacher(db, classId);
+                assignTeacher.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a class first.");
+            }
+        }
+
+
     }
 }
