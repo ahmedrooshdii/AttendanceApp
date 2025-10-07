@@ -12,5 +12,6 @@ namespace Attendance.Domain.Contracts.Services
     {
         Task<List<Class>> GetAllClassesAsync(Expression<Func<Class, bool>>? predicate = null);
         Task<List<Student>> GetStudentsByClassIdAsync(int classId);
+        Task<List<Teacher>> GetTeachersByClassIdAsync(int classId);
     }
 }

@@ -23,6 +23,7 @@ namespace Attendance.Presentation.Forms
         private readonly IAttendanceService _attendanceService;
         private readonly IUserService _userService;
         private readonly IStudentService _studentService;
+        
         public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService, IStudentService studentService)
         {
             InitializeComponent();
@@ -34,6 +35,8 @@ namespace Attendance.Presentation.Forms
             _attendanceService = attendanceService;
             _userService = userService;
             _studentService = studentService;
+            lblUserName.Text = $"User: {_user.UserName}";
+            lblRoleName.Text = $"Role: Teacher";
             // Pre-load forms
             _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
             {

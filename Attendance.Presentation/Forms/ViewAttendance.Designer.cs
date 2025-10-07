@@ -335,7 +335,7 @@
             btnExport.TabIndex = 15;
             btnExport.Text = "Export To Excel";
             btnExport.UseVisualStyleBackColor = false;
-            btnExport.Click += btnExport_Click;
+            btnExport.Click += btnExport_Click_1;
             // 
             // btnGenerate
             // 
@@ -436,7 +436,7 @@
             tpClass.Location = new Point(4, 4);
             tpClass.Name = "tpClass";
             tpClass.Padding = new Padding(3);
-            tpClass.Size = new Size(892, 387);
+            tpClass.Size = new Size(892, 391);
             tpClass.TabIndex = 1;
             tpClass.Text = "Class";
             tpClass.UseVisualStyleBackColor = true;
@@ -516,13 +516,14 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(47, 261);
+            button1.Location = new Point(47, 308);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(327, 39);
             button1.TabIndex = 16;
             button1.Text = "Export To Excel";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += btnExport_Click;
             // 
             // comboBox2
             // 
@@ -536,12 +537,16 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(47, 155);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(796, 88);
+            dataGridView1.ReadOnly = true;
+            dataGridView1.Size = new Size(796, 135);
             dataGridView1.TabIndex = 3;
             // 
             // label7

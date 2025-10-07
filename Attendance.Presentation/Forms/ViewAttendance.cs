@@ -53,7 +53,7 @@ namespace Attendance.Presentation.Forms
                 //load all classes
                 allClasses = await classServices.GetAllClassesAsync();
                 allClasses.Insert(0, new Class { ClassId = 0, ClassName = "-- Select Class --" });
-                cbClass2.DataSource = allClasses;
+                cbClass2.DataSource = allClasses.ToList();
                 cbClass2.DisplayMember = "ClassName";
                 cbClass2.ValueMember = "ClassId";
                 cbClass2.SelectedIndex = 0;
@@ -234,7 +234,11 @@ namespace Attendance.Presentation.Forms
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            if (dgvReport.Rows.Count == 0)
+            ExportFunction(dataGridView1);
+        }
+        private void  ExportFunction(DataGridView table)
+        {
+            if (table.Rows.Count == 0)
             {
                 MessageBox.Show("No records to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -251,29 +255,29 @@ namespace Attendance.Presentation.Forms
                     var wb = new XLWorkbook();
                     var ws = wb.Worksheets.Add("Attendance");
                     // Add headers
-                    for (int i = 0; i < dgvReport.Columns.Count; i++)
-                        ws.Cell(1, i + 1).Value = dgvReport.Columns[i].HeaderText ?? string.Empty;
+                    for (int i = 0; i < table.Columns.Count; i++)
+                        ws.Cell(1, i + 1).Value = table.Columns[i].HeaderText ?? string.Empty;
                     // Add rows
-                    for (int i = 0; i < dgvReport.Rows.Count; i++)
-                        for (int j = 0; j < dgvReport.Columns.Count; j++)
-                            ws.Cell(i + 2, j + 1).Value = dgvReport.Rows[i].Cells[j].Value?.ToString() ?? string.Empty;
+                    for (int i = 0; i < table.Rows.Count; i++)
+                        for (int j = 0; j < table.Columns.Count; j++)
+                            ws.Cell(i + 2, j + 1).Value = table.Rows[i].Cells[j].Value?.ToString() ?? string.Empty;
                     wb.SaveAs(sfd.FileName);
-                    MessageBox.Show("Exported to Excel successfully.");
+                    MessageBox.Show("Exported to Excel successfully.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
-
         private void btnExport_Click_1(object sender, EventArgs e)
         {
-            btnExport_Click(sender, e);
+            //btnExport_Click(sender, e);
+            ExportFunction(dgvReport);
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private  void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedValue is int id && id != 0)
+            if (comboBox2.SelectedIndex is int index && index != 0)
             {
 
-                PopulateTableClassReport(cbClass2.SelectedIndex, id);
+                PopulateTableClassReport((int)cbClass2.SelectedValue, index);
             }
             else
             {
@@ -287,31 +291,23 @@ namespace Attendance.Presentation.Forms
             if (ReportType == 1) // Students
             {
                 var students = await classServices.GetStudentsByClassIdAsync(classId);
+                SetupGridForStudents();
                 if (students != null)
                 {
-                    foreach (var student in students)
-                    {
-                        dataGridView1.Rows.Add(
-                            student.StudentId,
-                            student.StudentName
-                        );
-                    }
+                    foreach (var s in students)
+                        dataGridView1.Rows.Add(s.StudentId, s.StudentName);
                 }
             }
-            //else if (ReportType == 2) // Teachers
-            //{
-            //    var teachers = await classServices.GetTeachersByClassIdAsync(classId);
-            //    if (teachers != null)
-            //    {
-            //        foreach (var teacher in teachers)
-            //        {
-            //            dataGridView1.Rows.Add(
-            //                teacher.TeacherId,
-            //                teacher.TeacherName
-            //            );
-            //        }
-            //    }
-            //}
+            else if (ReportType == 2) // Teachers
+            {
+                var teachers = await classServices.GetTeachersByClassIdAsync(classId);
+                SetupGridForTeachers();
+                if (teachers != null)
+                {
+                    foreach (var s in teachers)
+                        dataGridView1.Rows.Add(s.TeacherId, s.TeacherName);
+                }
+            }
         }
 
         private void cbClass2_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,6 +315,10 @@ namespace Attendance.Presentation.Forms
             if (cbClass2.SelectedValue is int id && id != 0)
             {
                 comboBox2.Enabled = true;
+                comboBox2.Items.Clear();
+                comboBox2.Items.Add("-- Select Report Type --");
+                comboBox2.Items.Add("Students");
+                comboBox2.Items.Add("Teachers");
                 comboBox2.SelectedIndex = 0;
             }
             else
@@ -326,6 +326,20 @@ namespace Attendance.Presentation.Forms
                 comboBox2.Enabled = false;
                 dgvReport.Rows.Clear();
             }
+        }
+        private void SetupGridForStudents()
+        {
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Add("StudentId", "Student ID");
+            dataGridView1.Columns.Add("StudentName", "Student Name");
+        }
+        private void SetupGridForTeachers()
+        {            
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.Columns.Clear();;
+            dataGridView1.Columns.Add("TeacherId", "Teacher ID");
+            dataGridView1.Columns.Add("TeacherName", "Teacher Name");;
         }
     }
 }
