@@ -283,7 +283,7 @@
             // 
             // TeacherDashboard
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(12F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1184, 681);
@@ -297,6 +297,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TeacherDashboard";
             FormClosed += TeacherDashboard_FormClosed_1;
+            Load += TeacherDashboard_Load;
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel3.ResumeLayout(false);

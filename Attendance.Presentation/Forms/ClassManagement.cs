@@ -1,7 +1,8 @@
+﻿using Attendance.Domain.Entities;
+using Attendance.Infrastructure.Data;
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using Attendance.Infrastructure.Data;
 
 
 namespace Attendance.Presentation.Forms
@@ -10,26 +11,31 @@ namespace Attendance.Presentation.Forms
     {
 
 
-        private readonly AttendanceDbContext db;
+        private  AttendanceDbContext db;
 
-
-
-        public ClassManagement()
-        {
-            InitializeComponent();
-            var options = new DbContextOptionsBuilder<AttendanceDbContext>()
-               .UseSqlServer("Data Source=.;Initial Catalog=AttendanceDB;Integrated Security=True;TrustServerCertificate=True;")
-               .Options;
-
-            db = new AttendanceDbContext(options);
-            LoadClasses();
-        }
         public ClassManagement(AttendanceDbContext _db)
         {
             InitializeComponent();
             db = _db;
             LoadClasses();
         }
+        public ClassManagement()
+        {
+            InitializeComponent();
+
+            var options = new DbContextOptionsBuilder<AttendanceDbContext>()
+                .UseSqlServer("Data Source=.;Initial Catalog=AttendanceDB;Integrated Security=True;TrustServerCertificate=True;")
+                .Options;
+
+            db = new AttendanceDbContext(options);
+        }
+
+        private void ClassManagement_Shown(object sender, EventArgs e)
+        {
+            LoadClasses();
+        }
+
+
 
         private void ClassManagement_Load(object sender, EventArgs e)
         {
@@ -37,7 +43,25 @@ namespace Attendance.Presentation.Forms
         }
 
 
-        private void LoadClasses()
+
+        //private void LoadClasses()
+        //{
+        //    var classes = db.Classes
+        //        .Select(e => new { Id = e.ClassId, Class_Name = e.ClassName })
+        //        .ToList();
+
+        //    DisplayClasss.DataSource = classes;
+
+        //    DisplayClasss.EnableHeadersVisualStyles = false;
+        //    DisplayClasss.ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Control;
+        //    DisplayClasss.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+        //    DisplayClasss.Columns["Id"].HeaderText = "Class ID";
+        //    DisplayClasss.Columns["Class_Name"].HeaderText = "Class Name";
+        //    DisplayClasss.ColumnHeadersHeight = 40;
+        //}
+
+        public void LoadClasses()
         {
             var classes = db.Classes
                 .Select(e => new { Id = e.ClassId, Class_Name = e.ClassName })
@@ -53,7 +77,6 @@ namespace Attendance.Presentation.Forms
             DisplayClasss.Columns["Class_Name"].HeaderText = "Class Name";
             DisplayClasss.ColumnHeadersHeight = 40;
         }
-
 
 
         private void Add_btn_Click(object sender, EventArgs e)

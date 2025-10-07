@@ -12,10 +12,10 @@ using Attendance.Infrastructure.Data;
 
 namespace Attendance.Presentation.Forms
 {
-  
+
     public partial class Add : Form
     {
-            private readonly AttendanceDbContext db;
+        private readonly AttendanceDbContext db;
         public Add(AttendanceDbContext _db)
         {
             InitializeComponent();
@@ -24,24 +24,42 @@ namespace Attendance.Presentation.Forms
 
         private void Add_classBtn_Click(object sender, EventArgs e)
         {
-          
-            if (textBox_add.Text!= string.Empty)
+            string className = textBox_add.Text.Trim();
+
+            if (!string.IsNullOrEmpty(className))
             {
-                var newClass = new Class();
+                bool classExists = db.Classes
+                    .Any(c => c.ClassName.ToLower() == className.ToLower());
 
-                newClass.ClassName = textBox_add.Text;  
-                db.Classes.Add(newClass);
-                db.SaveChanges();
-                this.DialogResult = DialogResult.OK;
-               
-                this.Close();
-               
+                if (classExists)
+                {
+                    MessageBox.Show("This class already exists.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    var newClass = new Class
+                    {
+                        ClassName = className
+                    };
 
+                    db.Classes.Add(newClass);
+                    db.SaveChanges();
+
+                    MessageBox.Show("Class added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Please enter a class name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }   
+            }
+        }
+
+
+        private void Add_Load(object sender, EventArgs e)
+        {
 
         }
     }

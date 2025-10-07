@@ -73,7 +73,7 @@
             Name = "Add";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add";
-           // Load += this.Add;
+            Load += Add_Load;
             ResumeLayout(false);
             PerformLayout();
         }

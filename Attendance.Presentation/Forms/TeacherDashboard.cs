@@ -113,6 +113,7 @@ namespace Attendance.Presentation.Forms
                 MoveSidePanel(btnClassManagement);
                 _classManagementForm.BringToFront();
                 _classManagementForm.Show();
+                 
 
             }
             catch (Exception ex)
@@ -125,6 +126,11 @@ namespace Attendance.Presentation.Forms
         {
             lblUserName.Text = $"User: {_user.UserName}";
             lblRoleName.Text = $"Role: Admin";
+        }
+
+        private void TeacherDashboard_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

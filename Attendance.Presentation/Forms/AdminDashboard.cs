@@ -136,6 +136,7 @@ namespace Attendance.Presentation.Forms
                 // Bring the pre-loaded UserManagement form to the front
                 _classManagementForm.BringToFront();
                 _classManagementForm.Show();
+                _classManagementForm.LoadClasses();
             }
             catch (Exception ex)
             {
