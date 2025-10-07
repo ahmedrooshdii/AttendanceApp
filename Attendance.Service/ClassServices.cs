@@ -27,5 +27,9 @@ namespace Attendance.Service
         {
             return await _classRepository.GetStudentsByClassIdAsync(classId);
         }
+        public async Task<List<Teacher>> GetTeachersByClassIdAsync(int classId)
+        {
+            return await _classRepository.GetTeachersByClassIdAsync(classId);
+        }
     }
 }

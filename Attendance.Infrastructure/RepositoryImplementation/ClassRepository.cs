@@ -38,5 +38,13 @@ namespace Attendance.Infrastructure.RepositoryImplementation
                 .Where(s => s.ClassId == classId)
                 .ToListAsync();
         }
+        public async Task<List<Teacher>> GetTeachersByClassIdAsync(int classId)
+        {
+            using var _context = _contextFactory.CreateDbContext();
+            return await _context.Teachers
+                .Include(t => t.TeacherClasses)
+                .Where(t => t.TeacherClasses.Any(tc => tc.ClassId == classId))
+                .ToListAsync();
+        }
     }
 }

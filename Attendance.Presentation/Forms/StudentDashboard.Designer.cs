@@ -233,6 +233,7 @@
             // btnTakeAttendance
             // 
             btnTakeAttendance.BackColor = Color.FromArgb(67, 3, 125);
+            btnTakeAttendance.Cursor = Cursors.Hand;
             btnTakeAttendance.FlatAppearance.BorderSize = 0;
             btnTakeAttendance.FlatStyle = FlatStyle.Flat;
             btnTakeAttendance.ForeColor = Color.White;

@@ -189,6 +189,7 @@
             // 
             // btnClassManagement
             // 
+            btnClassManagement.Cursor = Cursors.Hand;
             btnClassManagement.FlatAppearance.BorderSize = 0;
             btnClassManagement.FlatStyle = FlatStyle.Flat;
             btnClassManagement.ForeColor = Color.White;
@@ -204,6 +205,7 @@
             // btnTakeAttendance
             // 
             btnTakeAttendance.BackColor = Color.FromArgb(67, 3, 125);
+            btnTakeAttendance.Cursor = Cursors.Hand;
             btnTakeAttendance.FlatAppearance.BorderSize = 0;
             btnTakeAttendance.FlatStyle = FlatStyle.Flat;
             btnTakeAttendance.ForeColor = Color.White;
