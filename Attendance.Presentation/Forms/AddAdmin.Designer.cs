@@ -89,6 +89,7 @@
             // 
             // CancelBtn
             // 
+            CancelBtn.Cursor = Cursors.Hand;
             CancelBtn.CustomizableEdges = customizableEdges5;
             CancelBtn.DisabledState.BorderColor = Color.DarkGray;
             CancelBtn.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -106,6 +107,7 @@
             // 
             // AddBtn
             // 
+            AddBtn.Cursor = Cursors.Hand;
             AddBtn.CustomizableEdges = customizableEdges7;
             AddBtn.DisabledState.BorderColor = Color.DarkGray;
             AddBtn.DisabledState.CustomBorderColor = Color.DarkGray;
