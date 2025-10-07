@@ -146,6 +146,7 @@
             // 
             // btnPreference
             // 
+            btnPreference.Cursor = Cursors.Hand;
             btnPreference.Dock = DockStyle.Top;
             btnPreference.FlatAppearance.BorderSize = 0;
             btnPreference.FlatStyle = FlatStyle.Flat;
@@ -161,6 +162,7 @@
             // 
             // btnReports
             // 
+            btnReports.Cursor = Cursors.Hand;
             btnReports.Dock = DockStyle.Top;
             btnReports.FlatAppearance.BorderSize = 0;
             btnReports.FlatStyle = FlatStyle.Flat;
@@ -176,6 +178,7 @@
             // 
             // btnDatabaseLog
             // 
+            btnDatabaseLog.Cursor = Cursors.Hand;
             btnDatabaseLog.Dock = DockStyle.Top;
             btnDatabaseLog.FlatAppearance.BorderSize = 0;
             btnDatabaseLog.FlatStyle = FlatStyle.Flat;
@@ -191,6 +194,7 @@
             // 
             // btnClassManagement
             // 
+            btnClassManagement.Cursor = Cursors.Hand;
             btnClassManagement.Dock = DockStyle.Top;
             btnClassManagement.FlatAppearance.BorderSize = 0;
             btnClassManagement.FlatStyle = FlatStyle.Flat;
@@ -208,6 +212,7 @@
             // btnUserManagement
             // 
             btnUserManagement.BackColor = Color.FromArgb(67, 3, 125);
+            btnUserManagement.Cursor = Cursors.Hand;
             btnUserManagement.Dock = DockStyle.Top;
             btnUserManagement.FlatAppearance.BorderSize = 0;
             btnUserManagement.FlatStyle = FlatStyle.Flat;

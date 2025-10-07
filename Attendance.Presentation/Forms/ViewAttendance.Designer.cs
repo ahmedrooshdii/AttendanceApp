@@ -135,7 +135,7 @@
             // 
             // panel24
             // 
-            panel24.Location = new Point(375, 53);
+            panel24.Location = new Point(376, 53);
             panel24.Name = "panel24";
             panel24.Size = new Size(10, 27);
             panel24.TabIndex = 21;
@@ -325,6 +325,7 @@
             // 
             btnExport.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnExport.BackColor = Color.Green;
+            btnExport.Cursor = Cursors.Hand;
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
             btnExport.ForeColor = Color.White;
@@ -436,7 +437,7 @@
             tpClass.Location = new Point(4, 4);
             tpClass.Name = "tpClass";
             tpClass.Padding = new Padding(3);
-            tpClass.Size = new Size(892, 391);
+            tpClass.Size = new Size(892, 387);
             tpClass.TabIndex = 1;
             tpClass.Text = "Class";
             tpClass.UseVisualStyleBackColor = true;
@@ -513,10 +514,11 @@
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             button1.BackColor = Color.Green;
+            button1.Cursor = Cursors.Hand;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.ForeColor = Color.White;
-            button1.Location = new Point(47, 308);
+            button1.Location = new Point(47, 300);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
             button1.Size = new Size(327, 39);
@@ -546,7 +548,7 @@
             dataGridView1.Location = new Point(47, 155);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(796, 135);
+            dataGridView1.Size = new Size(796, 127);
             dataGridView1.TabIndex = 3;
             // 
             // label7

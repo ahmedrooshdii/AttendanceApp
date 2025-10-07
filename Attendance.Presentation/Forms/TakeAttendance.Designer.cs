@@ -41,7 +41,6 @@
             panel6 = new Panel();
             panel4 = new Panel();
             panel3 = new Panel();
-            panel2 = new Panel();
             panel1 = new Panel();
             comboBox2 = new ComboBox();
             dateTimePicker1 = new DateTimePicker();
@@ -59,6 +58,7 @@
             tabControl1.Alignment = TabAlignment.Bottom;
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPageMarkAttendance);
+            tabControl1.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -74,31 +74,32 @@
             tabPageMarkAttendance.Controls.Add(panel6);
             tabPageMarkAttendance.Controls.Add(panel4);
             tabPageMarkAttendance.Controls.Add(panel3);
-            tabPageMarkAttendance.Controls.Add(panel2);
             tabPageMarkAttendance.Controls.Add(panel1);
             tabPageMarkAttendance.Controls.Add(dateTimePicker1);
             tabPageMarkAttendance.Controls.Add(label3);
             tabPageMarkAttendance.Controls.Add(label2);
             tabPageMarkAttendance.Controls.Add(label1);
+            tabPageMarkAttendance.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             tabPageMarkAttendance.Location = new Point(4, 4);
             tabPageMarkAttendance.Name = "tabPageMarkAttendance";
             tabPageMarkAttendance.Padding = new Padding(3);
-            tabPageMarkAttendance.Size = new Size(912, 431);
+            tabPageMarkAttendance.Size = new Size(912, 428);
             tabPageMarkAttendance.TabIndex = 0;
             tabPageMarkAttendance.Text = "Mark Attendance";
             tabPageMarkAttendance.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             button1.BackColor = Color.Green;
+            button1.Cursor = Cursors.Hand;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(772, 371);
+            button1.Location = new Point(39, 368);
             button1.Name = "button1";
-            button1.Size = new Size(98, 44);
+            button1.Size = new Size(244, 44);
             button1.TabIndex = 7;
             button1.Text = "Submit";
             button1.UseVisualStyleBackColor = false;
@@ -107,7 +108,7 @@
             // panel5
             // 
             panel5.BackColor = Color.Gray;
-            panel5.Location = new Point(535, 110);
+            panel5.Location = new Point(526, 107);
             panel5.Name = "panel5";
             panel5.Size = new Size(270, 1);
             panel5.TabIndex = 4;
@@ -124,7 +125,7 @@
             dataGridViewMarkAttendance.Location = new Point(39, 131);
             dataGridViewMarkAttendance.Name = "dataGridViewMarkAttendance";
             dataGridViewMarkAttendance.ScrollBars = ScrollBars.Vertical;
-            dataGridViewMarkAttendance.Size = new Size(831, 234);
+            dataGridViewMarkAttendance.Size = new Size(831, 231);
             dataGridViewMarkAttendance.TabIndex = 6;
             // 
             // ID
@@ -155,46 +156,39 @@
             comboBoxClass.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxClass.FlatStyle = FlatStyle.Flat;
             comboBoxClass.FormattingEnabled = true;
-            comboBoxClass.Location = new Point(535, 88);
+            comboBoxClass.Location = new Point(526, 79);
             comboBoxClass.Name = "comboBoxClass";
-            comboBoxClass.Size = new Size(270, 24);
+            comboBoxClass.Size = new Size(270, 27);
             comboBoxClass.TabIndex = 5;
             comboBoxClass.SelectedIndexChanged += comboBoxClass_SelectedIndexChanged;
             // 
             // panel6
             // 
-            panel6.Location = new Point(322, 57);
+            panel6.Location = new Point(367, 53);
             panel6.Name = "panel6";
-            panel6.Size = new Size(39, 54);
+            panel6.Size = new Size(10, 54);
             panel6.TabIndex = 4;
             // 
             // panel4
             // 
-            panel4.Location = new Point(385, 91);
+            panel4.Location = new Point(402, 82);
             panel4.Name = "panel4";
             panel4.Size = new Size(16, 26);
             panel4.TabIndex = 4;
             // 
             // panel3
             // 
-            panel3.Location = new Point(104, 91);
+            panel3.Location = new Point(93, 82);
             panel3.Name = "panel3";
             panel3.Size = new Size(19, 26);
             panel3.TabIndex = 4;
             // 
-            // panel2
-            // 
-            panel2.Location = new Point(120, 112);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(270, 13);
-            panel2.TabIndex = 4;
-            // 
             // panel1
             // 
             panel1.Controls.Add(comboBox2);
-            panel1.Location = new Point(120, 84);
+            panel1.Location = new Point(111, 72);
             panel1.Name = "panel1";
-            panel1.Size = new Size(270, 10);
+            panel1.Size = new Size(307, 10);
             panel1.TabIndex = 4;
             // 
             // comboBox2
@@ -202,14 +196,14 @@
             comboBox2.FormattingEnabled = true;
             comboBox2.Location = new Point(377, 9);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(229, 24);
+            comboBox2.Size = new Size(229, 27);
             comboBox2.TabIndex = 5;
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(120, 90);
+            dateTimePicker1.Location = new Point(111, 81);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(270, 22);
+            dateTimePicker1.Size = new Size(294, 27);
             dateTimePicker1.TabIndex = 1;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
@@ -219,7 +213,7 @@
             label3.BackColor = Color.White;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(535, 62);
+            label3.Location = new Point(459, 82);
             label3.Name = "label3";
             label3.Size = new Size(60, 19);
             label3.TabIndex = 0;
@@ -231,7 +225,7 @@
             label2.BackColor = Color.White;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(117, 62);
+            label2.Location = new Point(41, 82);
             label2.Name = "label2";
             label2.Size = new Size(57, 19);
             label2.TabIndex = 0;
@@ -278,7 +272,6 @@
         private Label label3;
         private Label label2;
         private Panel panel3;
-        private Panel panel2;
         private ComboBox comboBoxClass;
         private Panel panel4;
         private Panel panel5;
