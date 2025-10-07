@@ -36,6 +36,9 @@ namespace Attendance.Presentation.Forms
 
         public async void ViewAttendance_Load(object sender, EventArgs e)
         {
+            dtFrom.Value = DateTime.Today.AddDays(-7);
+            dtFrom.MaxDate = DateTime.Today;
+            dtTo.MaxDate = DateTime.Today;
             List<Class> allClasses = null; // Initialize the variable
             //check if userId is valid
             if (userId == 0)
@@ -49,6 +52,11 @@ namespace Attendance.Presentation.Forms
             {
                 //load all classes
                 allClasses = await classServices.GetAllClassesAsync();
+                allClasses.Insert(0, new Class { ClassId = 0, ClassName = "-- Select Class --" });
+                cbClass2.DataSource = allClasses;
+                cbClass2.DisplayMember = "ClassName";
+                cbClass2.ValueMember = "ClassId";
+                cbClass2.SelectedIndex = 0;
 
             }
             else if (user?.Role?.RoleName == "Teacher")
@@ -56,6 +64,8 @@ namespace Attendance.Presentation.Forms
                 //load only classes assigned to the teacher
                 var teacher = await teacherService.GetTeacherByUserId(userId);
                 allClasses = await teacherService.GetClassesForTeacher(teacher.TeacherId);
+                allClasses.Insert(0, new Class { ClassId = 0, ClassName = "-- Select Class --" });
+                tcReports.TabPages.Remove(tpClass);
             }
             else
             {
@@ -66,6 +76,7 @@ namespace Attendance.Presentation.Forms
                 label2.Visible = false;
                 txtStudent.Visible = false;
                 btnGenerate.PerformClick();
+                tcReports.TabPages.Remove(tpClass);
             }
             if (allClasses != null)
             {
@@ -73,6 +84,7 @@ namespace Attendance.Presentation.Forms
                 cmbClass.DisplayMember = "ClassName";
                 cmbClass.ValueMember = "ClassId";
                 cmbClass.SelectedIndex = 0;
+
             }
         }
 
@@ -118,6 +130,11 @@ namespace Attendance.Presentation.Forms
             if (user?.Role?.RoleName == "Admin" || user?.Role?.RoleName == "Teacher")
             {
                 // if class is selected and student is selected then fetch there attendance from db
+                if(txtStudent.Text == "")
+                {
+                    PopulateTable((int)cmbClass.SelectedValue);
+                    return;
+                }
                 var students = await studentService.GetStudentByNameAsync(txtStudent.Text);
                 if (students == null || students.Count() == 0)
                 {
@@ -160,6 +177,7 @@ namespace Attendance.Presentation.Forms
                 foreach (var student in students)
                 {
                     var attendance = await attendanceService.GetStudentAttendancesByDateRangeAsync(student.StudentId, dtFrom.Value.Date, dtTo.Value.Date);
+                    attendance = attendance.OrderBy(a => a.Date).ToList();
                     foreach (var attend in attendance)
                     {
                         dgvReport.Rows.Add(
@@ -175,12 +193,38 @@ namespace Attendance.Presentation.Forms
 
         private void dtFrom_ValueChanged(object sender, EventArgs e)
         {
-            this.btnGenerate.PerformClick();
+            if (dtFrom.Value > DateTime.Today)
+            {
+                MessageBox.Show("Future dates are not allowed.");
+                dtFrom.Value = DateTime.Today;
+            }
+            if (user?.Role?.RoleName == "Student")
+                this.btnGenerate.PerformClick();
+            if (cmbClass.SelectedIndex > 0)
+                PopulateTable((int)cmbClass.SelectedValue);
+
         }
 
         private void dtTo_ValueChanged(object sender, EventArgs e)
         {
-            this.btnGenerate.PerformClick();
+            if (dtTo.Value > DateTime.Today)
+            {
+                MessageBox.Show("Future dates are not allowed.");
+                dtTo.Value = DateTime.Today;
+            }
+            else
+            {
+                if (dtTo.Value < dtFrom.Value)
+                {
+                    MessageBox.Show("Invalid date range. 'To' date cannot be earlier than 'From' date.");
+                    dtTo.Value = dtFrom.Value;
+                }
+            }
+            if (user?.Role?.RoleName == "Student")
+                this.btnGenerate.PerformClick();
+            if (cmbClass.SelectedIndex > 0)
+                PopulateTable((int)cmbClass.SelectedValue);
+
         }
 
         private void txtStudent_TextChanged(object sender, EventArgs e)
@@ -222,6 +266,66 @@ namespace Attendance.Presentation.Forms
         private void btnExport_Click_1(object sender, EventArgs e)
         {
             btnExport_Click(sender, e);
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedValue is int id && id != 0)
+            {
+
+                PopulateTableClassReport(cbClass2.SelectedIndex, id);
+            }
+            else
+            {
+                dgvReport.Rows.Clear();
+            }
+        }
+        private async void PopulateTableClassReport(int classId, int ReportType)
+        {
+            dgvReport.Rows.Clear();
+            // Get either Students OR Teachers informations based on ReportType value and classId
+            if (ReportType == 1) // Students
+            {
+                var students = await classServices.GetStudentsByClassIdAsync(classId);
+                if (students != null)
+                {
+                    foreach (var student in students)
+                    {
+                        dataGridView1.Rows.Add(
+                            student.StudentId,
+                            student.StudentName
+                        );
+                    }
+                }
+            }
+            //else if (ReportType == 2) // Teachers
+            //{
+            //    var teachers = await classServices.GetTeachersByClassIdAsync(classId);
+            //    if (teachers != null)
+            //    {
+            //        foreach (var teacher in teachers)
+            //        {
+            //            dataGridView1.Rows.Add(
+            //                teacher.TeacherId,
+            //                teacher.TeacherName
+            //            );
+            //        }
+            //    }
+            //}
+        }
+
+        private void cbClass2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbClass2.SelectedValue is int id && id != 0)
+            {
+                comboBox2.Enabled = true;
+                comboBox2.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBox2.Enabled = false;
+                dgvReport.Rows.Clear();
+            }
         }
     }
 }
