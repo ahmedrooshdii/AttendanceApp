@@ -36,8 +36,7 @@ namespace Attendance.Presentation.Forms
             LoadClasses();
         }
 
-
-        private void LoadClasses()
+        public void LoadClasses()
         {
             var classes = db.Classes
                 .Select(e => new { Id = e.ClassId, Class_Name = e.ClassName })
@@ -53,7 +52,6 @@ namespace Attendance.Presentation.Forms
             DisplayClasss.Columns["Class_Name"].HeaderText = "Class Name";
             DisplayClasss.ColumnHeadersHeight = 40;
         }
-
 
 
         private void Add_btn_Click(object sender, EventArgs e)
