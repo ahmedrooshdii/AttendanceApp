@@ -92,63 +92,9 @@ namespace Attendance.Presentation.Forms
         }
 
 
-        private void Delete_btn_Click(object sender, EventArgs e)
-        {
-            if (DisplayClasss.CurrentRow != null && DisplayClasss.CurrentRow.Cells["Id"].Value != null)
-            {
-                int id = Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value);
-                var classObj = db.Classes.FirstOrDefault(c => c.ClassId == id);
-
-                if (classObj != null)
-                {
-              
-                    bool hasTeachers = db.TeacherClasses.Any(t => t.ClassId == id);
-
-                    if (hasTeachers)
-                    {
-                        MessageBox.Show("This class is assigned to a teacher and cannot be deleted.",
-                                        "Delete Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    bool hasStudents = db.Students.Any(s => s.ClassId == id);
-
-                    if (hasStudents)
-                    {
-                        MessageBox.Show("This class has students assigned and cannot be deleted.",
-                                        "Delete Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
-                        return;
-                    }
-
-               
-                    var result = MessageBox.Show("Are you sure you want to delete this class?",
-                                                 "Confirm Delete",
-                                                 MessageBoxButtons.YesNo,
-                                                 MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        db.Classes.Remove(classObj);
-                        db.SaveChanges();
-                        LoadClasses();
-                        MessageBox.Show("Class deleted successfully!");
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a row before deleting.",
-                                "Delete Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-            }
-        }
 
 
+       
         private void Search_btn_Click(object sender, EventArgs e)
         {
             string keyword = seahrch_tbx.Text.Trim();
@@ -158,7 +104,6 @@ namespace Attendance.Presentation.Forms
                 MessageBox.Show("Please enter a class name to search.");
                 return;
             }
-
 
             var result = db.Classes
                            .Where(c => c.ClassName.Contains(keyword))
@@ -176,6 +121,87 @@ namespace Attendance.Presentation.Forms
                 LoadClasses();
             }
         }
+
+        private void seahrch_tbx_TextChanged_1(object sender, EventArgs e)
+        {
+            string keyword = seahrch_tbx.Text.Trim();
+
+            if (string.IsNullOrEmpty(keyword))
+            {
+                LoadClasses(); 
+            }
+        }
+
+        private void Delete_btn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DisplayClasss.CurrentRow != null && DisplayClasss.CurrentRow.Cells["Id"].Value != null)
+                {
+                    int classId = Convert.ToInt32(DisplayClasss.CurrentRow.Cells["Id"].Value);
+
+                    var classToDelete = db.Classes.FirstOrDefault(c => c.ClassId == classId);
+
+                    if (classToDelete != null)
+                    {
+                        var confirmResult = MessageBox.Show(
+                            "Are you sure you want to delete this class?",
+                            "Confirm Delete",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning);
+
+                        if (confirmResult == DialogResult.Yes)
+                        {
+                            db.Classes.Remove(classToDelete);
+                            db.SaveChanges();
+
+                            MessageBox.Show("Class deleted successfully!", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                            string keyword = seahrch_tbx.Text.Trim();
+
+                            if (string.IsNullOrEmpty(keyword))
+                            {
+
+                                LoadClasses();
+                            }
+                            else
+                            {
+
+                                var result = db.Classes
+                                               .Where(c => c.ClassName.Contains(keyword))
+                                               .Select(c => new { Id = c.ClassId, Class_Name = c.ClassName })
+                                               .ToList();
+
+                                if (result.Count > 0)
+                                {
+                                    DisplayClasss.DataSource = result;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No classes found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    seahrch_tbx.Clear();
+                                    LoadClasses();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Class not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a class to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         private void DisplayClasss_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -197,6 +223,6 @@ namespace Attendance.Presentation.Forms
             }
         }
 
-
+      
     }
 }

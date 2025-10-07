@@ -31,10 +31,12 @@ namespace Attendance.Presentation.Forms
             seahrch_tbx.Name = "seahrch_tbx";
             seahrch_tbx.Size = new Size(231, 27);
             seahrch_tbx.TabIndex = 1;
+            seahrch_tbx.TextChanged += seahrch_tbx_TextChanged_1;
             // 
             // Search_btn
             // 
             Search_btn.BackColor = Color.Blue;
+            Search_btn.Cursor = Cursors.Hand;
             Search_btn.FlatAppearance.BorderSize = 0;
             Search_btn.FlatStyle = FlatStyle.Flat;
             Search_btn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -51,13 +53,14 @@ namespace Attendance.Presentation.Forms
             // 
             Add_btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Add_btn.BackColor = Color.FromArgb(0, 192, 0);
+            Add_btn.Cursor = Cursors.Hand;
             Add_btn.FlatAppearance.BorderSize = 0;
             Add_btn.FlatStyle = FlatStyle.Flat;
             Add_btn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Add_btn.ForeColor = SystemColors.ButtonHighlight;
-            Add_btn.Location = new Point(48, 376);
+            Add_btn.Location = new Point(23, 371);
             Add_btn.Name = "Add_btn";
-            Add_btn.Size = new Size(89, 43);
+            Add_btn.Size = new Size(141, 54);
             Add_btn.TabIndex = 3;
             Add_btn.Text = "Add";
             Add_btn.UseVisualStyleBackColor = false;
@@ -67,13 +70,14 @@ namespace Attendance.Presentation.Forms
             // 
             Update_btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Update_btn.BackColor = SystemColors.HotTrack;
+            Update_btn.Cursor = Cursors.Hand;
             Update_btn.FlatAppearance.BorderSize = 0;
             Update_btn.FlatStyle = FlatStyle.Flat;
             Update_btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Update_btn.ForeColor = SystemColors.ButtonHighlight;
-            Update_btn.Location = new Point(201, 376);
+            Update_btn.Location = new Point(210, 372);
             Update_btn.Name = "Update_btn";
-            Update_btn.Size = new Size(100, 43);
+            Update_btn.Size = new Size(133, 54);
             Update_btn.TabIndex = 4;
             Update_btn.Text = "Update";
             Update_btn.UseVisualStyleBackColor = false;
@@ -83,13 +87,14 @@ namespace Attendance.Presentation.Forms
             // 
             Delete_btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Delete_btn.BackColor = Color.Red;
+            Delete_btn.Cursor = Cursors.Hand;
             Delete_btn.FlatAppearance.BorderSize = 0;
             Delete_btn.FlatStyle = FlatStyle.Flat;
             Delete_btn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Delete_btn.ForeColor = SystemColors.ControlLightLight;
-            Delete_btn.Location = new Point(380, 377);
+            Delete_btn.Location = new Point(393, 372);
             Delete_btn.Name = "Delete_btn";
-            Delete_btn.Size = new Size(91, 43);
+            Delete_btn.Size = new Size(153, 54);
             Delete_btn.TabIndex = 5;
             Delete_btn.Text = "Delete";
             Delete_btn.UseVisualStyleBackColor = false;
@@ -99,12 +104,13 @@ namespace Attendance.Presentation.Forms
             // 
             Assign_teacherBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Assign_teacherBtn.BackColor = Color.NavajoWhite;
+            Assign_teacherBtn.Cursor = Cursors.Hand;
             Assign_teacherBtn.FlatAppearance.BorderSize = 0;
             Assign_teacherBtn.FlatStyle = FlatStyle.Flat;
             Assign_teacherBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Assign_teacherBtn.Location = new Point(555, 377);
+            Assign_teacherBtn.Location = new Point(580, 371);
             Assign_teacherBtn.Name = "Assign_teacherBtn";
-            Assign_teacherBtn.Size = new Size(147, 43);
+            Assign_teacherBtn.Size = new Size(201, 55);
             Assign_teacherBtn.TabIndex = 6;
             Assign_teacherBtn.Text = "Assign Teacher";
             Assign_teacherBtn.UseVisualStyleBackColor = false;
