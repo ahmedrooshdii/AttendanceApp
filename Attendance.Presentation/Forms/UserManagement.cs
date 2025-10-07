@@ -39,6 +39,12 @@ namespace Attendance.Presentation.Forms
         private async void FormUsers_Load(object sender, EventArgs e)
         {
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.EnableHeadersVisualStyles = false;
+            dgvUsers.ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Control;
+            dgvUsers.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
+
+           
+            dgvUsers.ColumnHeadersHeight = 40;
             await LoadUsersAsync();
         }
 

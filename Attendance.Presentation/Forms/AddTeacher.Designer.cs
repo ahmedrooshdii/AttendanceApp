@@ -100,10 +100,10 @@
             CancelBtn.DisabledState.CustomBorderColor = Color.DarkGray;
             CancelBtn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             CancelBtn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            CancelBtn.FillColor = Color.Red;
+            CancelBtn.FillColor = Color.Gray;
             CancelBtn.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             CancelBtn.ForeColor = Color.White;
-            CancelBtn.Location = new Point(294, 276);
+            CancelBtn.Location = new Point(328, 296);
             CancelBtn.Margin = new Padding(4);
             CancelBtn.Name = "CancelBtn";
             CancelBtn.ShadowDecoration.CustomizableEdges = customizableEdges6;
@@ -121,7 +121,7 @@
             AddBtn.FillColor = Color.Green;
             AddBtn.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             AddBtn.ForeColor = Color.White;
-            AddBtn.Location = new Point(128, 276);
+            AddBtn.Location = new Point(162, 296);
             AddBtn.Margin = new Padding(4);
             AddBtn.Name = "AddBtn";
             AddBtn.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -132,33 +132,33 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label3.Location = new Point(91, 219);
+            label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            label3.Location = new Point(114, 218);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(73, 25);
+            label3.Size = new Size(64, 19);
             label3.TabIndex = 14;
             label3.Text = "Classes";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label2.Location = new Point(91, 148);
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            label2.Location = new Point(114, 154);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(97, 25);
+            label2.Size = new Size(80, 19);
             label2.TabIndex = 13;
             label2.Text = "Password";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(91, 87);
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            label1.Location = new Point(114, 90);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(109, 25);
+            label1.Size = new Size(93, 19);
             label1.TabIndex = 12;
             label1.Text = "User Name";
             // 
@@ -196,11 +196,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(96, 26);
+            label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            label4.Location = new Point(114, 26);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(101, 25);
+            label4.Size = new Size(88, 19);
             label4.TabIndex = 20;
             label4.Text = "Full Name";
             // 

@@ -94,7 +94,7 @@
             CancelBtn.DisabledState.CustomBorderColor = Color.DarkGray;
             CancelBtn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             CancelBtn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            CancelBtn.FillColor = Color.Red;
+            CancelBtn.FillColor = Color.Gray;
             CancelBtn.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             CancelBtn.ForeColor = Color.White;
             CancelBtn.Location = new Point(297, 216);
@@ -124,20 +124,20 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-            label2.Location = new Point(96, 118);
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
+            label2.Location = new Point(96, 135);
             label2.Name = "label2";
-            label2.Size = new Size(97, 25);
+            label2.Size = new Size(80, 19);
             label2.TabIndex = 21;
             label2.Text = "Password";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             label1.Location = new Point(96, 53);
             label1.Name = "label1";
-            label1.Size = new Size(109, 25);
+            label1.Size = new Size(93, 19);
             label1.TabIndex = 20;
             label1.Text = "User Name";
             // 

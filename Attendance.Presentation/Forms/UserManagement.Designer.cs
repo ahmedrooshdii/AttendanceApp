@@ -65,15 +65,16 @@
             // 
             // txtSearch
             // 
+            txtSearch.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
             txtSearch.Location = new Point(14, 14);
             txtSearch.Margin = new Padding(4);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(233, 23);
+            txtSearch.Size = new Size(233, 27);
             txtSearch.TabIndex = 1;
             // 
             // btnSearch
             // 
-            btnSearch.BackColor = Color.Green;
+            btnSearch.BackColor = Color.Blue;
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
@@ -90,7 +91,7 @@
             // btnAdd
             // 
             btnAdd.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAdd.BackColor = SystemColors.HotTrack;
+            btnAdd.BackColor = Color.Green;
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
@@ -107,7 +108,7 @@
             // btnEdit
             // 
             btnEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnEdit.BackColor = Color.Green;
+            btnEdit.BackColor = Color.Orange;
             btnEdit.FlatAppearance.BorderSize = 0;
             btnEdit.FlatStyle = FlatStyle.Flat;
             btnEdit.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
@@ -165,7 +166,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button3.BackColor = SystemColors.HotTrack;
+            button3.BackColor = Color.Green;
             button3.FlatAppearance.BorderSize = 0;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
@@ -182,7 +183,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button4.BackColor = SystemColors.HotTrack;
+            button4.BackColor = Color.Green;
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Century Gothic", 12F, FontStyle.Bold);
