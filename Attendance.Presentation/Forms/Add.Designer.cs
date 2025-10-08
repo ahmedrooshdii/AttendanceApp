@@ -36,40 +36,44 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(145, 186);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(22, 125);
             label1.Name = "label1";
-            label1.Size = new Size(112, 28);
+            label1.Size = new Size(121, 28);
             label1.TabIndex = 0;
             label1.Text = "Class Name";
             // 
             // textBox_add
             // 
-            textBox_add.Location = new Point(312, 186);
+            textBox_add.Location = new Point(166, 129);
             textBox_add.Name = "textBox_add";
             textBox_add.Size = new Size(265, 27);
             textBox_add.TabIndex = 1;
             // 
             // Add_classBtn
             // 
-            Add_classBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Add_classBtn.Location = new Point(366, 295);
+            Add_classBtn.BackColor = Color.FromArgb(0, 192, 0);
+            Add_classBtn.Cursor = Cursors.Hand;
+            Add_classBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Add_classBtn.ForeColor = Color.White;
+            Add_classBtn.Location = new Point(193, 223);
             Add_classBtn.Name = "Add_classBtn";
-            Add_classBtn.Size = new Size(117, 52);
+            Add_classBtn.Size = new Size(143, 54);
             Add_classBtn.TabIndex = 2;
             Add_classBtn.Text = "Add Class ";
-            Add_classBtn.UseVisualStyleBackColor = true;
+            Add_classBtn.UseVisualStyleBackColor = false;
             Add_classBtn.Click += Add_classBtn_Click;
             // 
             // Add
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(552, 346);
             Controls.Add(Add_classBtn);
             Controls.Add(label1);
             Controls.Add(textBox_add);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Add";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add";

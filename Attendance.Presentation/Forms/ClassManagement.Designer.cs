@@ -27,7 +27,7 @@ namespace Attendance.Presentation.Forms
             // 
             // seahrch_tbx
             // 
-            seahrch_tbx.Location = new Point(34, 22);
+            seahrch_tbx.Location = new Point(12, 22);
             seahrch_tbx.Name = "seahrch_tbx";
             seahrch_tbx.Size = new Size(231, 27);
             seahrch_tbx.TabIndex = 1;
@@ -41,9 +41,9 @@ namespace Attendance.Presentation.Forms
             Search_btn.FlatStyle = FlatStyle.Flat;
             Search_btn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Search_btn.ForeColor = SystemColors.ButtonHighlight;
-            Search_btn.Location = new Point(304, 15);
+            Search_btn.Location = new Point(261, 22);
             Search_btn.Name = "Search_btn";
-            Search_btn.Size = new Size(110, 39);
+            Search_btn.Size = new Size(103, 32);
             Search_btn.TabIndex = 2;
             Search_btn.Text = "Search";
             Search_btn.UseVisualStyleBackColor = false;
@@ -56,7 +56,7 @@ namespace Attendance.Presentation.Forms
             Add_btn.Cursor = Cursors.Hand;
             Add_btn.FlatAppearance.BorderSize = 0;
             Add_btn.FlatStyle = FlatStyle.Flat;
-            Add_btn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Add_btn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Add_btn.ForeColor = SystemColors.ButtonHighlight;
             Add_btn.Location = new Point(23, 371);
             Add_btn.Name = "Add_btn";
@@ -73,7 +73,7 @@ namespace Attendance.Presentation.Forms
             Update_btn.Cursor = Cursors.Hand;
             Update_btn.FlatAppearance.BorderSize = 0;
             Update_btn.FlatStyle = FlatStyle.Flat;
-            Update_btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Update_btn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Update_btn.ForeColor = SystemColors.ButtonHighlight;
             Update_btn.Location = new Point(210, 372);
             Update_btn.Name = "Update_btn";
@@ -90,7 +90,7 @@ namespace Attendance.Presentation.Forms
             Delete_btn.Cursor = Cursors.Hand;
             Delete_btn.FlatAppearance.BorderSize = 0;
             Delete_btn.FlatStyle = FlatStyle.Flat;
-            Delete_btn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Delete_btn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Delete_btn.ForeColor = SystemColors.ControlLightLight;
             Delete_btn.Location = new Point(393, 372);
             Delete_btn.Name = "Delete_btn";
@@ -107,7 +107,7 @@ namespace Attendance.Presentation.Forms
             Assign_teacherBtn.Cursor = Cursors.Hand;
             Assign_teacherBtn.FlatAppearance.BorderSize = 0;
             Assign_teacherBtn.FlatStyle = FlatStyle.Flat;
-            Assign_teacherBtn.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Assign_teacherBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Assign_teacherBtn.Location = new Point(580, 371);
             Assign_teacherBtn.Name = "Assign_teacherBtn";
             Assign_teacherBtn.Size = new Size(201, 55);

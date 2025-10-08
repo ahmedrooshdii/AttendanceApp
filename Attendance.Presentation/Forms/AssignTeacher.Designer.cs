@@ -44,8 +44,9 @@
             // 
             // BtnCansel
             // 
-            BtnCansel.BackColor = Color.Red;
-            BtnCansel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnCansel.BackColor = Color.Gray;
+            BtnCansel.Cursor = Cursors.Hand;
+            BtnCansel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnCansel.ForeColor = SystemColors.ButtonHighlight;
             BtnCansel.Location = new Point(483, 338);
             BtnCansel.Name = "BtnCansel";
@@ -58,22 +59,23 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ActiveCaptionText;
             label1.Location = new Point(22, 113);
             label1.Name = "label1";
-            label1.Size = new Size(224, 28);
+            label1.Size = new Size(246, 28);
             label1.TabIndex = 0;
             label1.Text = "Select teachers to assign";
             // 
             // btnSave
             // 
-            btnSave.BackColor = Color.Lime;
-            btnSave.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSave.ForeColor = SystemColors.ActiveCaptionText;
-            btnSave.Location = new Point(153, 338);
+            btnSave.BackColor = Color.Green;
+            btnSave.Cursor = Cursors.Hand;
+            btnSave.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(130, 337);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(191, 54);
+            btnSave.Size = new Size(216, 54);
             btnSave.TabIndex = 1;
             btnSave.Text = "Save Assignment";
             btnSave.UseVisualStyleBackColor = false;
@@ -87,7 +89,8 @@
             Controls.Add(btnSave);
             Controls.Add(label1);
             Controls.Add(Panal_ChkBox);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "AssignTeacher";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AssignTeacher";
