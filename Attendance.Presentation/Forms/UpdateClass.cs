@@ -29,18 +29,37 @@ namespace Attendance.Presentation.Forms
                 textBox_updateClass.Text = existingClass.ClassName;
             }
         }
-      private void UpdateBtn_Click(object sender, EventArgs e)
+        private void UpdateBtn_Click(object sender, EventArgs e)
         {
+            string newClassName = textBox_updateClass.Text.Trim();
+
+            if (string.IsNullOrEmpty(newClassName))
+            {
+                MessageBox.Show("Please enter a class name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var existingClass = db.Classes.FirstOrDefault(c => c.ClassId == clssicd);
 
             if (existingClass != null)
             {
-                existingClass.ClassName = textBox_updateClass.Text;
+                
+                bool classExists = db.Classes
+                    .Any(c => c.ClassName.ToLower() == newClassName.ToLower() && c.ClassId != clssicd);
 
+                if (classExists)
+                {
+                    MessageBox.Show("This class name already exists.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+           
+                existingClass.ClassName = newClassName;
                 db.Classes.Update(existingClass);
                 db.SaveChanges();
 
                 MessageBox.Show("Class updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -50,6 +69,7 @@ namespace Attendance.Presentation.Forms
                 this.Close();
             }
         }
+
     }
 }
 
