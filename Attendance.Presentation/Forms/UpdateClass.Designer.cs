@@ -36,40 +36,46 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(76, 171);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 131);
             label1.Name = "label1";
-            label1.Size = new Size(182, 28);
+            label1.Size = new Size(195, 28);
             label1.TabIndex = 0;
             label1.Text = "Update Class Name";
             // 
             // textBox_updateClass
             // 
-            textBox_updateClass.Location = new Point(315, 172);
+            textBox_updateClass.Location = new Point(213, 135);
             textBox_updateClass.Name = "textBox_updateClass";
             textBox_updateClass.Size = new Size(263, 27);
             textBox_updateClass.TabIndex = 1;
             // 
             // UpdateBtn
             // 
-            UpdateBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            UpdateBtn.Location = new Point(350, 286);
+            UpdateBtn.BackColor = Color.Green;
+            UpdateBtn.Cursor = Cursors.Hand;
+            UpdateBtn.FlatAppearance.BorderSize = 0;
+            UpdateBtn.FlatStyle = FlatStyle.Flat;
+            UpdateBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UpdateBtn.ForeColor = Color.White;
+            UpdateBtn.Location = new Point(240, 240);
             UpdateBtn.Name = "UpdateBtn";
-            UpdateBtn.Size = new Size(122, 51);
+            UpdateBtn.Size = new Size(130, 61);
             UpdateBtn.TabIndex = 2;
             UpdateBtn.Text = "Update";
-            UpdateBtn.UseVisualStyleBackColor = true;
+            UpdateBtn.UseVisualStyleBackColor = false;
             UpdateBtn.Click += UpdateBtn_Click;
             // 
             // UpdateClass
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(596, 384);
             Controls.Add(UpdateBtn);
             Controls.Add(textBox_updateClass);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "UpdateClass";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UpdateClass";
