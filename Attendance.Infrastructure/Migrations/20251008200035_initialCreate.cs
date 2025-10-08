@@ -25,6 +25,21 @@ namespace Attendance.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Preference",
+                columns: table => new
+                {
+                    PreferenceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateFormat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Theme = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Preference", x => x.PreferenceId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
@@ -193,6 +208,9 @@ namespace Attendance.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Attendance");
+
+            migrationBuilder.DropTable(
+                name: "Preference");
 
             migrationBuilder.DropTable(
                 name: "TeacherClass");

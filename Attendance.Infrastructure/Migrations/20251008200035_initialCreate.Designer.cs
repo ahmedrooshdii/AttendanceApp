@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attendance.Infrastructure.Migrations
 {
     [DbContext(typeof(AttendanceDbContext))]
-    [Migration("20251005162215_initialCreate")]
+    [Migration("20251008200035_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -73,6 +73,31 @@ namespace Attendance.Infrastructure.Migrations
                     b.HasKey("ClassId");
 
                     b.ToTable("Class");
+                });
+
+            modelBuilder.Entity("Attendance.Domain.Entities.Preference", b =>
+                {
+                    b.Property<int>("PreferenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PreferenceId"));
+
+                    b.Property<string>("DateFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Theme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PreferenceId");
+
+                    b.ToTable("Preference");
                 });
 
             modelBuilder.Entity("Attendance.Domain.Entities.Role", b =>

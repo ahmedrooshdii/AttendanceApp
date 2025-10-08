@@ -25,7 +25,7 @@ namespace Attendance.Presentation.Forms
             // 
             // btnBackup
             // 
-            btnBackup.BackColor = Color.DarkOrchid;
+            btnBackup.BackColor = Color.DodgerBlue;
             btnBackup.FlatStyle = FlatStyle.Flat;
             btnBackup.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold);
             btnBackup.ForeColor = Color.White;
@@ -40,7 +40,7 @@ namespace Attendance.Presentation.Forms
             // 
             // btnRestore
             // 
-            btnRestore.BackColor = Color.DarkOrchid;
+            btnRestore.BackColor = Color.LimeGreen;
             btnRestore.FlatStyle = FlatStyle.Flat;
             btnRestore.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold);
             btnRestore.ForeColor = Color.White;
@@ -55,7 +55,7 @@ namespace Attendance.Presentation.Forms
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.DarkOrchid;
+            btnCancel.BackColor = Color.Red;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold);
             btnCancel.ForeColor = Color.White;

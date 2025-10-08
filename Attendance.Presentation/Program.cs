@@ -84,6 +84,22 @@ namespace Attendance.Presentation
                     var db = scope.ServiceProvider.GetRequiredService<AttendanceDbContext>();
                     db.Database.Migrate();
                     await AttendanceDbContextSeed.SeedAsync(db);
+
+                    var backupService = scope.ServiceProvider.GetRequiredService<IBackupService>();
+                    string backupDir = configuration["BackupSettings:BackupFolder"]
+                        ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AutoBackups");
+
+                    Directory.CreateDirectory(backupDir);
+
+                    var latestBackup = Directory.GetFiles(backupDir, "*.bak")
+                                                   .OrderByDescending(f => f)
+                                                   .FirstOrDefault();
+
+                    if (latestBackup == null || File.GetCreationTime(latestBackup) < DateTime.Now.AddHours(-6))
+                    {
+                        string backupFile = Path.Combine(backupDir, $"AppBackup_{DateTime.Now:yyyyMMdd_HHmmss}.bak");
+                        await backupService.BackupAsync(backupFile, CancellationToken.None);
+                    }
                 }
                 catch (Exception ex)
                 {
