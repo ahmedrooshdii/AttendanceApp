@@ -52,8 +52,10 @@
             // 
             // UpdateBtn
             // 
-            UpdateBtn.BackColor = Color.Blue;
+            UpdateBtn.BackColor = Color.Green;
             UpdateBtn.Cursor = Cursors.Hand;
+            UpdateBtn.FlatAppearance.BorderSize = 0;
+            UpdateBtn.FlatStyle = FlatStyle.Flat;
             UpdateBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             UpdateBtn.ForeColor = Color.White;
             UpdateBtn.Location = new Point(240, 240);

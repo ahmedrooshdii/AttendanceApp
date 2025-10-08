@@ -54,6 +54,8 @@
             // 
             Add_classBtn.BackColor = Color.FromArgb(0, 192, 0);
             Add_classBtn.Cursor = Cursors.Hand;
+            Add_classBtn.FlatAppearance.BorderSize = 0;
+            Add_classBtn.FlatStyle = FlatStyle.Flat;
             Add_classBtn.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Add_classBtn.ForeColor = Color.White;
             Add_classBtn.Location = new Point(193, 223);

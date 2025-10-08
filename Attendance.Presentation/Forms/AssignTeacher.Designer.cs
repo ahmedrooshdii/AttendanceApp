@@ -46,6 +46,8 @@
             // 
             BtnCansel.BackColor = Color.Gray;
             BtnCansel.Cursor = Cursors.Hand;
+            BtnCansel.FlatAppearance.BorderSize = 0;
+            BtnCansel.FlatStyle = FlatStyle.Flat;
             BtnCansel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnCansel.ForeColor = SystemColors.ButtonHighlight;
             BtnCansel.Location = new Point(483, 338);
@@ -71,6 +73,8 @@
             // 
             btnSave.BackColor = Color.Green;
             btnSave.Cursor = Cursors.Hand;
+            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSave.ForeColor = Color.White;
             btnSave.Location = new Point(130, 337);
