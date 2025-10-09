@@ -13,35 +13,21 @@ namespace Attendance.Presentation.Forms
         private readonly ViewAttendance _viewattendanceForm;
         private readonly DatabaseLog _databaseLogForm;
         private readonly Preference _preferenceForm;
-
-        private readonly IClassServices _classServices;
-        private readonly IUserService _userService;
-        private readonly ITeacherService _teacherService;
-        private readonly IStudentService _studentService;
-        private readonly IAttendanceService _attendanceService;
         private readonly IBackupService _backupService;
         private readonly User _user;
 
         private bool _isLoggingOut = false;
-        public AdminDashboard(User user, IClassServices classServices,
-            ITeacherService teacherService, IStudentService studentService, IAttendanceService attendanceService,
-            IUserService userService, IBackupService backupService , IServiceProvider serviceProvider)
+        public AdminDashboard(User user, IServiceProvider serviceProvider)
 
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
+            _backupService = _serviceProvider.GetService<IBackupService>();
             timerDataAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
             lblUserName.Text = $"User: {_user.UserName}";
             lblRoleName.Text = $"Role: Admin";
-            _classServices = classServices;
-            _teacherService = teacherService;
-            _studentService = studentService;
-            _attendanceService = attendanceService;
-            _userService = userService;
-            _backupService = backupService;
-            // Pre-load forms
 
             _userManagementForm = new UserManagement
             {
@@ -55,7 +41,7 @@ namespace Attendance.Presentation.Forms
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _viewattendanceForm = new ViewAttendance(_user.UserId, _classServices, _userService, _teacherService, _studentService, _attendanceService)
+            _viewattendanceForm = new ViewAttendance(_user.UserId, _serviceProvider)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,

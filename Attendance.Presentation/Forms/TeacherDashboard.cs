@@ -18,33 +18,26 @@ namespace Attendance.Presentation.Forms
         private readonly TakeAttendance _takeAttendanceForm;
         private readonly ViewAttendance _classManagementForm;
         private bool _isLoggingOut = false;
-        private readonly ITeacherService _teacherService;
-        private readonly IClassServices _classService;
-        private readonly IAttendanceService _attendanceService;
-        private readonly IUserService _userService;
-        private readonly IStudentService _studentService;
-        
-        public TeacherDashboard(User user, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService, IUserService userService, IStudentService studentService)
+        private readonly IServiceProvider _serviceProvider;
+
+        public TeacherDashboard(User user, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             timerDateAndTime.Start();
             lblAppName.AutoSize = true;
             _user = user;
-            _teacherService = teacherService;
-            _classService = classService;
-            _attendanceService = attendanceService;
-            _userService = userService;
-            _studentService = studentService;
+          
+            _serviceProvider = serviceProvider;
             lblUserName.Text = $"User: {_user.UserName}";
             lblRoleName.Text = $"Role: Teacher";
             // Pre-load forms
-            _takeAttendanceForm = new TakeAttendance(_user.UserId, _teacherService, _classService, _attendanceService)
+            _takeAttendanceForm = new TakeAttendance(_user.UserId, _serviceProvider)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,
                 Dock = DockStyle.Fill
             };
-            _classManagementForm = new ViewAttendance(_user.UserId, _classService, _userService, _teacherService, _studentService, _attendanceService)
+            _classManagementForm = new ViewAttendance(_user.UserId, _serviceProvider)
             {
                 TopLevel = false,
                 FormBorderStyle = FormBorderStyle.None,

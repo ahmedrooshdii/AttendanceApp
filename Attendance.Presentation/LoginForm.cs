@@ -9,30 +9,15 @@ namespace Attendance.Presentation
     public partial class LoginForm : Form
     {
         private readonly IAuthService _authService;
-        private readonly ITeacherService _teacherService;
-        private readonly IClassServices _classService;
-        private readonly IAttendanceService _attendanceService;
-        private readonly IUserService userServices;
-        private readonly IStudentService _studentService;
-        private readonly IBackupService _backupService;
         private readonly IServiceProvider _serviceProvider;
 
 
-        public LoginForm(IAuthService authService,
-            ITeacherService teacherService, IClassServices classService,
-            IAttendanceService attendanceService, IUserService userServices, IStudentService studentService,
-            IBackupService backupService, IServiceProvider serviceProvider)
+        public LoginForm(IAuthService authService, IServiceProvider serviceProvider)
 
         {
             InitializeComponent();
-            _serviceProvider = serviceProvider;
             _authService = authService;
-            _teacherService = teacherService;
-            _classService = classService;
-            _attendanceService = attendanceService;
-            this.userServices = userServices;
-            _studentService = studentService;
-            _backupService = backupService;
+            _serviceProvider = serviceProvider;
 
             // UI Enhancements
             SetPlaceholder(tbUserName, "Username");
@@ -150,10 +135,7 @@ namespace Attendance.Presentation
                 {
                     // Admin
                     this.Hide();
-                    var adminDashboard = new AdminDashboard(user,
-                        _classService, _teacherService, _studentService, _attendanceService, userServices,
-                         _backupService, _serviceProvider
-                        );
+                    var adminDashboard = new AdminDashboard(user, _serviceProvider);
                     adminDashboard.InitializeUser(user);
                     adminDashboard.Owner = this;
                     adminDashboard.Show();
@@ -162,7 +144,7 @@ namespace Attendance.Presentation
                 {
                     // Teacher
                     this.Hide();
-                    var teacherDashboard = new TeacherDashboard(user, _teacherService, _classService, _attendanceService, userServices, _studentService);
+                    var teacherDashboard = new TeacherDashboard(user, _serviceProvider);
                     //  var teacherDashboard = _serviceProvider.GetRequiredService<TeacherDashboard>();
                     // teacherDashboard.InitializeUser(user);
                     teacherDashboard.Owner = this;
@@ -172,7 +154,7 @@ namespace Attendance.Presentation
                 {
                     // Student
                     this.Hide();
-                    var studentDashboard = new StudentDashboard(user, _classService, userServices, _teacherService, _studentService, _attendanceService);
+                    var studentDashboard = new StudentDashboard(user, _serviceProvider);
                     //var studentDashboard = _serviceProvider.GetRequiredService<StudentDashboard>();
                     studentDashboard.InitializeUser(user);
                     studentDashboard.Owner = this;
