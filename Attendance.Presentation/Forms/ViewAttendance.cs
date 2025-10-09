@@ -283,12 +283,12 @@ namespace Attendance.Presentation.Forms
             }
             else
             {
-                dgvReport.Rows.Clear();
+                dataGridView1.Rows.Clear();
             }
         }
         private async void PopulateTableClassReport(int classId, int ReportType)
         {
-            dgvReport.Rows.Clear();
+            dataGridView1.Rows.Clear();
             // Get either Students OR Teachers informations based on ReportType value and classId
             if (ReportType == 1) // Students
             {
@@ -326,7 +326,7 @@ namespace Attendance.Presentation.Forms
             else
             {
                 comboBox2.Enabled = false;
-                dgvReport.Rows.Clear();
+                dataGridView1.Rows.Clear();
             }
         }
         private void SetupGridForStudents()
