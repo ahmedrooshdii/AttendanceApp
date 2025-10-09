@@ -15,19 +15,21 @@ namespace Attendance.Presentation.Forms
 {
     public partial class TakeAttendance : Form
     {
-        private int _userId;
+        private readonly int _userId;
+        private readonly IServiceProvider _serviceProvider;
         private readonly ITeacherService _teacherService;
         private readonly IClassServices _classService;
         private readonly IAttendanceService _attendanceService;
 
-        public TakeAttendance(int userId, ITeacherService teacherService, IClassServices classService, IAttendanceService attendanceService)
+        public TakeAttendance(int userId, IServiceProvider serviceProvider)
         {
             InitializeComponent();
             dataGridViewMarkAttendance.Columns["ID"].Visible = false;
             _userId = userId;
-            _teacherService = teacherService;
-            _classService = classService;
-            _attendanceService = attendanceService;
+            _serviceProvider = serviceProvider;
+            _teacherService = _serviceProvider.GetService<ITeacherService>();
+            _classService = _serviceProvider.GetService<IClassServices>();
+            _attendanceService = _serviceProvider.GetService<IAttendanceService>();
         }
 
         private async void TakeAttendance_Load(object sender, EventArgs e)
