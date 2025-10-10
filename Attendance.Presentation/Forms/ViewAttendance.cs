@@ -18,20 +18,22 @@ namespace Attendance.Presentation.Forms
     {
         private User user;
         private readonly int userId;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IUserService userServices;
         private readonly IClassServices classServices;
         private readonly ITeacherService teacherService;
         private readonly IStudentService studentService;
         private readonly IAttendanceService attendanceService;
-        public ViewAttendance(int _userId, IClassServices _classServices, IUserService _userServices, ITeacherService _teacherService, IStudentService _studentService, IAttendanceService _attendanceService)
+        public ViewAttendance(int _userId, IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            classServices = _classServices;
             userId = _userId;
-            userServices = _userServices;
-            teacherService = _teacherService;
-            studentService = _studentService;
-            attendanceService = _attendanceService;
+            _serviceProvider = serviceProvider;
+            classServices = _serviceProvider.GetService<IClassServices>();
+            userServices = _serviceProvider.GetService<IUserService>();
+            teacherService = _serviceProvider.GetService<ITeacherService>();
+            studentService = _serviceProvider.GetService<IStudentService>();
+            attendanceService = _serviceProvider.GetService<IAttendanceService>();
         }
 
         public async void ViewAttendance_Load(object sender, EventArgs e)
@@ -281,12 +283,12 @@ namespace Attendance.Presentation.Forms
             }
             else
             {
-                dgvReport.Rows.Clear();
+                dataGridView1.Rows.Clear();
             }
         }
         private async void PopulateTableClassReport(int classId, int ReportType)
         {
-            dgvReport.Rows.Clear();
+            dataGridView1.Rows.Clear();
             // Get either Students OR Teachers informations based on ReportType value and classId
             if (ReportType == 1) // Students
             {
@@ -324,7 +326,7 @@ namespace Attendance.Presentation.Forms
             else
             {
                 comboBox2.Enabled = false;
-                dgvReport.Rows.Clear();
+                dataGridView1.Rows.Clear();
             }
         }
         private void SetupGridForStudents()
