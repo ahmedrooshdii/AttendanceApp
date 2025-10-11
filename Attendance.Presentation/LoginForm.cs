@@ -127,6 +127,7 @@ namespace Attendance.Presentation
 
         private async void Login(object sender, EventArgs e)
         {
+            btnLogin.Enabled = false;
             var user = await _authService.LoginAsync(tbUserName.Text, tbPassword.Text);
             if (user != null && user.UserId > 0)
             {
@@ -162,9 +163,11 @@ namespace Attendance.Presentation
                 }
                 tbPassword.Text = string.Empty;
                 tbUserName.Text = string.Empty;
+                btnLogin.Enabled = true;
             }
             else
             {
+                btnLogin.Enabled = true;
                 MessageBox.Show("Invalid username or passwordz.");
             }
         }

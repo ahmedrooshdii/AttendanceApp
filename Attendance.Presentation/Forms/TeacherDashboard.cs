@@ -51,22 +51,19 @@ namespace Attendance.Presentation.Forms
             _takeAttendanceForm.BringToFront();
             _takeAttendanceForm.Show();
 
-            this.FormClosed += TeacherDashboard_FormClosed;
+            //this.FormClosed += TeacherDashboard_FormClosed;
         }
 
         private void TeacherDashboard_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (this.Owner != null)
-            {
-                this.Owner.Show();
-            }
+            this.Owner?.Show();
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
             _isLoggingOut = true;
             timerDateAndTime.Stop();
-            this.Owner.Show();
+            this.Owner?.Show();
             this.Close();
         }
         private void timerDateAndTime_Tick(object sender, EventArgs e)
